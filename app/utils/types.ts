@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 export type SearchResult = {
     id: number;
     key: string;
@@ -14,4 +16,10 @@ type Thumbnail = {
     height: number;
     duration: number;
     url: string;
+}
+
+export type User = {
+    id?: ObjectId;
+    name: string;
+    joinDate: Date;
 }
