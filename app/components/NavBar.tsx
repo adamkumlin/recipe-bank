@@ -1,6 +1,17 @@
+import { auth } from "@/auth";
 import Link from "next/link";
 
-export default function NavBar() {
+async function initialize() {
+  const session = await auth();
+  const user = session?.user?.email;
+
+  return user;
+}
+
+
+export default async function NavBar() {
+  const loggedInUser = await initialize();
+  console.log(loggedInUser)
   return (
     <nav className="w-full">
       <ul className="flex flex-row justify-between items-center mx-1">
@@ -11,9 +22,7 @@ export default function NavBar() {
             </h1>
           </Link>
         </li>
-        <li>
-          <Link href="/account">My Account</Link>
-        </li>
+        <li>{!loggedInUser ? <Link href="/login">Log in</Link> : <Link href="/account">My Account</Link>}</li>
       </ul>
     </nav>
   );

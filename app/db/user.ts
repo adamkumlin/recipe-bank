@@ -4,7 +4,8 @@ import { User } from "../utils/types";
 export async function addNewUser(user: User, collection: Collection<User>): Promise<void> {
     try {
         await collection.insertOne({
-            name: user.name,
+            name: user.name.toLowerCase(),
+            displayName: user.name,
             joinDate: user.joinDate
         })
     } catch {

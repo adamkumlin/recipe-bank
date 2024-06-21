@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState } from "react"
 import SearchBar from "./components/SearchBar";
 import type { SearchResult } from "./utils/types";
 
