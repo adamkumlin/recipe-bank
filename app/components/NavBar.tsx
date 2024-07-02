@@ -3,7 +3,7 @@ import Link from "next/link";
 
 async function initialize() {
   const session = await auth();
-  const user = session?.user?.email;
+  const user = session?.user;
 
   return user;
 }
@@ -11,7 +11,6 @@ async function initialize() {
 
 export default async function NavBar() {
   const loggedInUser = await initialize();
-  console.log(loggedInUser)
   return (
     <nav className="w-full">
       <ul className="flex flex-row justify-between items-center mx-1">
