@@ -1,1 +1,1 @@
-export const today = new Date(Date.now());
+const today = new Date(Date.now());
