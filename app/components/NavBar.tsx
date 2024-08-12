@@ -1,17 +1,11 @@
-import { auth } from "@/auth";
+"use client";
 import Link from "next/link";
+import { useContext } from "react";
+import { UserContext } from "../layout";
 
-async function initialize() {
-  const session = await auth();
-  const user = session?.user?.email;
+export default function NavBar() {
+  const user = useContext(UserContext);
 
-  return user;
-}
-
-
-export default async function NavBar() {
-  const loggedInUser = await initialize();
-  console.log(loggedInUser)
   return (
     <nav className="w-full">
       <ul className="flex flex-row justify-between items-center mx-1">
@@ -22,7 +16,7 @@ export default async function NavBar() {
             </h1>
           </Link>
         </li>
-        <li>{!loggedInUser ? <Link href="/login">Log in</Link> : <Link href="/account">My Account</Link>}</li>
+        <li>{!user ? <Link href="/login">Log in</Link> : <Link href="/account">My Account</Link>}</li>
       </ul>
     </nav>
   );
