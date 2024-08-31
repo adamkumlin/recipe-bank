@@ -5,7 +5,6 @@ export function connectToDb(): MongoClient | null {
 
   try {
     client.connect();
-    client.db("admin").command({ping: 1});
     return client;
   } catch {
     return null;

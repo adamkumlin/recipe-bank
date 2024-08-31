@@ -1,20 +1,44 @@
-import NextAuth from "next-auth";
-import GitHub from "next-auth/providers/github";
-import Google from "next-auth/providers/google";
+import { MongodbAdapter } from "@lucia-auth/adapter-mongodb";
+import { Lucia } from "lucia";
+import { Db } from "mongodb";
+import { connectToDb } from "./app/db/connect";
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut,
-} = NextAuth({
+const client = await connectToDb();
 
-  secret: process.env.AUTH_SECRET as string,
-  providers: [
-    GitHub,
-    Google({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    }),
-  ],
+let db = client?.db() as Db;
+const user = db.collection<UserDoc>("Users");
+const session = db.collection<SessionDoc>("Sessions");
+const adapter = new MongodbAdapter(session, user);
+
+export const lucia = new Lucia(adapter, {
+  sessionCookie: {
+    // this sets cookies with super long expiration
+    // since Next.js doesn't allow Lucia to extend cookie expiration when rendering pages
+    expires: false,
+    attributes: {
+      // set to `true` when using HTTPS
+      secure: process.env.NODE_ENV === "production",
+    },
+  },
 });
+
+declare module "lucia" {
+  interface Register {
+    Lucia: typeof lucia;
+    DatabaseUserAttributes: DatabaseUserAttributes;
+  }
+}
+
+interface DatabaseUserAttributes {
+  username: string;
+}
+
+interface UserDoc extends DatabaseUserAttributes {
+  _id: string;
+}
+
+interface SessionDoc {
+  _id: string;
+  expires_at: Date;
+  user_id: string;
+}

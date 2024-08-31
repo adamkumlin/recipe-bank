@@ -1,10 +1,9 @@
-import { auth } from "@/auth";
 import SignOutButton from "../components/LogOutButton";
 import LogInButton from "../components/LogInButton";
+import { initialize } from "../utils/helper";
 
 export default async function LogIn() {
-  const session = await auth();
-  const user = session?.user?.email;
+  const user = await initialize();
 
   return <>{user ? <SignOutButton /> : <LogInButton />}</>;
 }
