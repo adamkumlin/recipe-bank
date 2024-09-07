@@ -20,8 +20,9 @@ type Thumbnail = {
 
 export type User = {
     id?: ObjectId;
-    name: string;
+    username: string;
     displayName: string;
     profileImage?: string;
     joinDate: Date;
+    passwordHash: string;
 }

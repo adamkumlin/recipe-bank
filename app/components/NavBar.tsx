@@ -1,8 +1,6 @@
 import Link from "next/link";
-import { initialize } from "../utils/helper";
 
 export default async function NavBar() {
-  const user = initialize();
 
   return (
     <nav className="w-full">
@@ -15,11 +13,11 @@ export default async function NavBar() {
           </Link>
         </li>
         <li>
-          {!user ? (
+          {/* {!user ? (
             <Link href="/login">Log in</Link>
           ) : (
             <Link href="/account">My Account</Link>
-          )}
+          )} */}
         </li>
       </ul>
     </nav>
