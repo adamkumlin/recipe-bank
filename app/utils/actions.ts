@@ -7,27 +7,17 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { generateIdFromEntropySize } from "lucia";
 import { today } from "./constants";
+import { validateUserCredentials } from "./helper";
 
 export async function logIn(formData: FormData): Promise<ActionResult> {
   "use server";
+  
   const username = formData.get("username")?.toString();
-  if (!username) {
-    return {
-      error: "Username cannot be empty.",
-    };
-  }
-
   const password = formData.get("password")?.toString();
-  if (!password) {
-    return {
-      error: "Password cannot be empty.",
-    };
-  }
 
-  if (password.length < 8 || password.length > 40) {
-    return {
-      error: "Password has to be between 8 and 40 characters long.",
-    };
+  const errors = validateUserCredentials(username, password);
+  if (errors.length > 0 || !username || !password) {
+    return errors.join("");
   }
 
   const client = connectToDb();
@@ -41,21 +31,19 @@ export async function logIn(formData: FormData): Promise<ActionResult> {
   const db = client.db("RecipeBank");
   const existingUser = await getUserFromName(username, db.collection("Users"));
 
-  console.log(existingUser);
-  if ((existingUser && existingUser.length === 0) || !existingUser) {
+  if (!existingUser) {
     return {
       error: "Incorrect username or password.",
     };
   }
 
-  const validPassword = await verify(existingUser[0].passwordHash, password, {
+  const validPassword = await verify(existingUser.passwordHash, password, {
     memoryCost: 19456,
     timeCost: 2,
     outputLen: 32,
     parallelism: 1,
   });
 
-  console.log(validPassword);
   if (!validPassword) {
     return {
       error: "Incorrect username or password.",
@@ -63,7 +51,7 @@ export async function logIn(formData: FormData): Promise<ActionResult> {
   }
 
   // Create session cookie
-  const session = await lucia.createSession(existingUser[0]._id.toString(), {});
+  const session = await lucia.createSession(existingUser.id as string, {});
   const sessionCookie = lucia.createSessionCookie(session.id);
   console.log(sessionCookie);
 
@@ -80,22 +68,11 @@ export async function logIn(formData: FormData): Promise<ActionResult> {
 export async function signUp(formData: FormData): Promise<ActionResult> {
   "use server";
   const username = formData.get("username")?.toString();
-  if (!username) {
-    return;
-  }
-
   const password = formData.get("password")?.toString();
 
-  if (!password) {
-    return {
-      error: "Password cannot be empty.",
-    };
-  }
-
-  if (password.length < 8 || password.length > 40) {
-    return {
-      error: "Password has to be between 8 and 40 characters long.",
-    };
+  const errors = validateUserCredentials(username, password);
+  if (errors.length > 0 || !username || !password) {
+    return errors.join("");
   }
 
   const passwordHash = await hash(password, {
@@ -114,12 +91,11 @@ export async function signUp(formData: FormData): Promise<ActionResult> {
   const db = client.db("RecipeBank");
   const existingUser = await getUserFromName(username, db.collection("Users"));
 
-  if (existingUser && existingUser.length > 0) {
+  if (!existingUser) {
     return;
   }
 
   const userId = generateIdFromEntropySize(10);
-  console.log(userId);
 
   addNewUser(
     {

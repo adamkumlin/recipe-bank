@@ -19,7 +19,7 @@ type Thumbnail = {
 }
 
 export type User = {
-    id?: ObjectId;
+    id?: string;
     username: string;
     displayName: string;
     profileImage?: string;

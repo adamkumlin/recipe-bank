@@ -16,8 +16,7 @@ export async function addNewUser(user: User, collection: Collection<User>): Prom
 
 export async function getUserFromName(userName: string, collection: Collection<User>) {
     try {
-        //TODO: Use findOne instead
-        const user = await collection.find({username: userName.toLowerCase()}).toArray();
+        const user = await collection.findOne<User>({username: userName.toLowerCase()});
         return user;
     } catch (error) {
         return null;
