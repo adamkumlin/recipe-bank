@@ -1,32 +1,30 @@
-"use client";
-
 import { useState } from "react"
 import SearchBar from "./components/SearchBar";
 import type { SearchResult } from "./utils/types";
+import { validateRequest } from "./db/connect";
 
-export default function Home() {
-  const [query, setQuery] = useState<string>("");
-  const [results, setResults] = useState<SearchResult[]>([]);
+export default async function Home() {
 
-  async function search() {
-    if (query === "") {
-      return;
-    }
+  const {user} = await validateRequest();
+  console.log(user)
+  // const [query, setQuery] = useState<string>("");
+  // const [results, setResults] = useState<SearchResult[]>([]);
 
-    const uri = `https://en.wikipedia.org/w/rest.php/v1/search/title?q=${query}&limit=${10}`;
+  // async function search() {
+  //   if (query === "") {
+  //     return;
+  //   }
 
-    const response = await fetch(uri);
-    const results = await response.json();
-    setResults(results);
-  }
+  //   const uri = `https://en.wikipedia.org/w/rest.php/v1/search/title?q=${query}&limit=${10}`;
+
+  //   const response = await fetch(uri);
+  //   const results = await response.json();
+  //   setResults(results);
+  // }
 
   return (
     <main>
-      <SearchBar
-        setQuery={setQuery}
-        query={query}
-        search={search}
-      />
+      {user ? <div>Log in</div> : <div>nam </div>}
     </main>
   );
 }

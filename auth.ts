@@ -1,9 +1,8 @@
 import { MongodbAdapter } from "@lucia-auth/adapter-mongodb";
 import { Lucia } from "lucia";
-import { Db } from "mongodb";
-import { connectToDb } from "./app/db/connect";
+import { Db, MongoClient } from "mongodb";
 
-const client = await connectToDb();
+const client = new MongoClient(process.env.DB_CONNECTION_STRING as string);
 
 let db = client?.db() as Db;
 const user = db.collection<UserDoc>("Users");

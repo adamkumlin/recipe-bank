@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { validateRequest } from "../db/connect";
 
 export default async function NavBar() {
 
@@ -13,7 +14,7 @@ export default async function NavBar() {
           </Link>
         </li>
         <li>
-          {/* {!user ? (
+          {/* {!session ? (
             <Link href="/login">Log in</Link>
           ) : (
             <Link href="/account">My Account</Link>
