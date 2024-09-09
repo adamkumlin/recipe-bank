@@ -1,5 +1,3 @@
-import { ObjectId } from "mongodb";
-
 export type SearchResult = {
     id: number;
     key: string;
@@ -16,13 +14,4 @@ type Thumbnail = {
     height: number;
     duration: number;
     url: string;
-}
-
-export type User = {
-    id?: string;
-    username: string;
-    displayName: string;
-    profileImage?: string;
-    joinDate: Date;
-    passwordHash: string;
 }

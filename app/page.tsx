@@ -1,6 +1,3 @@
-import { useState } from "react"
-import SearchBar from "./components/SearchBar";
-import type { SearchResult } from "./utils/types";
 import { validateRequest } from "./db/connect";
 
 export default async function Home() {

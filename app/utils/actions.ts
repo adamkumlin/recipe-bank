@@ -1,8 +1,8 @@
 import { ActionResult } from "next/dist/server/app-render/types";
 import { connectToDb } from "../db/connect";
-import { addNewUser, getUserFromName } from "../db/user";
+import { getUserFromName } from "../db/user";
 import { hash, verify } from "@node-rs/argon2";
-import { lucia } from "@/auth";
+import { lucia, UserDoc } from "@/auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { generateIdFromEntropySize } from "lucia";
@@ -11,13 +11,12 @@ import { validateUserCredentials } from "./helper";
 
 export async function logIn(formData: FormData): Promise<ActionResult> {
   "use server";
-  
   const username = formData.get("username")?.toString();
   const password = formData.get("password")?.toString();
 
   const errors = validateUserCredentials(username, password);
   if (errors.length > 0 || !username || !password) {
-    return errors.join("");
+    return { error: errors.join("") };
   }
 
   const client = connectToDb();
@@ -51,9 +50,8 @@ export async function logIn(formData: FormData): Promise<ActionResult> {
   }
 
   // Create session cookie
-  const session = await lucia.createSession(existingUser.id as string, {});
+  const session = await lucia.createSession(existingUser._id, {});
   const sessionCookie = lucia.createSessionCookie(session.id);
-  console.log(sessionCookie);
 
   cookies().set(
     sessionCookie.name,
@@ -62,7 +60,7 @@ export async function logIn(formData: FormData): Promise<ActionResult> {
   );
 
   // Redirect to start page
-  return redirect("/");
+  // return redirect("/");
 }
 
 export async function signUp(formData: FormData): Promise<ActionResult> {
@@ -72,7 +70,7 @@ export async function signUp(formData: FormData): Promise<ActionResult> {
 
   const errors = validateUserCredentials(username, password);
   if (errors.length > 0 || !username || !password) {
-    return errors.join("");
+    return { error: errors.join("") };
   }
 
   const passwordHash = await hash(password, {
@@ -85,27 +83,29 @@ export async function signUp(formData: FormData): Promise<ActionResult> {
   const client = connectToDb();
 
   if (!client) {
-    return;
+    return {
+      error: "Error connecting to database.",
+    };
   }
 
   const db = client.db("RecipeBank");
   const existingUser = await getUserFromName(username, db.collection("Users"));
 
-  if (!existingUser) {
-    return;
+  if (existingUser) {
+    return {
+      error: "Username already in use.",
+    };
   }
 
   const userId = generateIdFromEntropySize(10);
 
-  addNewUser(
-    {
-      username: username,
-      passwordHash: passwordHash,
-      displayName: username,
-      joinDate: today,
-    },
-    db.collection("Users")
-  );
+  db.collection<UserDoc>("Users").insertOne({
+    _id: userId,
+    username: username,
+    passwordHash: passwordHash,
+    displayName: username,
+    joinDate: today,
+  });
 
   const session = await lucia.createSession(userId, {});
   const sessionCookie = lucia.createSessionCookie(session.id);
@@ -115,5 +115,5 @@ export async function signUp(formData: FormData): Promise<ActionResult> {
     sessionCookie.value,
     sessionCookie.attributes
   );
-  return redirect("/");
+  // return redirect("/");
 }
