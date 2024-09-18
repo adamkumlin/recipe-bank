@@ -1,27 +1,46 @@
-import { validateRequest } from "./db/connect";
+"use client";
+import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-export default async function Home() {
+export default function Home() {
+  const { status } = useSession();
+  const router = useRouter();
 
-  const {user} = await validateRequest();
-  console.log(user)
-  // const [query, setQuery] = useState<string>("");
-  // const [results, setResults] = useState<SearchResult[]>([]);
+  const showSession = () => {
+    if (status === "authenticated") {
+      return (
+        <button
+          className="border border-solid border-black rounded"
+          onClick={() => {
+            signOut({ redirect: false }).then(() => {
+              router.push("/");
+            });
 
-  // async function search() {
-  //   if (query === "") {
-  //     return;
-  //   }
-
-  //   const uri = `https://en.wikipedia.org/w/rest.php/v1/search/title?q=${query}&limit=${10}`;
-
-  //   const response = await fetch(uri);
-  //   const results = await response.json();
-  //   setResults(results);
-  // }
-
+          }}
+        >
+          Sign Out
+        </button>
+      )
+    } else if (status === "loading") {
+      return (
+        <span className="text-[#888] text-sm mt-7">Loading...</span>
+      )
+    } else {
+      return (
+        <Link
+          href="/login"
+          className="border border-solid border-black rounded"
+        >
+          Sign In
+        </Link>
+      )
+    }
+  }
   return (
-    <main>
-      {user ? <div>Log in</div> : <div>nam </div>}
+    <main className="flex min-h-screen flex-col items-center justify-center">
+      <h1 className="text-xl">Home</h1>
+      {showSession()}
     </main>
   );
 }
