@@ -20,10 +20,9 @@ export const register = async (values: any) => {
           email,
           password: hashedPassword,
         });
-        const savedUser = await user.save();
-        console.log(savedUser)
-        
 
+        User.create(user);
+        await user.save();
 
     }catch(e){
         console.log(e);

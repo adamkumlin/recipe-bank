@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { validateRequest } from "../db/connect";
 
 export default async function NavBar() {
 
