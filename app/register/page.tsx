@@ -26,50 +26,35 @@ export default function Register() {
 };
 
 return(
-    <section className="w-full h-screen flex items-center justify-center">
-          <form ref = {ref}
-            action={handleSubmit}
-            className="p-6 w-full max-w-[400px] flex flex-col justify-between items-center gap-2 
-            border border-solid border-black bg-white rounded">
-            {error && <div className="">{error}</div>}
-            <h1 className="mb-5 w-full text-2xl font-bold">Register</h1>
-    
-            <label className="w-full text-sm">Full Name</label>
-            <input
-              type="text"
-              placeholder="Full Name"
-              className="w-full h-8 border border-solid border-black py-1 px-2.5 rounded text-[13px]"
-              name="name"
-            />
-    
-            <label className="w-full text-sm">Email</label>
-            <input
-              type="email"
-              placeholder="Email"
-              className="w-full h-8 border border-solid border-black py-1 px-2.5 rounded"
-              name="email"
-            />
-    
-            <label className="w-full text-sm">Password</label>
-            <div className="flex w-full">
-              <input
-                type="password"
-                placeholder="Password"
-                className="w-full h-8 border border-solid border-black py-1 px-2.5 rounded"
-                name="password"
-              />
-            </div>
-    
-            <button className="w-full border border-solid border-black py-1.5 mt-2.5 rounded
-            transition duration-150 ease hover:bg-black">
-              Sign up
-            </button>
-    
-            
-            <Link href="/login" className="text-sm text-[#888] transition duration-150 ease hover:text-black">
-              Already have an account?
-              </Link>
-          </form>
-    </section>
+  <div className="w-full h-full bg-[rgb(34,193,195)] bg-[linear-gradient(0deg,rgba(34,193,195,1)0%,rgba(121,93,247,1)9%,rgba(248,45,253,1)100%);]">
+  <h1 className="text-white font-bold text-2xl tracking-wide text-center font-mono uppercase">
+    Register
+  </h1>
+  <form
+    className="flex flex-col items-center gap-2 border-2 border-black bg-white drop-shadow-lg rounded-xl m-4"
+    onSubmit={handleSubmit}
+  >
+    {error && <p className="text-red-600">{error}</p>}
+    <label className="uppercase font-mono" htmlFor="email">
+      Email
+    </label>
+    <input id="email" type="email" className="w-1/2 border-[1px] border-gray-700" name="email" />
+    <label className="uppercase font-mono" htmlFor="password">
+      Password
+    </label>
+    <input id="password" type="password" className="w-1/2 border-[1px] border-gray-700" name="password" />
+
+    <label className="uppercase font-mono" htmlFor="confirm-password">
+      Confirm password
+    </label>
+    <input id="confirm-password" type="password" className="w-1/2 border-[1px] border-gray-700" name="confirm-password" />
+
+    <button className="rounded text-white bg-slate-700 m-2 p-1 mb-4">Register</button>
+
+    <Link href="/login" className="text-blue-600 border-t-2 border-black border-dashed pt-2">
+      Already have an account?
+    </Link>
+  </form>
+</div>
     )
 }
