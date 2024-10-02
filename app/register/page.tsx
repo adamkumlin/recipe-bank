@@ -35,16 +35,16 @@ return(
     onSubmit={handleSubmit}
   >
     {error && <p className="text-red-600">{error}</p>}
-    <label className="uppercase font-mono" htmlFor="email">
+    <label className="uppercase" htmlFor="email">
       Email
     </label>
     <input id="email" type="email" className="w-1/2 border-[1px] border-gray-700" name="email" />
-    <label className="uppercase font-mono" htmlFor="password">
+    <label className="uppercase" htmlFor="password">
       Password
     </label>
     <input id="password" type="password" className="w-1/2 border-[1px] border-gray-700" name="password" />
 
-    <label className="uppercase font-mono" htmlFor="confirm-password">
+    <label className="uppercase" htmlFor="confirm-password">
       Confirm password
     </label>
     <input id="confirm-password" type="password" className="w-1/2 border-[1px] border-gray-700" name="confirm-password" />
