@@ -26,7 +26,7 @@ export default function LogIn() {
   };
 
   return (
-    <div className={`w-full ${lilitaOne.className} h-full bg-[rgb(34,193,195)] bg-[linear-gradient(0deg,rgba(34,193,195,1)0%,rgba(121,93,247,1)9%,rgba(248,45,253,1)100%);]`}>
+    <div className={`w-full flex flex-col place-content-center ${lilitaOne.className} h-full bg-[rgb(34,193,195)] bg-[linear-gradient(0deg,rgba(34,193,195,1)0%,rgba(121,93,247,1)9%,rgba(248,45,253,1)100%);]`}>
       <h1 className="text-white font-bold text-2xl tracking-wide text-center font uppercase">
         Log in
       </h1>
@@ -38,15 +38,15 @@ export default function LogIn() {
         <label className="uppercase text-white" htmlFor="email">
           Email
         </label>
-        <input id="email" type="email" className="w-1/2 border-[1px] border-gray-700" name="email" />
+        <input id="email" type="email" className="w-1/2 h-8 max-w-sm border-[1px] rounded-lg border-gray-700" name="email" />
         <label className="uppercase text-white" htmlFor="password">
           Password
         </label>
-        <input id="password" type="password" className="w-1/2 border-[1px] border-gray-700" name="password" />
+        <input id="password" type="password" className="w-1/2 h-8 max-w-sm border-[1px] rounded-lg border-gray-700" name="password" />
 
-        <button className="rounded text-white bg-slate-700 m-2 p-1 mb-4">Log in</button>
+        <button className="rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110">Log in</button>
 
-        <Link href="/register" className="text-blue-100 border-t-2 border-black border-dashed pt-2">
+        <Link href="/register" className="text-blue-100 border-t-2 border-black border-dashed pt-2 hover:text-red-400">
           Don't have an account?
         </Link>
       </form>
