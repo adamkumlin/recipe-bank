@@ -26,7 +26,7 @@ export default function Register() {
 };
 
 return(
-  <div className={`w-full flex flex-col place-content-center ${lilitaOne.className} h-full bg-[rgb(34,193,195)] bg-[linear-gradient(0deg,rgba(34,193,195,1)0%,rgba(121,93,247,1)9%,rgba(248,45,253,1)100%);]`}>
+  <div className={`w-full flex flex-col place-content-center ${lilitaOne.className} h-full`}>
       <h1 className="text-white font-bold text-2xl tracking-wide text-center font uppercase">
         Register
       </h1>

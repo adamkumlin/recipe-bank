@@ -26,7 +26,7 @@ export default function LogIn() {
   };
 
   return (
-    <div className={`w-full flex flex-col place-content-center ${lilitaOne.className} h-full bg-[rgb(34,193,195)] bg-[linear-gradient(0deg,rgba(34,193,195,1)0%,rgba(121,93,247,1)9%,rgba(248,45,253,1)100%);]`}>
+    <div className={`w-full flex flex-col place-content-center ${lilitaOne.className} h-full`}>
       <h1 className="text-white font-bold text-2xl tracking-wide text-center font uppercase">
         Log in
       </h1>
@@ -34,7 +34,7 @@ export default function LogIn() {
         className="flex flex-col gap-2 items-center drop-shadow-lg rounded-xl m-4"
         onSubmit={handleSubmit}
       >
-        {error && <p className="text-red-600">{error}</p>}
+        {error && <p className="text-yellow-300">{error}</p>}
         <label className="uppercase text-white" htmlFor="email">
           Email
         </label>
