@@ -1,24 +1,14 @@
 "use client";
+import PostAddIcon from '@mui/icons-material/PostAdd';
+
+import Link from "next/link";
+
 export default function Home() {
 
   return (
-    <div className="grid grid-cols-2 grid-rows-2 h-full text-center">
-      <section className="">
-        <h2>My recipes</h2>
-      
-      </section>
-      <section className="">
-        <h2>My recipes</h2>
-      
-      </section>
-      <section className="">
-        <h2>My recipes</h2>
-      
-      </section>
-      <section className="">
-        <h2>My recipes</h2>
-      
-      </section>
+    <div className="flex flex-row justify-evenly text-center">
+        <Link href="new-recipe"><PostAddIcon /><h2>New recipe</h2></Link>
+        <Link href="my-recipes" className=""><h2>My recipes</h2></Link>
     </div>
   );
 }

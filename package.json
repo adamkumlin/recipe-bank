@@ -10,6 +10,10 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^5.5.5",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.2",
+    "@mui/material": "^6.1.2",
     "bcryptjs": "^2.4.3",
     "mongodb": "^6.7.0",
     "mongoose": "^8.6.3",
