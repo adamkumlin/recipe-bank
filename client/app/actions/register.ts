@@ -1,5 +1,4 @@
 "use server"
-import { connectDB } from "../lib/mongodb";
 import User from "../lib/models/User";
 import bcrypt from "bcryptjs";
 
