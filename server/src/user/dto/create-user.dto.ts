@@ -1,26 +1,19 @@
 import {
   IsDateString,
-  IsLowercase,
+  IsEmail,
   IsNotEmpty,
   IsString,
-  MaxLength,
 } from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
-  @MaxLength(20)
   @IsNotEmpty()
-  @IsLowercase()
-  name: string;
-
-  @IsString()
-  @MaxLength(20)
-  @IsNotEmpty()
-  displayName: string;
+  @IsEmail()
+  email: string;
 
   @IsString()
   @IsNotEmpty()
-  password: string;
+  passwordHash: string;
 
   profileImage?: string;
 

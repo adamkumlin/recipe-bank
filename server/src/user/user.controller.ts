@@ -13,13 +13,13 @@ import { User } from './schema/user.schema';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ObjectId } from 'mongoose';
 
-@Controller('users')
+@Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get('all')
   async getAll(): Promise<User[]> {
-    return this.userService.getAll();
+    return await this.userService.getAll();
   }
   
   @Post('create')
@@ -27,9 +27,9 @@ export class UserController {
     await this.userService.create(createUserDto);
   }
 
-  @Get(':id')
-  async get(@Param('id') id: ObjectId): Promise<User> {
-    return this.userService.get(id);
+  @Get(':email')
+  async get(@Param('email') email: string): Promise<User> {
+    return await this.userService.getByEmail(email);
   }
 
   @Patch(':id')
@@ -42,6 +42,6 @@ export class UserController {
 
   @Delete(':id')
   async delete(@Param('id') id: ObjectId) {
-    return this.userService.delete(id);
+    return await this.userService.delete(id);
   }
 }

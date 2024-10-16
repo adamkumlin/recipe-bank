@@ -14,8 +14,8 @@ export class UserService {
     return createdUser.save();
   }
 
-  async get(id: ObjectId): Promise<User> {
-    const existingUser = await this.userModel.findById(id);
+  async getByEmail(email: string): Promise<User> {
+    const existingUser = await this.userModel.findOne({email: email}).exec();
     return existingUser;
   }
 

@@ -6,7 +6,6 @@ export const register = async (values: any) => {
     const { email, password, name } = values;
 
     try {
-        await connectDB();
         const userFound = await User.findOne({ email });
         if(userFound){
             return {
