@@ -1,19 +1,27 @@
-export function validateUserCredentials(
-  username: string | undefined,
-  password: string | undefined
-): string[] {
-  const errors: string[] = [];
-  if (!username) {
-    errors.push("Username cannot be empty.");
+import { emailRegex, passwordRegex } from "./constants";
+
+export function validateUserCredentials(formData: {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}): string {
+  if (!formData.email || !formData.password || !formData.confirmPassword) {
+    return "Please fill out all fields.";
   }
 
-  if (!password) {
-    errors.push("Password cannot be empty.");
+  if (formData.password !== formData.confirmPassword) {
+    return "The passwords do not match."
   }
 
-  if (password && (password.length < 8 || password.length > 40)) {
-    errors.push("Password has to be between 8 and 40 characters long.");
+  const isValidEmail = emailRegex.test(formData.email);
+  if (!isValidEmail) {
+    return "Email is not valid.";
   }
 
-  return errors;
+  const isValidPassword = passwordRegex.test(formData.password);
+  if (!isValidPassword) {
+    return "Password is not valid.";
+  }
+
+  return "";
 }

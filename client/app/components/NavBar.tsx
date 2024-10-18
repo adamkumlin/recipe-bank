@@ -1,11 +1,9 @@
 "use client";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { lilitaOne } from "../lib/fonts";
 
 export default function NavBar() {
 
-  const { status } = useSession();
   
   return (
     <nav>
@@ -18,11 +16,6 @@ export default function NavBar() {
           </Link>
         </li>
         <li className="text-xl">
-          {status === "authenticated" ? (
-            <Link href="/account">My Account</Link>
-          ) : (
-            <Link href="/login">Login/Register</Link>
-          ) }
         </li>
       </ul>
     </nav>

@@ -13,9 +13,7 @@ export class CreateUserDto {
 
   @IsString()
   @IsNotEmpty()
-  passwordHash: string;
-
-  profileImage?: string;
+  password: string;
 
   @IsNotEmpty()
   @IsDateString()

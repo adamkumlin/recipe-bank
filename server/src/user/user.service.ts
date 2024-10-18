@@ -10,6 +10,10 @@ export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
+    const isEmailAlreadyTaken = this.getByEmail(createUserDto.email) ?? true;
+    if (isEmailAlreadyTaken) {
+      throw new ConflictException(null, "Email is already in use.");
+    }
     const createdUser = new this.userModel(createUserDto);
     return createdUser.save();
   }
