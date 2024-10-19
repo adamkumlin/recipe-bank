@@ -15,7 +15,6 @@ import { AuthGuard } from './auth.guard';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @HttpCode(HttpStatus.OK)
   @Post("login")
   logIn(@Body() logInDto: Record<string, any>) {
     return this.authService.logIn(logInDto.email, logInDto.password);

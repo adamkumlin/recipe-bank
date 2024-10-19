@@ -1,10 +1,10 @@
 import {
   BadRequestException,
   Injectable,
-  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { User } from 'src/user/schema/user.schema';
 import { UserService } from 'src/user/user.service';
 
 const bcrypt = require('bcryptjs');
@@ -20,16 +20,10 @@ export class AuthService {
       throw new BadRequestException('Email or password is empty.');
     }
 
-    const user = await this.userService.getByEmail(email);
+    const user = await this.validateUser(email, password);
 
     if (!user) {
       throw new UnauthorizedException('Incorrect email or password.');
-    }
-
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-
-    if (!isPasswordValid) {
-      throw new UnauthorizedException("Incorrect email or password.");
     }
 
     const payload = {
@@ -39,5 +33,25 @@ export class AuthService {
 
     const accessToken = await this.jwtService.signAsync(payload);
     return accessToken;
+  }
+
+  async validateUser(email: string, password: string): Promise<User | null> {
+    if (!password || !email) {
+      return null;
+    }
+
+    const user = await this.userService.getByEmail(email);
+
+    if (!user) {
+      return null;
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return null;
+    }
+
+    return user;
   }
 }
