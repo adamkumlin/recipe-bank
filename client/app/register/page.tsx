@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
-import { FormEvent, FormEventHandler, useRef, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { lilitaOne } from "../lib/fonts";
 import { validateUserCredentials } from "../utils/helper";
 import { register } from "../actions/register";
+import bcrypt from "bcryptjs";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -14,21 +15,30 @@ export default function Register() {
   });
   const [error, setError] = useState<string>();
   const router = useRouter();
-  const ref = useRef<HTMLFormElement>(null);
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    const validation = validateUserCredentials(formData);
+
+    const validation = validateUserCredentials(formData, true);
     if (validation !== "") {
       setError(validation);
       return;
     }
 
     const json: string = JSON.stringify(formData);
-    const request = await register(json);
-    console.log(request)
-  }
 
+    // Call server action
+    const response = await register(json);
+
+    // If an error occurred, display it
+    if (response) {
+      setError(response.message);
+    } else {
+      // Otherwise send user to login page
+      router.push("/login");
+    }
+  }
+  
   return (
     <div
       className={`w-full flex flex-col place-content-center ${lilitaOne.className} h-full`}

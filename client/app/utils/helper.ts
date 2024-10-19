@@ -1,16 +1,25 @@
 import { emailRegex, passwordRegex } from "./constants";
 
-export function validateUserCredentials(formData: {
-  email: string;
-  password: string;
-  confirmPassword: string;
-}): string {
-  if (!formData.email || !formData.password || !formData.confirmPassword) {
-    return "Please fill out all fields.";
-  }
+export function validateUserCredentials(
+  formData: {
+    email: string;
+    password: string;
+    confirmPassword?: string;
+  },
+  isRegister: boolean
+): string {
+  if (!isRegister) {
+    if (!formData.email || !formData.password) {
+      return "Please fill out all fields.";
+    }
+  } else {
+    if (!formData.email || !formData.password || !formData.confirmPassword) {
+      return "Please fill out all fields.";
+    }
 
-  if (formData.password !== formData.confirmPassword) {
-    return "The passwords do not match."
+    if (formData.password !== formData.confirmPassword) {
+      return "The passwords do not match.";
+    }
   }
 
   const isValidEmail = emailRegex.test(formData.email);
