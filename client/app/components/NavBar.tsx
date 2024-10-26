@@ -4,7 +4,6 @@ import { lilitaOne } from "../lib/fonts";
 
 export default function NavBar() {
 
-  
   return (
     <nav>
       <ul className={`${lilitaOne.className} w-full flex flex-row justify-between p-2`}>

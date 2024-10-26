@@ -41,15 +41,15 @@ export default function LogIn() {
     <div
       className={`w-full flex flex-col place-content-center ${lilitaOne.className} h-full`}
     >
-      <h1 className="text-white font-bold text-2xl tracking-wide text-center font uppercase">
+      <h1 className="text-black font-bold text-2xl tracking-wide text-center font uppercase">
         Log in
       </h1>
       <form
         className="flex flex-col gap-2 items-center drop-shadow-lg rounded-xl m-4"
         onSubmit={handleSubmit}
       >
-        {error && <p className="text-yellow-300">{error}</p>}
-        <label className="uppercase text-white" htmlFor="email">
+        {error && <p className="text-red-500">{error}</p>}
+        <label className="uppercase text-black" htmlFor="email">
           Email
         </label>
         <input
@@ -62,7 +62,7 @@ export default function LogIn() {
           className="w-1/2 h-8 max-w-sm border-[1px] rounded-lg border-gray-700"
           name="email"
         />
-        <label className="uppercase text-white" htmlFor="password">
+        <label className="uppercase text-black" htmlFor="password">
           Password
         </label>
         <input
@@ -82,7 +82,7 @@ export default function LogIn() {
 
         <Link
           href="/register"
-          className="text-blue-100 border-t-2 border-black border-dashed pt-2 hover:text-red-400"
+          className="text-blue-500 border-t-2 border-black border-dashed pt-2 hover:text-blue-900"
         >
           Don't have an account?
         </Link>

@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { lilitaOne } from "../lib/fonts";
 import { validateUserCredentials } from "../utils/helper";
 import { register } from "../actions/register";
-import bcrypt from "bcryptjs";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -43,7 +42,7 @@ export default function Register() {
     <div
       className={`w-full flex flex-col place-content-center ${lilitaOne.className} h-full`}
     >
-      <h1 className="text-white font-bold text-2xl tracking-wide text-center font uppercase">
+      <h1 className="text-black font-bold text-2xl tracking-wide text-center font uppercase">
         Register
       </h1>
       <form
@@ -51,7 +50,7 @@ export default function Register() {
         onSubmit={(event) => handleSubmit(event)}
       >
         {error && <p className="text-red-600">{error}</p>}
-        <label className="uppercase text-white" htmlFor="email">
+        <label className="uppercase text-black" htmlFor="email">
           Email
         </label>
         <input
@@ -64,7 +63,7 @@ export default function Register() {
           className="w-1/2 h-8 max-w-sm border-[1px] rounded-lg border-gray-700"
           name="email"
         />
-        <label className="uppercase text-white" htmlFor="password">
+        <label className="uppercase text-black" htmlFor="password">
           Password
         </label>
         <input
@@ -78,7 +77,7 @@ export default function Register() {
           name="password"
         />
 
-        <label className="uppercase text-white" htmlFor="confirm-password">
+        <label className="uppercase text-black" htmlFor="confirm-password">
           Confirm password
         </label>
         <input
@@ -101,7 +100,7 @@ export default function Register() {
 
         <Link
           href="/login"
-          className="text-blue-100 border-t-2 border-black border-dashed pt-2 hover:text-red-400"
+          className="text-blue-500 border-t-2 border-black border-dashed pt-2 hover:text-blue-900"
         >
           Already have an account?
         </Link>
