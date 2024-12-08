@@ -9,8 +9,8 @@ import { UpdateRecipeDto } from './dto/update-recipe.dto';
 export class RecipeService {
   constructor(@InjectModel(Recipe.name) private recipeModel: Model<Recipe>) {}
 
-  async getAll(): Promise<Recipe[]> {
-    return await this.recipeModel.find().exec();
+  async getAll(userId: ObjectId): Promise<Recipe[]> {
+    return await this.recipeModel.find({userId: userId}).exec();
   }
 
   async create(createRecipeDto: CreateRecipeDto): Promise<Recipe> {

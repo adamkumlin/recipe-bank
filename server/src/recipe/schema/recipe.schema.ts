@@ -17,6 +17,9 @@ export class Recipe {
   @Prop({ required: false })
   image?: string;
 
+  @Prop({required: true, type: mongoose.Schema.Types.ObjectId })
+  userId: ObjectId;
+
   @Prop({required: true })
   dateCreated: string;
 

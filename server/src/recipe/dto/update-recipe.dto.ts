@@ -8,7 +8,7 @@ import {
     @IsString()
     @MaxLength(40)
     @IsNotEmpty()
-    name: string;
+    title: string;
   
     @IsString()
     @MaxLength(400)

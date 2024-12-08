@@ -8,9 +8,9 @@ import { UpdateRecipeDto } from './dto/update-recipe.dto';
 export class RecipeController {
   constructor(private readonly recipeService: RecipeService) {}
 
-  @Get('all')
-  getAll() {
-    return this.recipeService.getAll();
+  @Get(":userId")
+  getAll(@Param("userId") userId: ObjectId) {
+    return this.recipeService.getAll(userId);
   }
 
   @Post('create')

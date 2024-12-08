@@ -1,10 +1,8 @@
 "use client";
-import Link from "next/link";
-import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
-import { lilitaOne } from "../lib/fonts";
-import { validateUserCredentials } from "../utils/helper";
-import { register } from "../actions/register";
+import { type FormEvent, useState } from "react";
+import { lilitaOne } from "../../../client/app/lib/fonts";
+import { validateUserCredentials } from "../../../client/app/lib/utils/helper";
+import { register } from "../../../client/app/actions/register";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -13,7 +11,6 @@ export default function Register() {
     confirmPassword: "",
   });
   const [error, setError] = useState<string>();
-  const router = useRouter();
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -32,9 +29,6 @@ export default function Register() {
     // If an error occurred, display it
     if (response) {
       setError(response.message);
-    } else {
-      // Otherwise send user to login page
-      router.push("/login");
     }
   }
   
@@ -98,12 +92,12 @@ export default function Register() {
           Register
         </button>
 
-        <Link
+        <a
           href="/login"
           className="text-blue-500 border-t-2 border-black border-dashed pt-2 hover:text-blue-900"
         >
           Already have an account?
-        </Link>
+        </a>
       </form>
     </div>
   );
