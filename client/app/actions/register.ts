@@ -1,4 +1,4 @@
-"use server";
+
 import bcrypt from "bcryptjs";
 import { today } from "../lib/utils/constants";
 

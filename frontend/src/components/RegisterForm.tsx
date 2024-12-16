@@ -1,10 +1,9 @@
-"use client";
 import { type FormEvent, useState } from "react";
-import { lilitaOne } from "../../../client/app/lib/fonts";
+// import { lilitaOne } from "../../../client/app/lib/fonts";
 import { validateUserCredentials } from "../../../client/app/lib/utils/helper";
 import { register } from "../../../client/app/actions/register";
 
-export default function Register() {
+export default function RegisterForm() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -34,7 +33,7 @@ export default function Register() {
   
   return (
     <div
-      className={`w-full flex flex-col place-content-center ${lilitaOne.className} h-full`}
+      className={`w-full flex flex-col place-content-center h-full`}
     >
       <h1 className="text-black font-bold text-2xl tracking-wide text-center font uppercase">
         Register

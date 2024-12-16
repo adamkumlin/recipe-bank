@@ -1,4 +1,4 @@
-"use server";
+
 
 export async function logIn(json: string) {
   const formData = JSON.parse(json);
