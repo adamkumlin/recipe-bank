@@ -2,8 +2,8 @@ import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
 import { User } from 'src/user/schema/user.schema';
-
 const bcrypt = require('bcryptjs');
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -43,7 +43,6 @@ export class AuthService {
     if (!isValidPassword) {
       return null;
     }
-
     return user;
   }
 }

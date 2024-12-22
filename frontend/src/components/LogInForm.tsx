@@ -2,7 +2,7 @@
 import { type FormEvent, useState } from "react";
 // import { lilitaOne } from "../lib/fonts";
 import { validateUserCredentials } from "../lib/utils/helper";
-import { logIn } from "../lib/actions/login";
+import { actions } from 'astro:actions';
 
 export default function LogInForm() {
   const [formData, setFormData] = useState({
@@ -11,7 +11,7 @@ export default function LogInForm() {
   });
   const [error, setError] = useState("");
 
-  async function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const validation = validateUserCredentials(formData, false);
@@ -22,12 +22,11 @@ export default function LogInForm() {
 
     const json: string = JSON.stringify(formData);
 
-    // Call server action
-    const response = await logIn(json);
-
+    const response = await actions.logIn(json);
+    
     // If an error occurred, display it
-    if (response) {
-      setError(response.message);
+    if (!response.data) {
+      setError("wrogn!");
     }
   }
 

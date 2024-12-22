@@ -1,7 +1,7 @@
 import { type FormEvent, useState } from "react";
+import { validateUserCredentials } from "../lib/utils/helper";
+import { server } from "../actions";
 // import { lilitaOne } from "../../../client/app/lib/fonts";
-import { validateUserCredentials } from "../../../client/app/lib/utils/helper";
-import { register } from "../../../client/app/actions/register";
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -23,11 +23,11 @@ export default function RegisterForm() {
     const json: string = JSON.stringify(formData);
 
     // Call server action
-    const response = await register(json);
+    const response = await server.register(json);
 
     // If an error occurred, display it
     if (response) {
-      setError(response.message);
+      setError(response.toString());
     }
   }
   
