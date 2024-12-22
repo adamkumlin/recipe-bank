@@ -1,11 +1,7 @@
-import {
-  BadRequestException,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { UserService } from '../user/user.service';
 import { User } from 'src/user/schema/user.schema';
-import { UserService } from 'src/user/user.service';
 
 const bcrypt = require('bcryptjs');
 @Injectable()
@@ -15,7 +11,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async logIn(email: string, password: string) {
+  async signIn(email: string, password: string) {
     if (!password || !email) {
       throw new BadRequestException('Email or password is empty.');
     }
@@ -25,14 +21,10 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException('Incorrect email or password.');
     }
-
-    const payload = {
-      sub: user.id,
-      username: user.email,
+    const payload = { username: email};
+    return {
+      access_token: await this.jwtService.signAsync(payload),
     };
-
-    const accessToken = await this.jwtService.signAsync(payload);
-    return accessToken;
   }
 
   async validateUser(email: string, password: string): Promise<User | null> {
