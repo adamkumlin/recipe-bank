@@ -1,0 +1,18 @@
+---
+import Layout from "../../layouts/Layout.astro";
+const token = Astro.cookies.get("token");
+---
+
+<Layout>
+  {
+    !token ? (
+      <h1 class="text-black font-bold text-2xl tracking-wide text-center font uppercase">
+        You need to be logged in.
+      </h1>
+    ) : (
+      <h1 class="text-black font-bold text-2xl tracking-wide text-center font uppercase">
+        nam
+      </h1>
+    )
+  }
+</Layout>

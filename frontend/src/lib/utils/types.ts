@@ -7,3 +7,10 @@ export type RecipeResponse = {
     dateCreated: string,
     dateUpdated?: string
 }
+
+export type Recipe = {
+    title: string,
+    body: string,
+    dateCreated: string,
+    dateUpdated?: string
+}

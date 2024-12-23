@@ -1,6 +1,8 @@
 ---
 import NavBar from "../components/NavBar";
-// import { inter } from "../lib/fonts"
+import '@fontsource/lilita-one';
+
+const isLoggedIn = Astro.cookies.get("token") ? true : false;
 ---
 
 <!doctype html>
@@ -13,7 +15,7 @@ import NavBar from "../components/NavBar";
     <title>Astro Basics</title>
   </head>
   <body class={` bg-[rgb(221,218,218)]`}>
-    <NavBar client:load/>
+    <NavBar isLoggedIn={isLoggedIn} client:load/>
     <slot />
   </body>
 </html>
