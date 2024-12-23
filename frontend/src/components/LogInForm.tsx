@@ -3,6 +3,7 @@ import { type FormEvent, useState } from "react";
 // import { lilitaOne } from "../lib/fonts";
 import { validateUserCredentials } from "../lib/utils/helper";
 import { actions } from 'astro:actions';
+import Cookie from "js-cookie";
 
 export default function LogInForm() {
   const [formData, setFormData] = useState({
@@ -22,11 +23,14 @@ export default function LogInForm() {
 
     const json: string = JSON.stringify(formData);
 
-    const response = await actions.logIn(json);
+    const {data} = await actions.logIn(json);
     
     // If an error occurred, display it
-    if (!response.data) {
+    if (!data) {
       setError("wrogn!");
+    } else {
+      console.log(data.access_token)
+      Cookie.set("token", data.access_token)
     }
   }
 

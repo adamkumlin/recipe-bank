@@ -26,7 +26,6 @@ export const server = {
         return jsonResponse;
       }
 
-
       return "";
     },
   }),
