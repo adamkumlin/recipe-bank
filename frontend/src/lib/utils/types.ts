@@ -1,16 +1,20 @@
-import { ObjectId } from "mongoose"
+import { type ObjectId } from "mongoose";
 
 export type RecipeResponse = {
-    _id: string,
-    title: string,
-    body: string,
-    dateCreated: string,
-    dateUpdated?: string
-}
+  _id: ObjectId;
+  title: string;
+  ingredients: string[];
+  instructions: string[];
+  link: string;
+  dateCreated: string;
+  dateUpdated?: string;
+};
 
 export type Recipe = {
-    title: string,
-    body: string,
-    dateCreated: string,
-    dateUpdated?: string
-}
+  title: string;
+  ingredients: string[];
+  instructions: string[];
+  link: string;
+  dateCreated: string;
+  dateUpdated?: string;
+};

@@ -30,7 +30,7 @@ export default function LogInForm() {
       setError("wrogn!");
     } else {
       console.log(data.access_token)
-      Cookie.set("token", data.access_token)
+      Cookie.set("token", data.access_token, {expires: 7})
     }
   }
 

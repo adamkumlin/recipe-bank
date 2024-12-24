@@ -16,6 +16,12 @@ interface NavBarProps {
 
 export default function NavBar({ isLoggedIn }: NavBarProps) {
   const [isMinimized, setIsMinimized] = useState<boolean>(false);
+
+  function handleToggleMinimize() {
+    setTimeout(() => {
+      setIsMinimized(!isMinimized);
+    }, 90);
+  }
   return (
     <nav
       className={
@@ -25,51 +31,55 @@ export default function NavBar({ isLoggedIn }: NavBarProps) {
       }
     >
       <div className="flex flex-row justify-end mt-2">
-        <button type="button" onClick={() => setIsMinimized(!isMinimized)}>
+        <button type="button" onClick={handleToggleMinimize}>
           {!isMinimized ? <ArrowLeftFromLine /> : <ArrowRightFromLine />}
         </button>
       </div>
-        <a className="text-center font-['Lilita_One']" href="/">
-          {!isMinimized ? (
-            <h1 className="text-3xl">
-              Recipe <span className="text-blue-400">Bank</span>
-            </h1>
-          ) : (
-            <h1 className="text-3xl">
-              R<span className="text-blue-700">B</span>
-            </h1>
-          )}
-        </a>
-      <ul className="flex flex-col items-center font-['Lilita_One'] gap-5 *:bg-blue-950 *:w-full *:text-center *:rounded-lg mt-4 *:p-2">
-        <li>
+      <a className="text-center font-['Lilita_One']" href="/">
+        {!isMinimized ? (
+          <h1 className="text-3xl">
+            Recipe <span className="text-blue-400">Bank</span>
+          </h1>
+        ) : (
+          <h1 className="text-3xl">
+            R<span className="text-blue-700">B</span>
+          </h1>
+        )}
+      </a>
+      <ul className="flex flex-col items-center font-['Lilita_One'] gap-5 *:bg-blue-950 *:w-full *:text-center *:rounded-lg mt-4 *:p-2 *:transition *:ease-in *:delay-100 *:*:block">
+        <li className="hover:bg-blue-500">
           <a href="/new-recipe">
             <SquarePlus className={!isMinimized ? "inline mr-2" : "inline"} />
             {!isMinimized ? "New recipe" : ""}
           </a>
         </li>
-        <li>
+        <li className="hover:bg-blue-500">
           <a href="/my-recipes">
-            <SquareLibrary className={!isMinimized ? "inline mr-2" : "inline"} />
+            <SquareLibrary
+              className={!isMinimized ? "inline mr-2" : "inline"}
+            />
             {!isMinimized ? "My recipes" : ""}
           </a>
         </li>
-        <li>
+        <li className="hover:bg-blue-500">
           <a href="my-account">
-            <SquareUserRound className={!isMinimized ? "inline mr-2" : "inline"} />
+            <SquareUserRound
+              className={!isMinimized ? "inline mr-2" : "inline"}
+            />
             {!isMinimized ? "My account" : ""}
           </a>
         </li>
-        <li>
+        <li className="hover:bg-blue-500">
           <a href="my-account/settings">
             <Settings className={!isMinimized ? "inline mr-2" : "inline"} />
             {!isMinimized ? "Settings" : ""}
           </a>
         </li>
-        <li>
+        <li className="hover:bg-blue-500">
           {!isLoggedIn ? (
             <a href="login">
               <LogIn className={!isMinimized ? "inline mr-2" : "inline"} />
-              {!isMinimized ? "Log in" : ""}
+              {!isMinimized ? "Log in/Register" : ""}
             </a>
           ) : (
             <a href="logout">
