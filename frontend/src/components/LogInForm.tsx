@@ -36,9 +36,9 @@ export default function LogInForm() {
 
   return (
     <div
-      className={`w-full flex flex-col place-content-center h-full`}
+      className={`w-full flex flex-col place-content-center h-full text-white`}
     >
-      <h1 className="text-black font-bold text-2xl tracking-wide text-center font uppercase">
+      <h1 className=" font-bold text-2xl tracking-wide text-center font uppercase">
         Log in
       </h1>
       <form
@@ -46,7 +46,7 @@ export default function LogInForm() {
         onSubmit={handleSubmit}
       >
         {error && <p className="text-red-500">{error}</p>}
-        <label className="uppercase text-black" htmlFor="email">
+        <label className="uppercase" htmlFor="email">
           Email
         </label>
         <input
@@ -56,10 +56,10 @@ export default function LogInForm() {
           }
           value={formData.email}
           type="email"
-          className="w-1/2 h-8 max-w-sm border-[1px] rounded-lg border-gray-700"
+          className="w-1/2 h-8 max-w-sm text-black border-[1px] rounded-lg border-gray-700"
           name="email"
         />
-        <label className="uppercase text-black" htmlFor="password">
+        <label className="uppercase" htmlFor="password">
           Password
         </label>
         <input
@@ -69,7 +69,7 @@ export default function LogInForm() {
           }
           value={formData.password}
           type="password"
-          className="w-1/2 h-8 max-w-sm border-[1px] rounded-lg border-gray-700"
+          className="w-1/2 h-8 max-w-sm text-black border-[1px] rounded-lg border-gray-700"
           name="password"
         />
 

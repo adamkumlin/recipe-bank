@@ -12,11 +12,14 @@ export class Recipe {
   title: string;
 
   @Prop({ required: true, maxlength: 400 })
-  body: string;
+  ingredients: string[];
 
-  @Prop({ required: false })
-  image?: string;
+  @Prop({ required: true, maxlength: 400 })
+  instructions: string[];
 
+  @Prop({required: false})
+  link: string;
+  
   @Prop({required: true, type: mongoose.Schema.Types.ObjectId })
   userId: ObjectId;
 

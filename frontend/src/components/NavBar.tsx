@@ -61,14 +61,16 @@ export default function NavBar({ isLoggedIn }: NavBarProps) {
             {!isMinimized ? "My recipes" : ""}
           </a>
         </li>
-        <li className="hover:bg-blue-500">
-          <a href="my-account">
-            <SquareUserRound
-              className={!isMinimized ? "inline mr-2" : "inline"}
-            />
-            {!isMinimized ? "My account" : ""}
-          </a>
-        </li>
+        {isLoggedIn ? (
+          <li className="hover:bg-blue-500">
+            <a href="my-account">
+              <SquareUserRound
+                className={!isMinimized ? "inline mr-2" : "inline"}
+              />
+              {!isMinimized ? "My account" : ""}
+            </a>
+          </li>
+        ) : null}
         <li className="hover:bg-blue-500">
           <a href="my-account/settings">
             <Settings className={!isMinimized ? "inline mr-2" : "inline"} />

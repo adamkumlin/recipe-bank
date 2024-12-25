@@ -28,8 +28,13 @@ export class UserController {
   }
 
   @Get(':email')
-  async get(@Param('email') email: string): Promise<User> {
+  async getByEmail(@Param('email') email: string): Promise<User> {
     return await this.userService.getByEmail(email);
+  }
+
+  @Get(':id')
+  async getById(@Param('id') id: string): Promise<User> {
+    return await this.userService.getById(id);
   }
 
   @Patch(':id')

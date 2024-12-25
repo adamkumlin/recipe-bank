@@ -23,6 +23,11 @@ export class UserService {
     return existingUser;
   }
 
+  async getById(id: string): Promise<User> {
+    const existingUser = await this.userModel.findOne({_id: id}).exec();
+    return existingUser;
+  }
+
   async getAll(): Promise<User[]> {
     return await this.userModel.find().exec();
   }

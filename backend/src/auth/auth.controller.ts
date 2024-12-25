@@ -4,6 +4,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Param,
   Post,
   Request,
 } from '@nestjs/common';
@@ -24,5 +25,11 @@ export class AuthController {
   @Get('account')
   getAccount(@Request() req) {
     return req.user;
+  }
+
+  @Public()
+  @Get("verify-user/:token")
+  verifyUser(@Param("token") token: string) {
+    return this.authService.verifyUser(token);
   }
 }

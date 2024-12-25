@@ -1,4 +1,5 @@
 import {
+  IsArray,
     IsDateString,
     IsNotEmpty,
     IsString,
@@ -11,13 +12,18 @@ import {
     @IsNotEmpty()
     title: string;
   
-    @IsString()
-    @MaxLength(400)
+    @IsArray()
     @IsNotEmpty()
-    body: string;
+    ingredients: string[];
+
+    @IsArray()
+    @IsNotEmpty()
+    instructions: string[];
   
-    image?: string;
+    @IsString()
+    link: string;
     
+    @IsNotEmpty()
     userId: string;
   
     @IsDateString()

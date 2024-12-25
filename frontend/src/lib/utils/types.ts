@@ -5,7 +5,7 @@ export type RecipeResponse = {
   title: string;
   ingredients: string[];
   instructions: string[];
-  link: string;
+  link?: string;
   dateCreated: string;
   dateUpdated?: string;
 };
@@ -14,7 +14,7 @@ export type Recipe = {
   title: string;
   ingredients: string[];
   instructions: string[];
-  link: string;
+  link?: string;
   dateCreated: string;
   dateUpdated?: string;
 };

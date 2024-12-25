@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
 import { User } from 'src/user/schema/user.schema';
@@ -21,7 +25,7 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException('Incorrect email or password.');
     }
-    const payload = { username: email};
+    const payload = { id: user._id.toString(), username: email };
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
@@ -44,5 +48,19 @@ export class AuthService {
       return null;
     }
     return user;
+  }
+
+  async verifyUser(token: string) {
+    const decoded = this.jwtService.decode(token);
+    if (!decoded.username || !decoded.id) {
+      throw new BadRequestException('Bad JWT token.');
+    }
+
+    const existingUser = await this.userService.getById(decoded.id);
+    if (existingUser) {
+      return decoded;
+    } else {
+      throw new BadRequestException('User not found.');
+    }
   }
 }
