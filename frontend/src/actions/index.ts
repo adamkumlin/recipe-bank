@@ -68,7 +68,6 @@ export const server = {
     handler: async (input) => {
       const formData: Recipe = JSON.parse(input.recipe);
       const userId = JSON.parse(input.userId);
-      console.log(userId)
       const request = await fetch("http://localhost:3001/recipe/create", {
         method: "POST",
         headers: {
@@ -108,6 +107,27 @@ export const server = {
       if (!request.ok) {
         return {
           error: "Error verifying user."
+        }
+      } else {
+        const response = await request.json();
+        const jsonResponse = JSON.parse(JSON.stringify(response));
+        return jsonResponse;
+      }
+    }
+  }),
+  getUserRecipes: defineAction({
+    input: z.string(),
+    handler: async (input) => {
+      const request = await fetch("http://localhost:3001/recipe/" + input, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+
+      if (!request.ok) {
+        return {
+          error: "Error fetching user recipes."
         }
       } else {
         const response = await request.json();

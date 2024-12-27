@@ -7,10 +7,10 @@ interface RecipeProps {
 export default function Recipe({recipe}: RecipeProps) {
 
     return (
-        <div className="grid grid-cols-3 text-center *:border-r-[1px] border-[1px] border-black *:border-r-black">
+        <div className="flex flex-row justify-center gap-2 text-white ">
             <h2>{recipe.title}</h2>
-            <p>{recipe.body}</p>
-            <p>Created {recipe.dateCreated}</p>
+            {/* <p>{recipe.body}</p> */}
+            {/* <p>Created {recipe.dateCreated}</p> */}
         </div>
     )
 }

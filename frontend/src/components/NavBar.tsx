@@ -54,7 +54,7 @@ export default function NavBar({ isLoggedIn }: NavBarProps) {
           </a>
         </li>
         <li className="hover:bg-blue-500">
-          <a href="/my-recipes">
+          <a href="my-account/recipes">
             <SquareLibrary
               className={!isMinimized ? "inline mr-2" : "inline"}
             />

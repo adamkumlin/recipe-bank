@@ -9,6 +9,7 @@ import { Public } from 'src/auth/decorators/public.decorator';
 export class RecipeController {
   constructor(private readonly recipeService: RecipeService) {}
 
+  @Public()
   @Get(":userId")
   getAll(@Param("userId") userId: ObjectId) {
     return this.recipeService.getAll(userId);
