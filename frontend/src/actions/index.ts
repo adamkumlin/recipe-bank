@@ -1,6 +1,6 @@
 import { defineAction } from "astro:actions";
 import { z } from "astro:schema";
-import { today } from "../lib/utils/constants";
+import { now } from "../lib/utils/constants";
 import bcrypt from "bcryptjs";
 import { type Recipe } from "../lib/utils/types";
 
@@ -46,7 +46,7 @@ export const server = {
         body: JSON.stringify({
           email: formData.email,
           password: hash,
-          joinDate: today.toISOString(),
+          joinDate: now.toISOString(),
         }),
       });
 
@@ -118,7 +118,28 @@ export const server = {
   getUserRecipes: defineAction({
     input: z.string(),
     handler: async (input) => {
-      const request = await fetch("http://localhost:3001/recipe/" + input, {
+      const request = await fetch("http://localhost:3001/recipe/user/" + input, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+
+      if (!request.ok) {
+        return {
+          error: "Error fetching user recipes."
+        }
+      } else {
+        const response = await request.json();
+        const jsonResponse = JSON.parse(JSON.stringify(response));
+        return jsonResponse;
+      }
+    }
+  }),
+  getRecipe: defineAction({
+    input: z.string(),
+    handler: async (input) => {
+      const request = await fetch("http://localhost:3001/recipe/id/" + input, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

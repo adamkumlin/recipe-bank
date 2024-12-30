@@ -1,6 +1,6 @@
 import { type FormEvent, useState } from "react";
 import { type Recipe } from "../lib/utils/types";
-import { today } from "../lib/utils/constants";
+import { now } from "../lib/utils/constants";
 import { actions } from "astro:actions";
 import Cookies from "js-cookie";
 
@@ -10,7 +10,7 @@ export default function NewRecipeForm() {
     ingredients: [],
     instructions: [],
     link: "",
-    dateCreated: today.toString(),
+    dateCreated: `${now.toLocaleDateString("sv-SE")} ${now.toLocaleTimeString("sv-SE")}`,
   });
   const [error, setError] = useState<string>("");
   const [popupError, setPopupError] = useState<string>("");

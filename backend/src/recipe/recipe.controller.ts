@@ -10,9 +10,15 @@ export class RecipeController {
   constructor(private readonly recipeService: RecipeService) {}
 
   @Public()
-  @Get(":userId")
+  @Get("/user/:userId")
   getAll(@Param("userId") userId: ObjectId) {
     return this.recipeService.getAll(userId);
+  }
+
+  @Public()
+  @Get("/id/:id")
+  get(@Param("id") id: ObjectId) {
+    return this.recipeService.get(id);
   }
   
   @Public()

@@ -13,6 +13,10 @@ export class RecipeService {
     return await this.recipeModel.find({userId: userId}).exec();
   }
 
+  async get(id: ObjectId): Promise<Recipe> {
+    return await this.recipeModel.findById(id).exec();
+  }
+
   async create(createRecipeDto: CreateRecipeDto): Promise<Recipe> {
     const createdRecipe = new this.recipeModel(createRecipeDto);
     return createdRecipe.save();

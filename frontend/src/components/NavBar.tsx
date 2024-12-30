@@ -54,7 +54,7 @@ export default function NavBar({ isLoggedIn }: NavBarProps) {
           </a>
         </li>
         <li className="hover:bg-blue-500">
-          <a href="my-account/recipes">
+          <a href="/my-account/recipes">
             <SquareLibrary
               className={!isMinimized ? "inline mr-2" : "inline"}
             />
@@ -63,7 +63,7 @@ export default function NavBar({ isLoggedIn }: NavBarProps) {
         </li>
         {isLoggedIn ? (
           <li className="hover:bg-blue-500">
-            <a href="my-account">
+            <a href="/my-account">
               <SquareUserRound
                 className={!isMinimized ? "inline mr-2" : "inline"}
               />
@@ -72,19 +72,19 @@ export default function NavBar({ isLoggedIn }: NavBarProps) {
           </li>
         ) : null}
         <li className="hover:bg-blue-500">
-          <a href="my-account/settings">
+          <a href="/my-account/settings">
             <Settings className={!isMinimized ? "inline mr-2" : "inline"} />
             {!isMinimized ? "Settings" : ""}
           </a>
         </li>
         <li className="hover:bg-blue-500">
           {!isLoggedIn ? (
-            <a href="login">
+            <a href="/login">
               <LogIn className={!isMinimized ? "inline mr-2" : "inline"} />
               {!isMinimized ? "Log in/Register" : ""}
             </a>
           ) : (
-            <a href="logout">
+            <a href="/logout">
               <LogOut className={!isMinimized ? "inline mr-2" : "inline"} />
               {!isMinimized ? "Log out" : ""}
             </a>
