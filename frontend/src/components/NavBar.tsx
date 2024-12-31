@@ -26,8 +26,8 @@ export default function NavBar({ isLoggedIn }: NavBarProps) {
     <nav
       className={
         !isMinimized
-          ? "bg-gray-900 border-r-2 absolute *:text-xl *:text-white h-full w-1/5 px-6"
-          : "bg-gray-900 border-r-2 absolute *:text-xl *:text-white h-full w-fit px-6"
+          ? "bg-gray-900 absolute *:text-xl *:text-white h-full w-1/5 px-6"
+          : "bg-gray-900 absolute *:text-xl *:text-white h-full w-fit px-6"
       }
     >
       <div className="flex flex-row justify-end mt-2">
@@ -35,7 +35,7 @@ export default function NavBar({ isLoggedIn }: NavBarProps) {
           {!isMinimized ? <ArrowLeftFromLine /> : <ArrowRightFromLine />}
         </button>
       </div>
-      <a className="text-center font-['Lilita_One']" href="/">
+      <a className="text-center" href="/">
         {!isMinimized ? (
           <h1 className="text-3xl">
             Recipe <span className="text-blue-400">Bank</span>
@@ -46,7 +46,7 @@ export default function NavBar({ isLoggedIn }: NavBarProps) {
           </h1>
         )}
       </a>
-      <ul className="flex flex-col items-center font-['Lilita_One'] gap-5 *:bg-blue-950 *:w-full *:text-center *:rounded-lg mt-4 *:p-2 *:transition *:ease-in *:delay-100 *:*:block">
+      <ul className="flex flex-col items-center gap-5 *:bg-blue-950 *:w-full *:text-center *:rounded-lg mt-4 *:p-2 *:transition *:ease-in *:delay-100 *:*:block">
         <li className="hover:bg-blue-500">
           <a href="/new-recipe">
             <SquarePlus className={!isMinimized ? "inline mr-2" : "inline"} />

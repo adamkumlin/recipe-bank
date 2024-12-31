@@ -20,6 +20,12 @@ export class RecipeController {
   get(@Param("id") id: ObjectId) {
     return this.recipeService.get(id);
   }
+
+  @Public()
+  @Delete("/id/:id")
+  delete(@Param("id") id: ObjectId) {
+    return this.recipeService.delete(id);
+  }
   
   @Public()
   @Post('create')
@@ -33,10 +39,5 @@ export class RecipeController {
     @Body() updateRecipeDto: UpdateRecipeDto,
   ) {
     return await this.recipeService.update(id, updateRecipeDto);
-  }
-
-  @Delete(":id")
-  async delete(@Param("id") id: ObjectId) {
-    return await this.recipeService.delete(id);
   }
 }

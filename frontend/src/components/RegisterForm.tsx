@@ -1,7 +1,6 @@
 import { type FormEvent, useState } from "react";
 import { validateUserCredentials } from "../lib/utils/helper";
 import { server } from "../actions";
-// import { lilitaOne } from "../../../client/app/lib/fonts";
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState({
