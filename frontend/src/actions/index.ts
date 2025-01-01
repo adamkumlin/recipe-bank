@@ -160,6 +160,7 @@ export const server = {
   deleteRecipe: defineAction({
     input: z.string(),
     handler: async (input) => {
+      console.log(input)
       const request = await fetch("http://localhost:3001/recipe/id/" + input, {
         method: "DELETE",
         headers: {

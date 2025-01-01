@@ -6,7 +6,7 @@ const isLoggedIn = Astro.cookies.get("token") ? true : false;
 ---
 
 <!doctype html>
-<html lang="en">
+<html class="m-0 w-full h-full" lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -14,19 +14,10 @@ const isLoggedIn = Astro.cookies.get("token") ? true : false;
     <meta name="generator" content={Astro.generator} />
     <title>Astro Basics</title>
   </head>
-  <body class={`font-['Lilita_One'] bg-[rgb(4,5,15)] text-center text-white`}>
+  <body class={`font-['Lilita_One'] bg-[rgb(4,5,15)] text-center text-white m-0 w-full h-full *:overflow-y-hidden`}>
     <NavBar isLoggedIn={isLoggedIn} client:load/>
     <main class="min-w-4/5 ml-auto border-[20px] border-gray-900 h-full">
       <slot />
     </main>
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>

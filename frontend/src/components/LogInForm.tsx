@@ -1,9 +1,8 @@
 
 import { type FormEvent, useState } from "react";
-// import { lilitaOne } from "../lib/fonts";
 import { validateUserCredentials } from "../lib/utils/helper";
 import { actions } from 'astro:actions';
-import Cookie from "js-cookie";
+import Cookies from "js-cookie";
 
 export default function LogInForm() {
   const [formData, setFormData] = useState({
@@ -12,8 +11,8 @@ export default function LogInForm() {
   });
   const [error, setError] = useState("");
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
 
     const validation = validateUserCredentials(formData, false);
     if (validation !== "") {
@@ -30,13 +29,14 @@ export default function LogInForm() {
       setError("wrogn!");
     } else {
       console.log(data.access_token)
-      Cookie.set("token", data.access_token, {expires: 7})
+      Cookies.set("token", data.access_token, {expires: 7})
+      window.location.reload();
     }
   }
 
   return (
     <div
-      className={`w-full flex flex-col place-content-center h-full text-white`}
+      className={`flex flex-col place-content-center h-full text-white w-1/2 m-auto`}
     >
       <h1 className=" font-bold text-2xl tracking-wide text-center font uppercase">
         Log in
@@ -51,6 +51,7 @@ export default function LogInForm() {
         </label>
         <input
           id="email"
+          autoComplete="off"
           onChange={(e) =>
             setFormData((current) => ({ ...current, email: e.target.value }))
           }

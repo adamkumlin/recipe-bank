@@ -8,7 +8,8 @@ import {
   SquarePlus,
   SquareUserRound,
 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import Cookies from "js-cookie";
 
 interface NavBarProps {
   isLoggedIn: boolean;
@@ -18,10 +19,14 @@ export default function NavBar({ isLoggedIn }: NavBarProps) {
   const [isMinimized, setIsMinimized] = useState<boolean>(false);
 
   function handleToggleMinimize() {
-    setTimeout(() => {
-      setIsMinimized(!isMinimized);
-    }, 90);
+    setIsMinimized(!isMinimized);
   }
+
+  function handleLogOutClick() {
+    Cookies.remove("token");
+    window.location.reload();
+  }
+
   return (
     <nav
       className={
@@ -46,7 +51,7 @@ export default function NavBar({ isLoggedIn }: NavBarProps) {
           </h1>
         )}
       </a>
-      <ul className="flex flex-col items-center gap-5 *:bg-blue-950 *:w-full *:text-center *:rounded-lg mt-4 *:p-2 *:transition *:ease-in *:delay-100 *:*:block">
+      <ul className="flex flex-col items-center gap-5 *:bg-blue-950 *:w-full *:text-center *:rounded-lg mt-4 *:p-2 *:*:block">
         <li className="hover:bg-blue-500">
           <a href="/new-recipe">
             <SquarePlus className={!isMinimized ? "inline mr-2" : "inline"} />
@@ -84,10 +89,10 @@ export default function NavBar({ isLoggedIn }: NavBarProps) {
               {!isMinimized ? "Log in/Register" : ""}
             </a>
           ) : (
-            <a href="/logout">
+            <button onClick={handleLogOutClick} className="w-full">
               <LogOut className={!isMinimized ? "inline mr-2" : "inline"} />
               {!isMinimized ? "Log out" : ""}
-            </a>
+            </button>
           )}
         </li>
       </ul>

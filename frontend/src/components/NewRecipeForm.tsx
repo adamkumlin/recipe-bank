@@ -3,6 +3,7 @@ import { type Recipe } from "../lib/utils/types";
 import { now } from "../lib/utils/constants";
 import { actions } from "astro:actions";
 import Cookies from "js-cookie";
+import NewRecipeFormPopup from "./NewRecipeFormPopup";
 
 export default function NewRecipeForm() {
   const [formData, setFormData] = useState<Recipe>({
@@ -14,11 +15,12 @@ export default function NewRecipeForm() {
   });
   const [error, setError] = useState<string>("");
   const [popupError, setPopupError] = useState<string>("");
-  const [showPopupMenu, setShowPopupMenu] = useState({
+  const [popupMenu, setPopupMenu] = useState({
     isActive: false,
     menuType: "",
   });
   const [newValue, setNewValue] = useState<string>("");
+
   function handleAddIngredient() {
     if (!newValue) {
       setPopupError("Ingredient cannot be empty.");
@@ -27,7 +29,7 @@ export default function NewRecipeForm() {
 
     const ingredients: string[] = formData.ingredients;
     ingredients.push(newValue);
-    setShowPopupMenu({ isActive: false, menuType: "" });
+    setPopupMenu({ isActive: false, menuType: "" });
     setNewValue("");
     setPopupError("");
   }
@@ -40,7 +42,7 @@ export default function NewRecipeForm() {
 
     const instructions: string[] = formData.instructions;
     instructions.push(newValue);
-    setShowPopupMenu({ isActive: false, menuType: "" });
+    setPopupMenu({ isActive: false, menuType: "" });
     setNewValue("");
     setPopupError("");
   }
@@ -77,12 +79,12 @@ export default function NewRecipeForm() {
   }
 
   return (
-    <div className="w-full flex flex-col justify-center items-center h-full text-white">
+    <div className="w-1/2 mx-auto flex flex-col justify-center items-center h-full text-white">
       <h1 className="font-bold text-2xl tracking-wide text-center font uppercase">
         New recipe
       </h1>
       <form
-        className="flex flex-col gap-2 items-center drop-shadow-lg rounded-xl m-4 w-1/2"
+        className="flex flex-col gap-2 items-center drop-shadow-lg rounded-xl m-4 w-full"
         onSubmit={(e) => handleSubmit(e)}
       >
         {error && <p className="text-red-600">{error}</p>}
@@ -130,49 +132,14 @@ export default function NewRecipeForm() {
             <button
               type="button"
               onClick={() =>
-                setShowPopupMenu({ isActive: true, menuType: "ingredient" })
+                setPopupMenu({ isActive: true, menuType: "ingredient" })
               }
               className="rounded-md text-white bg-slate-700 p-2 hover:scale-110"
             >
               Add ingredient
             </button>
 
-            {showPopupMenu.isActive &&
-            showPopupMenu.menuType === "ingredient" ? (
-              <div className="absolute top-1 flex flex-col items-center bg-blue-950 z-10 p-14 rounded-3xl border-[1px] border-white">
-                <label className="uppercase" htmlFor="ingredient">
-                  Ingredient
-                </label>
-                {popupError && <p className="text-red-600">{popupError}</p>}
-                <input
-                  id="ingredient"
-                  onChange={(e) => setNewValue(e.target.value)}
-                  value={newValue}
-                  type="text"
-                  className="h-8 max-w-sm border-[1px] rounded-lg border-gray-700 text-black"
-                  name="ingredient"
-                />
-
-                <div>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setShowPopupMenu({ isActive: false, menuType: "" })
-                    }
-                    className="rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={handleAddIngredient}
-                    type="button"
-                    className="rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110"
-                  >
-                    Done
-                  </button>
-                </div>
-              </div>
-            ) : null}
+            <NewRecipeFormPopup popupMenu={popupMenu} setPopupMenu={setPopupMenu}/>
           </div>
           <div>
             <label className="uppercase" htmlFor="password">
@@ -189,15 +156,15 @@ export default function NewRecipeForm() {
             <button
               type="button"
               onClick={() =>
-                setShowPopupMenu({ isActive: true, menuType: "instruction" })
+                setPopupMenu({ isActive: true, menuType: "instruction" })
               }
               className="rounded-md text-white bg-slate-700 p-2 hover:scale-110"
             >
               Add instruction
             </button>
 
-            {showPopupMenu.isActive &&
-            showPopupMenu.menuType === "instruction" ? (
+            {popupMenu.isActive &&
+            popupMenu.menuType === "instruction" ? (
               <div className="absolute flex top-1 flex-col items-center bg-blue-950 z-10 p-14 rounded-3xl border-[1px] border-white">
                 <label className="uppercase" htmlFor="instruction">
                   Instruction
@@ -216,7 +183,7 @@ export default function NewRecipeForm() {
                   <button
                     type="button"
                     onClick={() =>
-                      setShowPopupMenu({ isActive: false, menuType: "" })
+                      setPopupMenu({ isActive: false, menuType: "" })
                     }
                     className="rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110"
                   >

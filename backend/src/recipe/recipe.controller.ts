@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { RecipeService } from './recipe.service';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { ObjectId } from 'mongoose';
@@ -10,23 +18,23 @@ export class RecipeController {
   constructor(private readonly recipeService: RecipeService) {}
 
   @Public()
-  @Get("/user/:userId")
-  getAll(@Param("userId") userId: ObjectId) {
+  @Get('/user/:userId')
+  getAll(@Param('userId') userId: ObjectId) {
     return this.recipeService.getAll(userId);
   }
 
   @Public()
-  @Get("/id/:id")
-  get(@Param("id") id: ObjectId) {
+  @Get('/id/:id')
+  get(@Param('id') id: ObjectId) {
     return this.recipeService.get(id);
   }
 
   @Public()
-  @Delete("/id/:id")
-  delete(@Param("id") id: ObjectId) {
+  @Delete('/id/:id')
+  delete(@Param('id') id: ObjectId) {
     return this.recipeService.delete(id);
   }
-  
+
   @Public()
   @Post('create')
   async create(@Body() createRecipeDto: CreateRecipeDto) {

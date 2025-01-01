@@ -1,6 +1,7 @@
 import { type FormEvent, useState } from "react";
 import { validateUserCredentials } from "../lib/utils/helper";
 import { server } from "../actions";
+import Cookies from "js-cookie";
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -10,8 +11,8 @@ export default function RegisterForm() {
   });
   const [error, setError] = useState<string>();
 
-  async function handleSubmit(event: FormEvent) {
-    event.preventDefault();
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
 
     const validation = validateUserCredentials(formData, true);
     if (validation !== "") {
@@ -22,19 +23,22 @@ export default function RegisterForm() {
     const json: string = JSON.stringify(formData);
 
     // Call server action
-    const response = await server.register(json);
+    const {data} = await server.register(json);
 
-    // If an error occurred, display it
-    if (response) {
-      setError(response.toString());
+    if (!data) {
+      setError("wrogn!");
+    } else {
+      console.log(data.access_token)
+      Cookies.set("token", data.access_token, {expires: 7})
+      window.location.reload();
     }
   }
   
   return (
     <div
-      className={`w-full flex flex-col place-content-center h-full`}
+      className={`w-1/2 m-auto flex flex-col place-content-center h-full`}
     >
-      <h1 className="text-black font-bold text-2xl tracking-wide text-center font uppercase">
+      <h1 className="font-bold text-2xl tracking-wide text-center font uppercase">
         Register
       </h1>
       <form
@@ -42,7 +46,7 @@ export default function RegisterForm() {
         onSubmit={(event) => handleSubmit(event)}
       >
         {error && <p className="text-red-600">{error}</p>}
-        <label className="uppercase text-black" htmlFor="email">
+        <label className="uppercase" htmlFor="email">
           Email
         </label>
         <input
@@ -55,7 +59,7 @@ export default function RegisterForm() {
           className="w-1/2 h-8 max-w-sm border-[1px] rounded-lg border-gray-700"
           name="email"
         />
-        <label className="uppercase text-black" htmlFor="password">
+        <label className="uppercase" htmlFor="password">
           Password
         </label>
         <input
@@ -69,7 +73,7 @@ export default function RegisterForm() {
           name="password"
         />
 
-        <label className="uppercase text-black" htmlFor="confirm-password">
+        <label className="uppercase" htmlFor="confirm-password">
           Confirm password
         </label>
         <input
