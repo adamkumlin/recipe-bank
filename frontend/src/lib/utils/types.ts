@@ -18,3 +18,9 @@ export type Recipe = {
   dateCreated: string;
   dateUpdated?: string;
 };
+
+export type PopupMenu = {
+  isActive: boolean,
+  menuType: string,
+  handler?: (newValue: string) => void;
+}

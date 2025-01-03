@@ -174,5 +174,22 @@ export const server = {
         }
       }
     }
-  })
+  }),
+  toggleAlwaysRememberPassword: defineAction({
+    input: z.string(),
+    handler: async (input) => {
+      const request = await fetch("http://localhost:3001/user/" + input, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+
+      if (!request.ok) {
+        return {
+          error: "Error fetching user recipes."
+        }
+      }
+    }
+  }),
 };
