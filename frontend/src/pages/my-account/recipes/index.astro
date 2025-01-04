@@ -5,6 +5,7 @@ import Layout from "../../../layouts/Layout.astro";
 import type { RecipeResponse } from "../../../lib/utils/types";
 
 const token = Astro.cookies.get("token");
+console.log(token)
 let recipes: RecipeResponse[] = [];
 try {
     if (!token) {

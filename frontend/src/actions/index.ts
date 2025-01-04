@@ -50,8 +50,7 @@ export const server = {
         }),
       });
 
-      // If an error occurred, return it
-      if (!request.ok) {
+      if (request.ok) {
         const response = await request.json();
         const jsonResponse = JSON.parse(JSON.stringify(response));
         return jsonResponse;
@@ -160,7 +159,6 @@ export const server = {
   deleteRecipe: defineAction({
     input: z.string(),
     handler: async (input) => {
-      console.log(input)
       const request = await fetch("http://localhost:3001/recipe/id/" + input, {
         method: "DELETE",
         headers: {
@@ -176,14 +174,22 @@ export const server = {
     }
   }),
   toggleAlwaysRememberPassword: defineAction({
-    input: z.string(),
+    input: z.object({
+      settingValue: z.string(),
+      userId: z.string()
+    }),
     handler: async (input) => {
-      const request = await fetch("http://localhost:3001/user/" + input, {
+      const request = await fetch("http://localhost:3001/user/" + input.userId, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-        }
+        },
+        body: JSON.stringify({
+          alwaysRememberPassword: input.settingValue
+        }),
       });
+
+      console.log(request)
 
       if (!request.ok) {
         return {

@@ -12,6 +12,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './schema/user.schema';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ObjectId } from 'mongoose';
+import { Public } from 'src/auth/decorators/public.decorator';
 
 @Controller('user')
 export class UserController {
@@ -22,9 +23,10 @@ export class UserController {
     return await this.userService.getAll();
   }
   
+  @Public()
   @Post('create')
   async create(@Body() createUserDto: CreateUserDto) {
-    await this.userService.create(createUserDto);
+    return await this.userService.create(createUserDto);
   }
 
   @Get(':email')
@@ -37,6 +39,7 @@ export class UserController {
     return await this.userService.getById(id);
   }
 
+  @Public()
   @Patch(':id')
   async update(
     @Param('id') id: ObjectId,

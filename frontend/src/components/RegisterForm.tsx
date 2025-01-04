@@ -1,7 +1,7 @@
 import { type FormEvent, useState } from "react";
 import { validateUserCredentials } from "../lib/utils/helper";
-import { server } from "../actions";
 import Cookies from "js-cookie";
+import { actions } from "astro:actions";
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -23,12 +23,12 @@ export default function RegisterForm() {
     const json: string = JSON.stringify(formData);
 
     // Call server action
-    const {data} = await server.register(json);
+    const {data} = await actions.register(json);
 
     if (!data) {
       setError("wrogn!");
     } else {
-      console.log(data.access_token)
+      const {data} = await actions.logIn(json);
       Cookies.set("token", data.access_token, {expires: 7})
       window.location.reload();
     }
@@ -56,7 +56,7 @@ export default function RegisterForm() {
           }
           value={formData.email}
           type="email"
-          className="w-1/2 h-8 max-w-sm border-[1px] rounded-lg border-gray-700"
+          className="w-1/2 h-8 max-w-sm border-[1px] rounded-lg text-black border-gray-700"
           name="email"
         />
         <label className="uppercase" htmlFor="password">
@@ -69,7 +69,7 @@ export default function RegisterForm() {
           }
           value={formData.password}
           type="password"
-          className="w-1/2 h-8 max-w-sm border-[1px] rounded-lg border-gray-700"
+          className="w-1/2 h-8 max-w-sm border-[1px] rounded-lg text-black border-gray-700"
           name="password"
         />
 
@@ -86,7 +86,7 @@ export default function RegisterForm() {
           }
           value={formData.confirmPassword}
           type="password"
-          className="w-1/2 h-8 max-w-sm border-[1px] rounded-lg border-gray-700"
+          className="w-1/2 h-8 max-w-sm border-[1px] rounded-lg text-black border-gray-700"
           name="confirm-password"
         />
 

@@ -21,10 +21,11 @@ export class AuthService {
     }
 
     const user = await this.validateUser(email, password);
-
+    console.log(user)
     if (!user) {
       throw new UnauthorizedException('Incorrect email or password.');
     }
+    // @ts-ignore: _id does exist
     const payload = { id: user._id.toString(), username: email };
     return {
       access_token: await this.jwtService.signAsync(payload),
@@ -52,6 +53,7 @@ export class AuthService {
 
   async verifyUser(token: string) {
     const decoded = this.jwtService.decode(token);
+    console.log(token)
     if (!decoded.username || !decoded.id) {
       throw new BadRequestException('Bad JWT token.');
     }
