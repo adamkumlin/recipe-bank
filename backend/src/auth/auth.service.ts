@@ -21,7 +21,6 @@ export class AuthService {
     }
 
     const user = await this.validateUser(email, password);
-    console.log(user)
     if (!user) {
       throw new UnauthorizedException('Incorrect email or password.');
     }
@@ -53,7 +52,6 @@ export class AuthService {
 
   async verifyUser(token: string) {
     const decoded = this.jwtService.decode(token);
-    console.log(token)
     if (!decoded.username || !decoded.id) {
       throw new BadRequestException('Bad JWT token.');
     }

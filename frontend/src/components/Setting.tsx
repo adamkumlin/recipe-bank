@@ -1,47 +1,62 @@
 import { actions } from "astro:actions";
-import { useState, type FormEvent } from "react";
-import Cookies from "js-cookie";
+import React, { useState, type FormEvent } from "react";
 
 interface SettingProps {
   name: string;
-  action: any;
+  settingName: string;
   inputType: "checkbox" | "text";
-  currentValue: "string" | boolean;
+  currentValue: string;
+  setError: React.Dispatch<React.SetStateAction<string>>;
+  token: string;
 }
 
 export default function Setting({
   name,
-  action,
+  settingName,
   inputType,
   currentValue,
+  setError,
+  token,
 }: SettingProps) {
-  const [newSettingValue, setNewSettingValue] = useState<string>("");
+  const [currentSettingValue, setCurrentSettingValue] = useState<string>(
+    currentValue.toString()
+  );
+  const [newSettingValue, setNewSettingValue] = useState<string>(
+    inputType === "checkbox" ? currentValue.toString() : ""
+  );
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
-    const token = Cookies.get("token");
     if (!token) {
+      setError("Error: Invalid token.");
       return;
     }
 
-    const isDifferentValue = currentValue != newSettingValue ? true : false;
-    if (!isDifferentValue && newSettingValue == "") {
+    if (newSettingValue === "") {
+      setError("Error: New value cannot be empty.");
+      return;
+    }
+
+    if (currentSettingValue === newSettingValue) {
+      setError("Error: New value must differ from the original value.");
       return;
     }
 
     const user = await actions.verifyUserJwt(token);
     if (!user) {
+      setError("Error: Invalid user.");
       return;
     }
 
-    const newSettingValueJson: string = JSON.stringify(newSettingValue);
-    const userIdJson: string = JSON.stringify(user.data.id);
     const json = {
-      settingValue: newSettingValueJson,
-      userId: userIdJson,
+      settingName: settingName,
+      settingValue: newSettingValue,
+      userId: user.data.id,
     };
-    const data = await action(json);
+    await actions.editUserSetting(json);
+
+    setCurrentSettingValue(newSettingValue);
+    setError("");
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -54,14 +69,20 @@ export default function Setting({
       <span>{name}</span>
       <form onSubmit={handleSubmit}>
         {inputType === "checkbox" ? (
-          <input type="checkbox" onChange={(e) => handleChange(e)} />
+          <input
+            type="checkbox"
+            onChange={(e) => handleChange(e)}
+            checked={newSettingValue == "true"}
+          />
         ) : (
           <input
             type="text"
             onChange={(e) => setNewSettingValue(e.target.value)}
           />
         )}
-        <button type="submit">Save</button>
+        {currentSettingValue !== newSettingValue && (
+          <button type="submit">Save</button>
+        )}
       </form>
     </div>
   );

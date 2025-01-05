@@ -20,7 +20,7 @@ export const server = {
           password: formData.password,
         }),
       });
-      
+
       if (request.ok) {
         const response = await request.json();
         const jsonResponse = JSON.parse(JSON.stringify(response));
@@ -62,7 +62,7 @@ export const server = {
   addNewRecipe: defineAction({
     input: z.object({
       recipe: z.string(),
-      userId: z.string()
+      userId: z.string(),
     }),
     handler: async (input) => {
       const formData: Recipe = JSON.parse(input.recipe);
@@ -78,62 +78,68 @@ export const server = {
           ingredients: formData.ingredients,
           instructions: formData.instructions,
           link: formData.link,
-          dateCreated: formData.dateCreated
+          dateCreated: formData.dateCreated,
         }),
       });
 
       if (!request.ok) {
         return {
-          error: "Error adding recipe."
-        }
+          error: "Error adding recipe.",
+        };
       } else {
         return {
-          message: "Recipe added successfully."
-        }
+          message: "Recipe added successfully.",
+        };
       }
-    }
+    },
   }),
   verifyUserJwt: defineAction({
     input: z.string(),
     handler: async (input) => {
-      const request = await fetch("http://localhost:3001/auth/verify-user/" + input, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
+      const request = await fetch(
+        "http://localhost:3001/auth/verify-user/" + input,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      });
+      );
 
       if (!request.ok) {
         return {
-          error: "Error verifying user."
-        }
+          error: "Error verifying user.",
+        };
       } else {
         const response = await request.json();
         const jsonResponse = JSON.parse(JSON.stringify(response));
         return jsonResponse;
       }
-    }
+    },
   }),
   getUserRecipes: defineAction({
     input: z.string(),
     handler: async (input) => {
-      const request = await fetch("http://localhost:3001/recipe/user/" + input, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
+      const request = await fetch(
+        "http://localhost:3001/recipe/user/" + input,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      });
+      );
 
       if (!request.ok) {
         return {
-          error: "Error fetching user recipes."
-        }
+          error: "Error fetching user recipes.",
+        };
       } else {
         const response = await request.json();
         const jsonResponse = JSON.parse(JSON.stringify(response));
         return jsonResponse;
       }
-    }
+    },
   }),
   getRecipe: defineAction({
     input: z.string(),
@@ -142,19 +148,19 @@ export const server = {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-        }
+        },
       });
 
       if (!request.ok) {
         return {
-          error: "Error fetching user recipes."
-        }
+          error: "Error fetching user recipes.",
+        };
       } else {
         const response = await request.json();
         const jsonResponse = JSON.parse(JSON.stringify(response));
         return jsonResponse;
       }
-    }
+    },
   }),
   deleteRecipe: defineAction({
     input: z.string(),
@@ -163,39 +169,62 @@ export const server = {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-        }
+        },
       });
 
       if (!request.ok) {
         return {
-          error: "Error fetching user recipes."
-        }
+          error: "Error fetching user recipes.",
+        };
       }
-    }
+    },
   }),
-  toggleAlwaysRememberPassword: defineAction({
+  editUserSetting: defineAction({
     input: z.object({
+      settingName: z.string(),
       settingValue: z.string(),
-      userId: z.string()
+      userId: z.string(),
     }),
     handler: async (input) => {
-      const request = await fetch("http://localhost:3001/user/" + input.userId, {
-        method: "PATCH",
+      const request = await fetch(
+        "http://localhost:3001/user/" + input.userId,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            [input.settingName]: input.settingValue,
+          }),
+        }
+      );
+
+      if (!request.ok) {
+        return {
+          error: "Error fetching user recipes.",
+        };
+      }
+    },
+  }),
+  getUserSettings: defineAction({
+    input: z.string(),
+    handler: async (input) => {
+      const request = await fetch("http://localhost:3001/user/settings/" + input, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          alwaysRememberPassword: input.settingValue
-        }),
       });
-
-      console.log(request)
 
       if (!request.ok) {
         return {
-          error: "Error fetching user recipes."
-        }
+          error: "Error fetching user data.",
+        };
+      } else {
+        const response = await request.json();
+        const jsonResponse = JSON.parse(JSON.stringify(response));
+        return jsonResponse;
       }
-    }
+    },
   }),
 };

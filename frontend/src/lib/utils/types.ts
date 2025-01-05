@@ -24,3 +24,10 @@ export type PopupMenu = {
   menuType: string,
   handler?: (newValue: string) => void;
 }
+
+export type UserSettings = {
+  alwaysRememberPassword: boolean;
+  useDarkMode: boolean;
+  useMetric: boolean;
+  displayLangauge: string;
+}

@@ -8,11 +8,9 @@ import type { RecipeResponse } from "../../../lib/utils/types";
 const {recipe} = Astro.params;
 
 let recipeResponse;
-console.log(Astro.params)
 try {
     const recipeData = await Astro.callAction(actions.getRecipe, recipe as string);
     recipeResponse = recipeData;
-    console.log(recipeData)
 } catch(e) {
     console.log(e)
 }

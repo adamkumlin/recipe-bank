@@ -33,7 +33,7 @@ export class UserService {
   }
 
   async update(id: ObjectId, updateUserDto: UpdateUserDto): Promise<User> {
-    return this.userModel.findByIdAndUpdate(id, updateUserDto).exec();
+    return await this.userModel.findByIdAndUpdate(id, updateUserDto).exec();
   }
 
   async delete(id: ObjectId) {

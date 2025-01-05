@@ -28,7 +28,6 @@ export default function LogInForm() {
     if (!data) {
       setError("wrogn!");
     } else {
-      console.log(data.access_token)
       Cookies.set("token", data.access_token, {expires: 7})
       window.location.reload();
     }

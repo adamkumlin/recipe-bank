@@ -26,7 +26,6 @@ export default function RecipeSettings({ recipeIds }: RecipeSettingsProps) {
   useEffect(() => {
     if (popupStatus === "accepted") {
       for (const id of recipeIds) {
-        console.log(id);
         actions.deleteRecipe(id.toString());
       }
 

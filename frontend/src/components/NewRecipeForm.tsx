@@ -24,7 +24,6 @@ export default function NewRecipeForm() {
   });
 
   function handleAddIngredient(newValue: string) {
-    console.log(newValue);
     if (!newValue) {
       setPopupError("Ingredient cannot be empty.");
       return;
@@ -79,7 +78,6 @@ export default function NewRecipeForm() {
       userId: userIdJson,
     };
     const response = actions.addNewRecipe(json);
-    console.log(response);
   }
 
   return (
