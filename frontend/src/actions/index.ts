@@ -201,8 +201,12 @@ export const server = {
 
       if (!request.ok) {
         return {
-          error: "Error fetching user recipes.",
+          error: "Error fetching user data.",
         };
+      } else {
+        const response = await request.json();
+        const jsonResponse = JSON.parse(JSON.stringify(response));
+        return jsonResponse;
       }
     },
   }),

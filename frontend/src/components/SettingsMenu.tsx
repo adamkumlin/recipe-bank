@@ -1,6 +1,6 @@
 import { actions } from "astro:actions";
 import Setting from "./Setting";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { type UserSettings } from "../lib/utils/types";
 
 interface SettingsMenuProps {
@@ -9,6 +9,28 @@ interface SettingsMenuProps {
 export default function SettingsMenu({ token }: SettingsMenuProps) {
   const [error, setError] = useState("");
   const [userSettings, setUserSettings] = useState<UserSettings | null>(null);
+  const [focusedSection, setFocusedSection] = useState<string>("");
+
+  const loginSectionRef = useRef(null);
+  const displaySectionRef = useRef(null);
+  const accessibilitySectionRef = useRef(null);
+
+  function handleClick(ref: React.MutableRefObject<HTMLDivElement | null>) {
+    console.log(ref.current)
+    if (!ref.current) {
+      return;
+    }
+    ref.current.scroll()
+    ref.current.animate([
+      { backgroundColor: 'initial' },
+      { backgroundColor: "#00308F" },
+      { backgroundColor: 'initial' }
+    ], {
+      duration: 1000,
+      iterations: 1
+    });
+  }
+
   useEffect(() => {
     async function getUserSettings() {
       if (!token) {
@@ -29,26 +51,59 @@ export default function SettingsMenu({ token }: SettingsMenuProps) {
   }, []);
 
   if (!token) {
-    return <h1>You need to be logged in to view this page.</h1>;
+    return <h2>You need to be logged in to view this page.</h2>;
   } else if (!userSettings) {
-    return <h1>Loading...</h1>;
+    return <h2>Loading...</h2>;
   } else {
     return (
-      <div className="flex flex-col border-2 border-red-500 w-1/2 mx-auto">
-        <div className="flex flex-row justify-center gap-2 text-purple-300 border-b-2">
-          <a href="#login">Account/Login</a>
-          <a href="#display">Display/Visualisation</a>
-          <a href="#accessiblity">Accessibility</a>
-
+      <div className="flex flex-col w-1/2 mx-auto bg-gray-900 border-2 rounded-md">
+        <div className="flex flex-row justify-center gap-2 text-purple-300 *:p-2">
+          <a onClick={() => handleClick(loginSectionRef)} href="#login">Login</a>
+          <a onClick={() => handleClick(displaySectionRef)} href="#display">Display</a>
+          <a onClick={() => handleClick(accessibilitySectionRef)} href="#accessiblity">Accessibility</a>
         </div>
         {error && <span className="text-red-500">{error}</span>}
-        <div className="*:flex *:flex-row *:justify-evenly">
-          <div id="#login">
+        <div className="*:flex *:flex-col *:justify-evenly *:border-b">
+          <div ref={loginSectionRef} id="login" className={focusedSection === "login" ?  "bg-blue-500 transition-all" : ""}>
             <Setting
               name="Always remember password"
               inputType="checkbox"
               settingName="alwaysRememberPassword"
               currentValue={userSettings.alwaysRememberPassword.toString()}
+              setError={setError}
+              token={token}
+            />
+          </div>
+          <div ref={displaySectionRef} id="display">
+            <Setting
+              name="Use dark theme"
+              inputType="checkbox"
+              settingName="useDarkTheme"
+              currentValue={userSettings.useDarkTheme.toString()}
+              setError={setError}
+              token={token}
+            />
+            <Setting
+              name="Use metric"
+              inputType="checkbox"
+              settingName="useMetric"
+              currentValue={userSettings.useMetric.toString()}
+              setError={setError}
+              token={token}
+            />
+            <Setting
+              name="Language"
+              inputType="checkbox"
+              settingName="displayLanguage"
+              currentValue={userSettings.displayLanguage.toString()}
+              setError={setError}
+              token={token}
+            />
+            <Setting
+              name="Always minimize navbar"
+              inputType="checkbox"
+              settingName="alwaysMinimizeNavbar"
+              currentValue={userSettings.alwaysMinimizeNavbar.toString()}
               setError={setError}
               token={token}
             />

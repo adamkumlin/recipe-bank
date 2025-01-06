@@ -63,7 +63,7 @@ export class UserController {
     @Param('id') id: ObjectId,
     @Body() updateUserDto: UpdateUserDto,
   ) {
-    await this.userService.update(id, updateUserDto);
+    return await this.userService.update(id, updateUserDto);
   }
 
   @Delete(':id')
