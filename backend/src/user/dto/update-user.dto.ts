@@ -29,4 +29,8 @@ export class UpdateUserDto {
   @IsOptional()
   @IsString()
   displayLanguage?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  alwaysMinimizeNavbar?: boolean;
 }

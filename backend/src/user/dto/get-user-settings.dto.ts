@@ -16,4 +16,8 @@ export class GetUserSettingsDto {
   @IsOptional()
   @IsString()
   displayLanguage?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  alwaysMinimizeNavbar?: boolean;
 }

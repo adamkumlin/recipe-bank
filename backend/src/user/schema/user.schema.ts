@@ -28,6 +28,9 @@ export class User {
   @Prop({default: true})
   useDarkTheme: boolean;
 
+  @Prop({default: false})
+  alwaysMinimizeNavbar: boolean;
+
   @Prop({default: "english"})
   displayLanguage: string;
 }

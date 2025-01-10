@@ -16,7 +16,6 @@ export default function SettingsMenu({ token }: SettingsMenuProps) {
   const accessibilitySectionRef = useRef(null);
 
   function handleClick(ref: React.MutableRefObject<HTMLDivElement | null>) {
-    console.log(ref.current)
     if (!ref.current) {
       return;
     }
@@ -93,7 +92,7 @@ export default function SettingsMenu({ token }: SettingsMenuProps) {
             />
             <Setting
               name="Language"
-              inputType="checkbox"
+              inputType="select"
               settingName="displayLanguage"
               currentValue={userSettings.displayLanguage.toString()}
               setError={setError}
@@ -105,6 +104,7 @@ export default function SettingsMenu({ token }: SettingsMenuProps) {
               settingName="alwaysMinimizeNavbar"
               currentValue={userSettings.alwaysMinimizeNavbar.toString()}
               setError={setError}
+              options={["english", "swedish"]}
               token={token}
             />
           </div>
