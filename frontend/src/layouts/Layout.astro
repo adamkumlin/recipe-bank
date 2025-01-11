@@ -1,8 +1,34 @@
 ---
+import { map } from "nanostores";
 import NavBar from "../components/NavBar";
-import '@fontsource/lilita-one';
+import { type UserSettings } from "../lib/utils/types";
+import { actions } from "astro:actions";
+import "@fontsource/lilita-one";
 
-const isLoggedIn = Astro.cookies.get("token") ? true : false;
+const token = Astro.cookies.get("token");
+try {
+  if (!token) {
+    return;
+  }
+  const { data } = await Astro.callAction(actions.verifyUserJwt, token.value);
+  if (!data) {
+    return;
+  }
+  const settings = await Astro.callAction(actions.getUserSettings, data.id);
+
+  if (!settings.data) {
+    return;
+  }
+  const userSettings = map<UserSettings>({
+    alwaysMinimizeNavbar: settings.data.alwaysMinimizeNavbar,
+    alwaysRememberPassword: settings.data.alwaysRememberPassword,
+    useDarkTheme: settings.data.useDarkTheme,
+    useMetric: settings.data.useMetric,
+    displayLanguage: settings.data.displayLanguage,
+  });
+} catch (e) {
+  console.log(e);
+}
 ---
 
 <!doctype html>
@@ -14,8 +40,10 @@ const isLoggedIn = Astro.cookies.get("token") ? true : false;
     <meta name="generator" content={Astro.generator} />
     <title>Astro Basics</title>
   </head>
-  <body class={`font-['Lilita_One'] bg-[rgb(4,5,15)] text-center text-white m-0 w-full h-full *:overflow-y-hidden`}>
-    <NavBar isLoggedIn={isLoggedIn} client:load/>
+  <body
+    class={`font-['Lilita_One'] bg-[rgb(4,5,15)] text-center text-white m-0 w-full h-full *:overflow-y-hidden`}
+  >
+    <NavBar isLoggedIn={token ? true : false} client:load />
     <main class="min-w-4/5 ml-auto sm:border-[20px] border-gray-900 h-full">
       <slot />
     </main>

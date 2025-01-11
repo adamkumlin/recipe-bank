@@ -58,31 +58,29 @@ export default function Setting({
     }
     updateSetting();
   }, [handleChange]);
-
   return (
     <div className="flex flex-row">
       <label htmlFor={id}>{name}</label>
       {inputType === "checkbox" ? (
         <input
           id={id}
+          className="mx-2"
           type="checkbox"
           onChange={(e) => handleChange(e)}
           checked={newSettingValue === "true"}
         />
       ) : (
         <select
-          className="bg-transparent border-[1px]"
+          className="bg-transparent border-[1px] mx-2"
           value={newSettingValue}
-          defaultValue="english"
           id={id}
           onChange={(e) => setNewSettingValue(e.target.value)}
         >
-          {options &&
-            options.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
+          {options?.map((option, index) => (
+            <option className="bg-black" key={index} value={option}>
+              {option}
+            </option>
+          ))}
         </select>
       )}
     </div>

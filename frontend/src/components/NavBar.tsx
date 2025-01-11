@@ -10,7 +10,7 @@ import {
   SquareUserRound,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
 interface NavBarProps {

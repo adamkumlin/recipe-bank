@@ -95,6 +95,7 @@ export default function SettingsMenu({ token }: SettingsMenuProps) {
               inputType="select"
               settingName="displayLanguage"
               currentValue={userSettings.displayLanguage.toString()}
+              options={["english", "swedish"]}
               setError={setError}
               token={token}
             />
@@ -104,7 +105,6 @@ export default function SettingsMenu({ token }: SettingsMenuProps) {
               settingName="alwaysMinimizeNavbar"
               currentValue={userSettings.alwaysMinimizeNavbar.toString()}
               setError={setError}
-              options={["english", "swedish"]}
               token={token}
             />
           </div>
