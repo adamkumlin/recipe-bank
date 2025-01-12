@@ -1,5 +1,6 @@
 import { actions } from "astro:actions";
 import React, { useEffect, useState, useId, useRef } from "react";
+import { fontSizeMap } from "../lib/utils/constants";
 
 interface SettingProps {
   name: string;
@@ -24,8 +25,6 @@ export default function Setting({
     currentValue.toString()
   );
 
-  const hasRendered = useRef(false);
-
   const id = useId();
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -43,10 +42,6 @@ export default function Setting({
   }
 
   async function updateSetting() {
-    if (newSettingValue === null || newSettingValue === "") {
-      return;
-    }
-
     const user = await actions.verifyUserJwt(token);
     if (!user) {
       setError("Error: Invalid user.");
@@ -61,10 +56,12 @@ export default function Setting({
     await actions.editUserSetting(json);
     setError("");
   }
-  
+
   useEffect(() => {
-    console.log("triggered");
-  }, [newSettingValue]);
+    if (newSettingValue !== currentValue) {
+      updateSetting();
+    }
+  }, [handleChange]);
 
   return (
     <div className="flex flex-row">
@@ -86,11 +83,14 @@ export default function Setting({
         >
           {options?.map((option, index) => (
             <option className="bg-black" key={index} value={option}>
-              {option[0].toUpperCase() + option.slice(1)}
+              {settingName !== "fontSize"
+                ? option[0].toUpperCase() + option.slice(1)
+                : fontSizeMap.get(option)}
             </option>
           ))}
         </select>
       )}
+      <button id="changeFont">Confirm</button>
     </div>
   );
 }

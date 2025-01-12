@@ -5,12 +5,14 @@ import "@fontsource/lilita-one";
 
 const token = Astro.cookies.get("token");
 let isAlwaysMinimized = false;
+let selectedFont = "Lilita One";
 try {
   if (token) {
     const { data } = await Astro.callAction(actions.verifyUserJwt, token.value);
 
     const settings = await Astro.callAction(actions.getUserSettings, data.id);
     isAlwaysMinimized = settings.data.alwaysMinimizeNavbar;
+    selectedFont = settings.data.font;
   }
 } catch (e) {
   console.log(e);
@@ -29,9 +31,15 @@ try {
   <body
     class={`font-['Lilita_One'] bg-[rgb(4,5,15)] text-center text-white m-0 w-full h-full *:overflow-y-hidden`}
   >
-    <NavBar isAlwaysMinimized={isAlwaysMinimized} isLoggedIn={token ? true : false} client:load />
+    <NavBar
+      isAlwaysMinimized={isAlwaysMinimized}
+      isLoggedIn={token ? true : false}
+      client:load
+    />
     <main class="min-w-4/5 ml-auto sm:border-[20px] border-gray-900 h-full">
       <slot />
     </main>
   </body>
 </html>
+
+<style></style>

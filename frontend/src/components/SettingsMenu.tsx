@@ -9,9 +9,8 @@ interface SettingsMenuProps {
 export default function SettingsMenu({ token }: SettingsMenuProps) {
   const [error, setError] = useState("");
   const [userSettings, setUserSettings] = useState<UserSettings | null>(null);
-  const [focusedSection, setFocusedSection] = useState<string>("");
 
-  const loginSectionRef = useRef(null);
+  // const loginSectionRef = useRef(null);
   const displaySectionRef = useRef(null);
   const accessibilitySectionRef = useRef(null);
 
@@ -57,14 +56,14 @@ export default function SettingsMenu({ token }: SettingsMenuProps) {
     return (
       <div className="flex flex-col w-1/2 mx-auto bg-gray-900 border-2 rounded-md">
         <div className="flex flex-row justify-center gap-2 text-purple-300 *:p-2">
-          <a onClick={() => handleClick(loginSectionRef)} href="#login">Login</a>
+          {/* <a onClick={() => handleClick(loginSectionRef)} href="#login">Login</a> */}
           <a onClick={() => handleClick(displaySectionRef)} href="#display">Display</a>
           <a onClick={() => handleClick(accessibilitySectionRef)} href="#accessiblity">Accessibility</a>
         </div>
         {error && <span className="text-red-500">{error}</span>}
         <div className="*:flex *:flex-col *:justify-evenly *:border-b">
-          <div ref={loginSectionRef} id="login" className={focusedSection === "login" ?  "bg-blue-500 transition-all" : ""}>
-          </div>
+          {/* <div ref={loginSectionRef} id="login" className={focusedSection === "login" ?  "bg-blue-500 transition-all" : ""}>
+          </div> */}
           <div ref={displaySectionRef} id="display">
             <Setting
               name="Use dark theme"
@@ -100,13 +99,13 @@ export default function SettingsMenu({ token }: SettingsMenuProps) {
               token={token}
             />
           </div>
-          <div ref={displaySectionRef} id="accessibility">
+          <div ref={accessibilitySectionRef} id="accessibility">
             <Setting
-              name="Text size"
+              name="Font size"
               inputType="select"
-              settingName="textSize"
+              settingName="fontSize"
               options={["0.5", "0.75", "1", "1.25", "1.5", "1.75", "2"]}
-              currentValue={userSettings.textSize.toString()}
+              currentValue={userSettings.fontSize.toString()}
               setError={setError}
               token={token}
             />
@@ -114,7 +113,7 @@ export default function SettingsMenu({ token }: SettingsMenuProps) {
               name="Font"
               inputType="select"
               settingName="font"
-              options={["Lilita One", "Arial", "Segue UI", "Helvetica"]}
+              options={["Lilita One", "Arial", "Roboto", "Merriweather"]}
               currentValue={userSettings.font.toString()}
               setError={setError}
               token={token}

@@ -31,6 +31,6 @@ export type UserSettings = {
   useMetric: boolean;
   displayLanguage: string;
   alwaysMinimizeNavbar: boolean;
-  textSize: number;
-  font: "Lilita_One" | "Arial" | "Segue UI" | "Helvetica";
+  fontSize: number;
+  font: "Lilita One" | "Arial" | "Roboto" | "Merriweather";
 };

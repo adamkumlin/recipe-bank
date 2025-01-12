@@ -35,9 +35,9 @@ export class User {
   displayLanguage: string;
 
   @Prop({ default: 1 })
-  textSize?: number;
+  fontSize?: number;
 
-  @Prop({default: "Lilita_One"})
+  @Prop({default: "Lilita One"})
   font?: string;
 }
 

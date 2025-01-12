@@ -17,7 +17,7 @@ export class GetUserSettingsDto {
   alwaysMinimizeNavbar: boolean;
 
   @IsNumber()
-  textSize: number;
+  fontSize: number;
 
   @IsString()
   font: string;

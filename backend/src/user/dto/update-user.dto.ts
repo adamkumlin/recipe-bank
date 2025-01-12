@@ -36,7 +36,7 @@ export class UpdateUserDto {
 
   @IsOptional()
   @IsNumber()
-  textSize?: number;
+  fontSize?: number;
 
   @IsOptional()
   @IsString()
