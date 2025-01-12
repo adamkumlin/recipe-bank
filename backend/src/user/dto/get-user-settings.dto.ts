@@ -1,23 +1,24 @@
-import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsNumber, IsString } from 'class-validator';
 
 export class GetUserSettingsDto {
-  @IsOptional()
   @IsBoolean()
-  alwaysRememberPassword?: boolean;
+  alwaysRememberPassword: boolean;
 
-  @IsOptional()
   @IsBoolean()
-  useMetric?: boolean;
+  useMetric: boolean;
 
-  @IsOptional()
   @IsBoolean()
-  useDarkTheme?: boolean;
+  useDarkTheme: boolean;
 
-  @IsOptional()
   @IsString()
-  displayLanguage?: string;
+  displayLanguage: string;
 
-  @IsOptional()
   @IsBoolean()
-  alwaysMinimizeNavbar?: boolean;
+  alwaysMinimizeNavbar: boolean;
+
+  @IsNumber()
+  textSize: number;
+
+  @IsString()
+  font: string;
 }

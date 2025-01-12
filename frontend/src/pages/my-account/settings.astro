@@ -7,6 +7,5 @@ const token = Astro.cookies.get("token");
 
 <Layout>
         <h1 class="text-2xl m-2">Settings</h1>
-
         <SettingsMenu token={token?.value ?? ""} client:load/>
 </Layout>

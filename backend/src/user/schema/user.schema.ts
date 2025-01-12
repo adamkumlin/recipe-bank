@@ -5,9 +5,9 @@ export type UserDocument = HydratedDocument<User>;
 
 @Schema()
 export class User {
-  @Prop({required: false, type: mongoose.Schema.Types.ObjectId })
+  @Prop({ required: false, type: mongoose.Schema.Types.ObjectId })
   id: ObjectId;
-  
+
   @Prop({ required: true, unique: true })
   email: string;
 
@@ -19,20 +19,26 @@ export class User {
 
   joinDate: string;
 
-  @Prop({default: true})
+  @Prop({ default: true })
   alwaysRememberPassword: boolean;
 
-  @Prop({default: true})
+  @Prop({ default: true })
   useMetric: boolean;
 
-  @Prop({default: true})
+  @Prop({ default: true })
   useDarkTheme: boolean;
 
-  @Prop({default: false})
+  @Prop({ default: false })
   alwaysMinimizeNavbar: boolean;
 
-  @Prop({default: "english"})
+  @Prop({ default: 'english' })
   displayLanguage: string;
+
+  @Prop({ default: 1 })
+  textSize?: number;
+
+  @Prop({default: "Lilita_One"})
+  font?: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

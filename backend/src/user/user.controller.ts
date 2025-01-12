@@ -54,6 +54,8 @@ export class UserController {
     dto.useDarkTheme = user.useDarkTheme;
     dto.useMetric = user.useMetric;
     dto.alwaysMinimizeNavbar = user.alwaysMinimizeNavbar;
+    dto.textSize = user.textSize;
+    dto.font = user.font;
 
     return dto;
   }

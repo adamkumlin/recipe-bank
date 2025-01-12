@@ -10,15 +10,16 @@ import {
   SquareUserRound,
   X,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Cookies from "js-cookie";
 
 interface NavBarProps {
   isLoggedIn: boolean;
+  isAlwaysMinimized: boolean;
 }
 
-export default function NavBar({ isLoggedIn }: NavBarProps) {
-  const [isMinimized, setIsMinimized] = useState<boolean>(false);
+export default function NavBar({ isLoggedIn, isAlwaysMinimized }: NavBarProps) {
+  const [isMinimized, setIsMinimized] = useState<boolean>(isAlwaysMinimized);
   const [isActiveHamburger, setIsActiveHamburger] = useState<boolean>(false);
 
   function handleLogOutClick() {

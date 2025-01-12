@@ -1,4 +1,4 @@
-import { IsBoolean, IsEmail, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsEmail, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class UpdateUserDto {
   @IsOptional()
@@ -33,4 +33,12 @@ export class UpdateUserDto {
   @IsOptional()
   @IsBoolean()
   alwaysMinimizeNavbar?: boolean;
+
+  @IsOptional()
+  @IsNumber()
+  textSize?: number;
+
+  @IsOptional()
+  @IsString()
+  font?: string;
 }

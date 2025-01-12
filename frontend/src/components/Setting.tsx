@@ -1,5 +1,5 @@
 import { actions } from "astro:actions";
-import React, { useEffect, useState, useId } from "react";
+import React, { useEffect, useState, useId, useRef } from "react";
 
 interface SettingProps {
   name: string;
@@ -21,8 +21,10 @@ export default function Setting({
   token,
 }: SettingProps) {
   const [newSettingValue, setNewSettingValue] = useState<string>(
-    inputType === "checkbox" ? currentValue.toString() : ""
+    currentValue.toString()
   );
+
+  const hasRendered = useRef(false);
 
   const id = useId();
 
@@ -40,24 +42,30 @@ export default function Setting({
     setNewSettingValue(isChecked.toString());
   }
 
-  useEffect(() => {
-    async function updateSetting() {
-      const user = await actions.verifyUserJwt(token);
-      if (!user) {
-        setError("Error: Invalid user.");
-        return;
-      }
-
-      const json = {
-        settingName: settingName,
-        settingValue: newSettingValue,
-        userId: user.data.id,
-      };
-      await actions.editUserSetting(json);
-      setError("");
+  async function updateSetting() {
+    if (newSettingValue === null || newSettingValue === "") {
+      return;
     }
-    updateSetting();
-  }, [handleChange]);
+
+    const user = await actions.verifyUserJwt(token);
+    if (!user) {
+      setError("Error: Invalid user.");
+      return;
+    }
+
+    const json = {
+      settingName: settingName,
+      settingValue: newSettingValue,
+      userId: user.data.id,
+    };
+    await actions.editUserSetting(json);
+    setError("");
+  }
+  
+  useEffect(() => {
+    console.log("triggered");
+  }, [newSettingValue]);
+
   return (
     <div className="flex flex-row">
       <label htmlFor={id}>{name}</label>
@@ -78,7 +86,7 @@ export default function Setting({
         >
           {options?.map((option, index) => (
             <option className="bg-black" key={index} value={option}>
-              {option}
+              {option[0].toUpperCase() + option.slice(1)}
             </option>
           ))}
         </select>

@@ -20,10 +20,10 @@ export type Recipe = {
 };
 
 export type PopupMenu = {
-  isActive: boolean,
-  menuType: string,
+  isActive: boolean;
+  menuType: string;
   handler?: (newValue: string) => void;
-}
+};
 
 export type UserSettings = {
   alwaysRememberPassword: boolean;
@@ -31,4 +31,6 @@ export type UserSettings = {
   useMetric: boolean;
   displayLanguage: string;
   alwaysMinimizeNavbar: boolean;
-}
+  textSize: number;
+  font: "Lilita_One" | "Arial" | "Segue UI" | "Helvetica";
+};

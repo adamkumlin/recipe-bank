@@ -64,14 +64,6 @@ export default function SettingsMenu({ token }: SettingsMenuProps) {
         {error && <span className="text-red-500">{error}</span>}
         <div className="*:flex *:flex-col *:justify-evenly *:border-b">
           <div ref={loginSectionRef} id="login" className={focusedSection === "login" ?  "bg-blue-500 transition-all" : ""}>
-            <Setting
-              name="Always remember password"
-              inputType="checkbox"
-              settingName="alwaysRememberPassword"
-              currentValue={userSettings.alwaysRememberPassword.toString()}
-              setError={setError}
-              token={token}
-            />
           </div>
           <div ref={displaySectionRef} id="display">
             <Setting
@@ -104,6 +96,26 @@ export default function SettingsMenu({ token }: SettingsMenuProps) {
               inputType="checkbox"
               settingName="alwaysMinimizeNavbar"
               currentValue={userSettings.alwaysMinimizeNavbar.toString()}
+              setError={setError}
+              token={token}
+            />
+          </div>
+          <div ref={displaySectionRef} id="accessibility">
+            <Setting
+              name="Text size"
+              inputType="select"
+              settingName="textSize"
+              options={["0.5", "0.75", "1", "1.25", "1.5", "1.75", "2"]}
+              currentValue={userSettings.textSize.toString()}
+              setError={setError}
+              token={token}
+            />
+            <Setting
+              name="Font"
+              inputType="select"
+              settingName="font"
+              options={["Lilita One", "Arial", "Segue UI", "Helvetica"]}
+              currentValue={userSettings.font.toString()}
               setError={setError}
               token={token}
             />
