@@ -4,8 +4,6 @@ export class GetUserSettingsDto {
   @IsBoolean()
   alwaysRememberPassword: boolean;
 
-  @IsBoolean()
-  useMetric: boolean;
 
   @IsBoolean()
   useDarkTheme: boolean;

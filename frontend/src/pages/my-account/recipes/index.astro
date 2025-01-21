@@ -7,18 +7,21 @@ import type { RecipeResponse } from "../../../lib/utils/types";
 const token = Astro.cookies.get("token");
 let recipes: RecipeResponse[] = [];
 try {
-    if (!token) {
-        return;
-    }
-      const user = await Astro.callAction(actions.verifyUserJwt, token.value);
-      const {data} = await Astro.callAction(actions.getUserRecipes, user.data.id);
-      recipes = data;
+  if (!token) {
+    return new Response("Not Authorized", {
+      status: 401,
+      statusText: "Not Authorized",
+    });
+  }
+  const user = await Astro.callAction(actions.verifyUserJwt, token.value);
+  const { data } = await Astro.callAction(actions.getUserRecipes, user.data.id);
+  recipes = data;
 } catch (e) {
-    console.log(e)
+  console.log(e);
 }
 ---
 
 <Layout>
-    <h1 class:list={["text-3xl", "mb-6", "text-blue-400"]}>Recipes</h1>
-<RecipeList recipes={recipes} client:load/>
+  <h1 class:list={["text-3xl", "mb-6", "text-blue-400"]}>Recipes</h1>
+  <RecipeList recipes={recipes} client:load />
 </Layout>

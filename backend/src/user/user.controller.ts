@@ -52,7 +52,6 @@ export class UserController {
     dto.alwaysRememberPassword = user.alwaysRememberPassword;
     dto.displayLanguage = user.displayLanguage;
     dto.useDarkTheme = user.useDarkTheme;
-    dto.useMetric = user.useMetric;
     dto.alwaysMinimizeNavbar = user.alwaysMinimizeNavbar;
     dto.fontSize = user.fontSize;
     dto.font = user.font;

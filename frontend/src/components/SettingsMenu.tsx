@@ -74,14 +74,6 @@ export default function SettingsMenu({ token }: SettingsMenuProps) {
               token={token}
             />
             <Setting
-              name="Use metric"
-              inputType="checkbox"
-              settingName="useMetric"
-              currentValue={userSettings.useMetric.toString()}
-              setError={setError}
-              token={token}
-            />
-            <Setting
               name="Language"
               inputType="select"
               settingName="displayLanguage"

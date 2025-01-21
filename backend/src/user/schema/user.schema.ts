@@ -23,9 +23,6 @@ export class User {
   alwaysRememberPassword: boolean;
 
   @Prop({ default: true })
-  useMetric: boolean;
-
-  @Prop({ default: true })
   useDarkTheme: boolean;
 
   @Prop({ default: false })

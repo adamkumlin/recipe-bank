@@ -20,10 +20,6 @@ export class UpdateUserDto {
 
   @IsOptional()
   @IsBoolean()
-  useMetric?: boolean;
-
-  @IsOptional()
-  @IsBoolean()
   useDarkTheme?: boolean;
 
   @IsOptional()

@@ -28,7 +28,6 @@ export type PopupMenu = {
 export type UserSettings = {
   alwaysRememberPassword: boolean;
   useDarkTheme: boolean;
-  useMetric: boolean;
   displayLanguage: string;
   alwaysMinimizeNavbar: boolean;
   fontSize: number;
