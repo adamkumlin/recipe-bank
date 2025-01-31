@@ -3,9 +3,13 @@ import SettingsMenu from "../../components/SettingsMenu";
 import Layout from "../../layouts/Layout.astro";
 
 const token = Astro.cookies.get("token");
+
+if (!token) {
+  return Astro.redirect("/login");
+}
 ---
 
 <Layout>
-        <h1 class="text-2xl m-2">Settings</h1>
-        <SettingsMenu token={token?.value ?? ""} client:load/>
+  <h1 class="text-2xl m-2">Settings</h1>
+  <SettingsMenu token={token?.value ?? ""} client:load />
 </Layout>

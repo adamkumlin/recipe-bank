@@ -1,7 +1,6 @@
 import {
   ArrowLeftFromLine,
   ArrowRightFromLine,
-  LogIn,
   LogOut,
   Menu,
   Settings,
@@ -14,11 +13,10 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 
 interface NavBarProps {
-  isLoggedIn: boolean;
   isAlwaysMinimized: boolean;
 }
 
-export default function NavBar({ isLoggedIn, isAlwaysMinimized }: NavBarProps) {
+export default function NavBar({ isAlwaysMinimized }: NavBarProps) {
   const [isMinimized, setIsMinimized] = useState<boolean>(isAlwaysMinimized);
   const [isActiveHamburger, setIsActiveHamburger] = useState<boolean>(false);
 
@@ -67,16 +65,14 @@ export default function NavBar({ isLoggedIn, isAlwaysMinimized }: NavBarProps) {
               {!isMinimized ? "My recipes" : ""}
             </a>
           </li>
-          {isLoggedIn ? (
-            <li className="hover:bg-blue-500">
-              <a href="/my-account">
-                <SquareUserRound
-                  className={!isMinimized ? "inline mr-2" : "inline"}
-                />
-                {!isMinimized ? "My account" : ""}
-              </a>
-            </li>
-          ) : null}
+          <li className="hover:bg-blue-500">
+            <a href="/my-account">
+              <SquareUserRound
+                className={!isMinimized ? "inline mr-2" : "inline"}
+              />
+              {!isMinimized ? "My account" : ""}
+            </a>
+          </li>
           <li className="hover:bg-blue-500">
             <a href="/my-account/settings">
               <Settings className={!isMinimized ? "inline mr-2" : "inline"} />
@@ -84,17 +80,10 @@ export default function NavBar({ isLoggedIn, isAlwaysMinimized }: NavBarProps) {
             </a>
           </li>
           <li className="hover:bg-blue-500">
-            {!isLoggedIn ? (
-              <a href="/login">
-                <LogIn className={!isMinimized ? "inline mr-2" : "inline"} />
-                {!isMinimized ? "Log in/Register" : ""}
-              </a>
-            ) : (
-              <button onClick={handleLogOutClick} className="w-full">
-                <LogOut className={!isMinimized ? "inline mr-2" : "inline"} />
-                {!isMinimized ? "Log out" : ""}
-              </button>
-            )}
+            <button onClick={handleLogOutClick} className="w-full">
+              <LogOut className={!isMinimized ? "inline mr-2" : "inline"} />
+              {!isMinimized ? "Log out" : ""}
+            </button>
           </li>
         </ul>
       </nav>
@@ -105,8 +94,15 @@ export default function NavBar({ isLoggedIn, isAlwaysMinimized }: NavBarProps) {
             Recipe <span className="text-blue-400">Bank</span>
           </h1>
         </a>
-        <button type="button" onClick={() => setIsActiveHamburger(!isActiveHamburger)}>
-          {!isActiveHamburger ? <Menu className="min-w-[50px] min-h-[50px]"/> : <X className="min-w-[50px] min-h-[50px]"/>}
+        <button
+          type="button"
+          onClick={() => setIsActiveHamburger(!isActiveHamburger)}
+        >
+          {!isActiveHamburger ? (
+            <Menu className="min-w-[50px] min-h-[50px]" />
+          ) : (
+            <X className="min-w-[50px] min-h-[50px]" />
+          )}
         </button>
       </div>
       {isActiveHamburger && (
@@ -124,14 +120,12 @@ export default function NavBar({ isLoggedIn, isAlwaysMinimized }: NavBarProps) {
                 My recipes
               </a>
             </li>
-            {isLoggedIn ? (
-              <li className="hover:bg-blue-500">
-                <a href="/my-account">
-                  <SquareUserRound className="inline mr-2" />
-                  My account
-                </a>
-              </li>
-            ) : null}
+            <li className="hover:bg-blue-500">
+              <a href="/my-account">
+                <SquareUserRound className="inline mr-2" />
+                My account
+              </a>
+            </li>
             <li className="hover:bg-blue-500">
               <a href="/my-account/settings">
                 <Settings className="inline mr-2" />
@@ -139,17 +133,10 @@ export default function NavBar({ isLoggedIn, isAlwaysMinimized }: NavBarProps) {
               </a>
             </li>
             <li className="hover:bg-blue-500">
-              {!isLoggedIn ? (
-                <a href="/login">
-                  <LogIn className="inline mr-2" />
-                  Log in/Register
-                </a>
-              ) : (
-                <button onClick={handleLogOutClick} className="w-full">
-                  <LogOut className="inline mr-2" />
-                  Log out
-                </button>
-              )}
+              <button onClick={handleLogOutClick} className="w-full">
+                <LogOut className="inline mr-2" />
+                Log out
+              </button>
             </li>
           </ul>
         </nav>

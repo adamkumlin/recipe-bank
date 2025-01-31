@@ -31,12 +31,20 @@ try {
   <body
     class={`font-['Lilita_One'] bg-[rgb(4,5,15)] text-center text-white m-0 w-full h-full *:overflow-y-hidden`}
   >
-    <NavBar
-      isAlwaysMinimized={isAlwaysMinimized}
-      isLoggedIn={token ? true : false}
-      client:load
-    />
-    <main class="min-w-4/5 ml-auto sm:border-[20px] border-gray-900 h-full">
+    {
+      token ? (
+        <NavBar isAlwaysMinimized={isAlwaysMinimized} client:load />
+      ) : (
+        <h1 class="text-9xl">
+          Recipe <span class="text-blue-400">Bank</span>
+        </h1>
+      )
+    }
+    <main
+      class={token
+        ? "min-w-4/5 ml-auto border-[20px] border-gray-900 h-full"
+        : "min-w-4/5 ml-auto h-full"}
+    >
       <slot />
     </main>
   </body>
