@@ -12,11 +12,11 @@ import {
 import { useState } from "react";
 import Cookies from "js-cookie";
 
-interface NavBarProps {
+interface Props {
   isAlwaysMinimized: boolean;
 }
 
-export default function NavBar({ isAlwaysMinimized }: NavBarProps) {
+export default function NavBar({ isAlwaysMinimized }: Props) {
   const [isMinimized, setIsMinimized] = useState<boolean>(isAlwaysMinimized);
   const [isActiveHamburger, setIsActiveHamburger] = useState<boolean>(false);
 

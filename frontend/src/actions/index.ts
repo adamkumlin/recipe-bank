@@ -1,6 +1,5 @@
 import { defineAction } from "astro:actions";
 import { z } from "astro:schema";
-import { now } from "../lib/utils/constants";
 import bcrypt from "bcryptjs";
 import { type Recipe } from "../lib/utils/types";
 
@@ -46,7 +45,7 @@ export const server = {
         body: JSON.stringify({
           email: formData.email,
           password: hash,
-          joinDate: now.toISOString(),
+          joinDate: formData.time
         }),
       });
 

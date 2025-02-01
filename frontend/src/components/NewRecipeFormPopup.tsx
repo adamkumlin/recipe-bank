@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { PopupMenu } from "../lib/utils/types";
 
-interface NewRecipeFormPopupProps {
+interface Props {
   popupMenu: PopupMenu;
   setPopupMenu: React.Dispatch<React.SetStateAction<PopupMenu>>;
   popupError: string;
@@ -10,7 +10,7 @@ export default function NewRecipeFormPopup({
   popupMenu,
   setPopupMenu,
   popupError,
-}: NewRecipeFormPopupProps) {
+}: Props) {
   const [newValue, setNewValue] = useState("");
 
   function assureHandlerExists(

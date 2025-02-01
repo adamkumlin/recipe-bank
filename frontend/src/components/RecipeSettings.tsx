@@ -3,11 +3,11 @@ import { useEffect, useState, type FormEvent } from "react";
 import { CircleCheck, CircleSlash, X } from "lucide-react";
 import { actions } from "astro:actions";
 
-interface RecipeSettingsProps {
+interface Props {
   recipeIds: ObjectId[];
 }
 
-export default function RecipeSettings({ recipeIds }: RecipeSettingsProps) {
+export default function RecipeSettings({ recipeIds }: Props) {
   const [error, setError] = useState<string>("");
   const [popupStatus, setPopupStatus] = useState<
     "hidden" | "shown" | "accepted"

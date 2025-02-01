@@ -4,11 +4,11 @@ import Recipe from "./Recipe";
 import RecipeSettings from "./RecipeSettings";
 import { type ObjectId } from "mongoose";
 import cookingPot from "../assets/cooking-pot.svg";
-interface RecipeListProps {
+interface Props {
   recipes: RecipeResponse[];
 }
 
-export default function RecipeList({ recipes }: RecipeListProps) {
+export default function RecipeList({ recipes }: Props) {
   const [selectedRecipeIds, setSelectedRecipeIds] = useState<ObjectId[]>([]);
 
   if (recipes.length > 0) {

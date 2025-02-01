@@ -2,7 +2,7 @@ import { actions } from "astro:actions";
 import React, { useEffect, useState, useId, useRef } from "react";
 import { fontSizeMap } from "../lib/utils/constants";
 
-interface SettingProps {
+interface Props {
   name: string;
   settingName: string;
   inputType: "checkbox" | "select";
@@ -20,7 +20,7 @@ export default function Setting({
   setError,
   options,
   token,
-}: SettingProps) {
+}: Props) {
   const [newSettingValue, setNewSettingValue] = useState<string>(
     currentValue.toString()
   );

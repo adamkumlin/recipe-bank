@@ -1,10 +1,10 @@
-interface SearchBarProps {
+interface Props {
   query: string;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   search: () => void;
 }
 
-export default function SearchBar({ query, setQuery, search }: SearchBarProps) {
+export default function SearchBar({ query, setQuery, search }: Props) {
   return (
     <form className="flex w-1/2 flex-row justify-center m-auto *:mx-1 drop-shadow-md">
       <input

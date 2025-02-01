@@ -3,10 +3,10 @@ import Setting from "./Setting";
 import { useEffect, useRef, useState } from "react";
 import { type UserSettings } from "../lib/utils/types";
 
-interface SettingsMenuProps {
+interface Props {
   token: string;
 }
-export default function SettingsMenu({ token }: SettingsMenuProps) {
+export default function SettingsMenu({ token }: Props) {
   const [error, setError] = useState("");
   const [userSettings, setUserSettings] = useState<UserSettings | null>(null);
 

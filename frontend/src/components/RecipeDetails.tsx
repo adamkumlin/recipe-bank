@@ -1,10 +1,10 @@
 import type { RecipeResponse } from "../lib/utils/types";
 
-interface RecipeDetailsProps {
+interface Props {
   recipe: RecipeResponse;
 }
 
-export default function RecipeDetails({ recipe }: RecipeDetailsProps) {
+export default function RecipeDetails({ recipe }: Props) {
   if (!recipe) {
     return <div>Recipe not found.</div>;
   }

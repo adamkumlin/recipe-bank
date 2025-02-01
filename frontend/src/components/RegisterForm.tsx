@@ -2,12 +2,14 @@ import { type FormEvent, useState } from "react";
 import { validateUserCredentials } from "../lib/utils/helper";
 import Cookies from "js-cookie";
 import { actions } from "astro:actions";
+import { useTime } from "../hooks/useTime";
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     confirmPassword: "",
+    dateCreated: "",
   });
   const [error, setError] = useState<string>();
 
@@ -20,24 +22,25 @@ export default function RegisterForm() {
       return;
     }
 
+    const time = await useTime();
+    setFormData({ ...formData, dateCreated: time });
+
     const json: string = JSON.stringify(formData);
 
     // Call server action
-    const {data} = await actions.register(json);
+    const { data } = await actions.register(json);
 
     if (!data) {
       setError("wrogn!");
     } else {
-      const {data} = await actions.logIn(json);
-      Cookies.set("token", data.access_token, {expires: 7})
+      const { data } = await actions.logIn(json);
+      Cookies.set("token", data.access_token, { expires: 7 });
       window.location.reload();
     }
   }
-  
+
   return (
-    <div
-      className={`w-1/2 m-auto flex flex-col place-content-center h-full`}
-    >
+    <div className={`w-1/2 m-auto flex flex-col place-content-center h-full`}>
       <h1 className="font-bold text-2xl tracking-wide text-center font uppercase">
         Register
       </h1>

@@ -1,13 +1,13 @@
 import type { ObjectId } from "mongoose";
 import type { RecipeResponse } from "../lib/utils/types";
 
-interface RecipeProps {
+interface Props {
   recipe: RecipeResponse;
   setSelectedRecipeIds: React.Dispatch<React.SetStateAction<ObjectId[]>>;
   selectedRecipeIds: ObjectId[];
 }
 
-export default function Recipe({ recipe, setSelectedRecipeIds, selectedRecipeIds }: RecipeProps) {
+export default function Recipe({ recipe, setSelectedRecipeIds, selectedRecipeIds }: Props) {
   const createdDate = recipe.dateCreated.split(" ").shift();
   const createdTime = recipe.dateCreated.split(" ").pop();
 

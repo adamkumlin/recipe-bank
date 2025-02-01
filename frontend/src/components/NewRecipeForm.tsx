@@ -1,10 +1,10 @@
 import { type FormEvent, useState } from "react";
 import { type PopupMenu, type Recipe } from "../lib/utils/types";
-import { now } from "../lib/utils/constants";
 import { actions } from "astro:actions";
 import Cookies from "js-cookie";
 import NewRecipeFormPopup from "./NewRecipeFormPopup";
 import clipboard from "../assets/clipboard.png";
+import { useTime } from "../hooks/useTime";
 
 export default function NewRecipeForm() {
   const [formData, setFormData] = useState<Recipe>({
@@ -12,9 +12,7 @@ export default function NewRecipeForm() {
     ingredients: [],
     instructions: [],
     link: "",
-    dateCreated: `${now.toLocaleDateString("sv-SE")} ${now.toLocaleTimeString(
-      "sv-SE"
-    )}`,
+    dateCreated: "",
   });
   const [error, setError] = useState<string>("");
   const [popupError, setPopupError] = useState<string>("");
@@ -70,6 +68,9 @@ export default function NewRecipeForm() {
     if (!user) {
       return;
     }
+
+    const time = await useTime();
+    setFormData({ ...formData, dateCreated: time });
 
     const recipeJson: string = JSON.stringify(formData);
     const userIdJson: string = JSON.stringify(user.data.id);
@@ -127,9 +128,7 @@ export default function NewRecipeForm() {
         {formData.ingredients.length > 0 ? (
           <ul className="list-disc list-inside w-full max-h-24 overflow-auto">
             {formData.ingredients.map((i, index) => (
-              <li key={index}>
-                {i}
-              </li>
+              <li key={index}>{i}</li>
             ))}
           </ul>
         ) : null}
@@ -159,9 +158,7 @@ export default function NewRecipeForm() {
         {formData.instructions.length > 0 ? (
           <ol className="list-decimal list-inside w-full max-h-24 overflow-auto">
             {formData.instructions.map((i, index) => (
-              <li key={index}>
-                {i}
-              </li>
+              <li key={index}>{i}</li>
             ))}
           </ol>
         ) : null}
