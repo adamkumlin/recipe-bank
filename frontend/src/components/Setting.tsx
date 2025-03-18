@@ -1,6 +1,5 @@
 import { actions } from "astro:actions";
 import React, { useEffect, useState, useId, useRef } from "react";
-import { fontSizeMap } from "../lib/utils/constants";
 
 interface Props {
   name: string;
@@ -83,14 +82,11 @@ export default function Setting({
         >
           {options?.map((option, index) => (
             <option className="bg-black" key={index} value={option}>
-              {settingName !== "fontSize"
-                ? option[0].toUpperCase() + option.slice(1)
-                : fontSizeMap.get(option)}
+              option[0].toUpperCase() + option.slice(1)
             </option>
           ))}
         </select>
       )}
-      <button id="changeFont">Confirm</button>
     </div>
   );
 }

@@ -29,12 +29,4 @@ export class UpdateUserDto {
   @IsOptional()
   @IsBoolean()
   alwaysMinimizeNavbar?: boolean;
-
-  @IsOptional()
-  @IsNumber()
-  fontSize?: number;
-
-  @IsOptional()
-  @IsString()
-  font?: string;
 }

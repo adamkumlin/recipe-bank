@@ -30,6 +30,4 @@ export type UserSettings = {
   useDarkTheme: boolean;
   displayLanguage: string;
   alwaysMinimizeNavbar: boolean;
-  fontSize: number;
-  font: "Lilita One" | "Arial" | "Roboto" | "Merriweather";
 };

@@ -91,26 +91,6 @@ export default function SettingsMenu({ token }: Props) {
               token={token}
             />
           </div>
-          <div ref={accessibilitySectionRef} id="accessibility">
-            <Setting
-              name="Font size"
-              inputType="select"
-              settingName="fontSize"
-              options={["0.5", "0.75", "1", "1.25", "1.5", "1.75", "2"]}
-              currentValue={userSettings.fontSize.toString()}
-              setError={setError}
-              token={token}
-            />
-            <Setting
-              name="Font"
-              inputType="select"
-              settingName="font"
-              options={["Lilita One", "Arial", "Roboto", "Merriweather"]}
-              currentValue={userSettings.font.toString()}
-              setError={setError}
-              token={token}
-            />
-          </div>
         </div>
       </div>
     );

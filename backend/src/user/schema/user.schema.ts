@@ -30,12 +30,6 @@ export class User {
 
   @Prop({ default: 'english' })
   displayLanguage: string;
-
-  @Prop({ default: 1 })
-  fontSize?: number;
-
-  @Prop({default: "Lilita One"})
-  font?: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -5,14 +5,11 @@ import "@fontsource/lilita-one";
 
 const token = Astro.cookies.get("token");
 let isAlwaysMinimized = false;
-let selectedFont = "Lilita One";
 try {
   if (token) {
     const { data } = await Astro.callAction(actions.verifyUserJwt, token.value);
-
     const settings = await Astro.callAction(actions.getUserSettings, data.id);
     isAlwaysMinimized = settings.data.alwaysMinimizeNavbar;
-    selectedFont = settings.data.font;
   }
 } catch (e) {
   console.log(e);

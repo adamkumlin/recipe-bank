@@ -53,9 +53,6 @@ export class UserController {
     dto.displayLanguage = user.displayLanguage;
     dto.useDarkTheme = user.useDarkTheme;
     dto.alwaysMinimizeNavbar = user.alwaysMinimizeNavbar;
-    dto.fontSize = user.fontSize;
-    dto.font = user.font;
-
     return dto;
   }
 
