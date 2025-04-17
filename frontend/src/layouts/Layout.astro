@@ -26,16 +26,12 @@ try {
     <title>Astro Basics</title>
   </head>
   <body
-    class={`font-['Lilita_One'] bg-[rgb(4,5,15)] text-center text-white m-0 w-full h-full *:overflow-y-hidden`}
+    class={`font-['Lilita_One'] bg-[rgb(4,5,15)] text-center text-white m-0 w-full h-full *:overflow-y-hidden z-0`}
   >
     {
       token ? (
         <NavBar isAlwaysMinimized={isAlwaysMinimized} client:load />
-      ) : (
-        <h1 class="text-9xl">
-          Recipe <span class="text-blue-400">Bank</span>
-        </h1>
-      )
+      ) : null
     }
     <main
       class={token

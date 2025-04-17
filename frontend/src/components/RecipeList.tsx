@@ -11,7 +11,7 @@ interface Props {
 export default function RecipeList({ recipes }: Props) {
   const [selectedRecipeIds, setSelectedRecipeIds] = useState<ObjectId[]>([]);
 
-  if (recipes.length > 0) {
+  if (recipes && recipes.length > 0) {
     return (
       <div className="flex flex-col justify-center w-1/2 m-auto text-center text-white">
         <RecipeSettings recipeIds={selectedRecipeIds} />

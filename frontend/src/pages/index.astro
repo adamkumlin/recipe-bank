@@ -1,16 +1,29 @@
 ---
-import Layout from '../layouts/Layout.astro';
-
+import Layout from "../layouts/Layout.astro";
+import cookingVideo from "../assets/cooking.mp4";
 ---
 
+<video
+  class="-z-30 absolute w-full h-full blur-md opacity-30 object-cover"
+  autoplay
+  muted
+  loop
+>
+  <source src={cookingVideo} />
+</video>
 <Layout>
-    <div class="flex flex-col items-center justify-center h-1/2 *:text-2xl">
-        <div class="flex flex-row *:w-1/2 w-3/5 justify-center">
-            <p>
-                Ever found a recipe that you really, <span class="text-orange-500">really</span></span>, like, so you <span class="text-purple-500">bookmark it</span>, but when it's time to finally use it, it's just <span class="text-red-500">gone</span>?
-                With Recipe <span class="text-blue-400">Bank</span>, you can store all your saved recipes in one place. Add them, and they will be here, <span class="text-green-500">forever*</span>.
-            </p>
-        </div>
-            <a class="bg-lime-700 w-fit p-2 rounded border-[1px] border-white mt-8" href="/login">Get started</a>
+  <div class="flex flex-col items-center justify-center gap-10 h-full">
+    <h1 class="text-9xl">
+      Recipe <span class="text-blue-400">Bank</span>
+    </h1>
+    <div class="text-4xl">
+      <p><span class="">See</span> it.</p>
+      <p>Save it.</p>
+      <p>Cook it.</p>
     </div>
+    <a
+      class="bg-lime-700 w-fit p-2 rounded border-[1px] border-white mt-8"
+      href="/login">Get started</a
+    >
+  </div>
 </Layout>

@@ -31,3 +31,4 @@ export type UserSettings = {
   displayLanguage: string;
   alwaysMinimizeNavbar: boolean;
 };
+

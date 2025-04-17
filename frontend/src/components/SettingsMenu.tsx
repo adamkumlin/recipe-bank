@@ -12,7 +12,7 @@ export default function SettingsMenu({ token }: Props) {
 
   // const loginSectionRef = useRef(null);
   const displaySectionRef = useRef(null);
-  const accessibilitySectionRef = useRef(null);
+  // const accessibilitySectionRef = useRef(null);
 
   function handleClick(ref: React.MutableRefObject<HTMLDivElement | null>) {
     if (!ref.current) {
@@ -58,7 +58,7 @@ export default function SettingsMenu({ token }: Props) {
         <div className="flex flex-row justify-center gap-2 text-purple-300 *:p-2">
           {/* <a onClick={() => handleClick(loginSectionRef)} href="#login">Login</a> */}
           <a onClick={() => handleClick(displaySectionRef)} href="#display">Display</a>
-          <a onClick={() => handleClick(accessibilitySectionRef)} href="#accessiblity">Accessibility</a>
+          {/* <a onClick={() => handleClick(accessibilitySectionRef)} href="#accessiblity">Accessibility</a> */}
         </div>
         {error && <span className="text-red-500">{error}</span>}
         <div className="*:flex *:flex-col *:justify-evenly *:border-b">
