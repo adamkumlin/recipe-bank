@@ -1,6 +1,6 @@
 ---
 import NewRecipeForm from "../../components/NewRecipeForm";
-import Layout from "../../layouts/Layout.astro";
+import LandingPageLayout from "../../layouts/LandingPageLayout.astro";
 
 const token = Astro.cookies.get("token");
 
@@ -9,6 +9,6 @@ if (!token) {
 }
 ---
 
-<Layout>
+<LandingPageLayout>
     <NewRecipeForm client:load />
-</Layout>
+</LandingPageLayout>

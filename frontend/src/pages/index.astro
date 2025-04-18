@@ -1,7 +1,10 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import StartPageLayout from "../layouts/StartPageLayout.astro";
 import cookingVideo from "../assets/cooking.mp4";
+import easeOfUseImage from "../assets/ease-of-use.jpg";
+import recipeBookImage from "../assets/recipe-book.jpg"
 ---
+
 <video
   class="-z-30 absolute w-full h-full blur-md opacity-30 object-cover"
   autoplay
@@ -10,30 +13,47 @@ import cookingVideo from "../assets/cooking.mp4";
 >
   <source src={cookingVideo} />
 </video>
-<Layout>
-  <div class="flex flex-col items-center justify-center gap-10 h-full">
+<StartPageLayout>
+  <div class="flex flex-col items-center justify-center gap-10 h-full mt-20">
     <h1 class="text-9xl">
       Recipe <span class="text-blue-400">Bank</span>
     </h1>
-    <div class="text-4xl">
+    <div class="text-4xl" id="intro">
       <p><span class="text-blue-500">See</span> it.</p>
       <p><span class="text-green-500">Save</span> it.</p>
       <p><span class="text-red-500">Cook</span> it.</p>
+    </div>
+    <div class="hidden flex-row w-full h-auto *:w-1/3 justify-around" id="cta">
+      <div class="flex flex-col items-center">
+        <h2 class="text-2xl font-bold">Your recipes, unified</h2>
+        <p>
+          Recipe <span class="text-blue-400">Bank</span> keeps your favorites ready
+          to go — anytime, anywhere.
+        </p>
+        <img class="rounded-full w-[300px] h-[300px] object-cover mt-4" src={recipeBookImage.src} alt="Recipe book" />
+      </div>
+      <div class="flex flex-col items-center">
+        <h2 class="text-2xl font-bold">Like clockwork</h2>
+        <p>One click, zero fuss — your recipes, saved in style.</p>
+        <img class="rounded-full w-[300px] h-[300px] object-cover mt-4" src={easeOfUseImage.src} alt="Woman using a computer" />
+      </div>
     </div>
     <a
       class="bg-lime-700 w-fit p-4 text-2xl rounded border-[1px] border-white mt-8"
       href="/login">Get started</a
     >
   </div>
-</Layout>
+</StartPageLayout>
 
 <script>
   import { animate } from "animejs";
 
   const button = document.getElementsByTagName("a")[0];
+  const heading = document.getElementsByTagName("h1")[0];
   const smokeParticleStyle =
     "width: 5px; height: 5px; borderRadius: 100%; position: absolute; bottom: 20%; width: 5px; height: 5px;";
-  const smokeContainerStyle = "height: 50%; width: 50%; position: absolute; pointer-events: none";
+  const smokeContainerStyle =
+    "height: 50%; width: 50%; position: absolute; pointer-events: none";
 
   function createSmokeParticle() {
     let percentage = Math.ceil(Math.round(Math.random() * 9));
@@ -52,7 +72,7 @@ import cookingVideo from "../assets/cooking.mp4";
 
     const smokeContainer = document.querySelector("#smokeContainer");
     smokeContainer?.appendChild(particle);
-    
+
     return particle;
   }
 
@@ -62,6 +82,9 @@ import cookingVideo from "../assets/cooking.mp4";
     loop: true,
   });
 
+  const moveHeadingAnimation = animate(heading, {
+    y: "-70px"
+  })
   function animateSmoke(smokeParticle: HTMLDivElement) {
     if (!smokeParticle) {
       return;
@@ -76,6 +99,7 @@ import cookingVideo from "../assets/cooking.mp4";
 
   document.addEventListener("DOMContentLoaded", () => {
     buttonShakeAnimation.pause();
+    moveHeadingAnimation.pause();
   });
 
   button.addEventListener("mouseenter", () => {
@@ -88,11 +112,12 @@ import cookingVideo from "../assets/cooking.mp4";
     smokeContainer?.remove();
   });
 
+  
   button.addEventListener("mouseover", () => {
     const smokeContainer = document.createElement("div");
     smokeContainer.id = "smokeContainer";
     smokeContainer.style = smokeContainerStyle;
-
+    
     const buttonContainer = button.closest("div") as HTMLDivElement;
     buttonContainer.insertBefore(smokeContainer, button);
     setInterval(() => {
@@ -102,5 +127,27 @@ import cookingVideo from "../assets/cooking.mp4";
         particle.remove();
       }, 200);
     }, 50);
+  });
+  
+  let yPosition = 0;
+
+
+  document.addEventListener("scroll", () => {
+    yPosition = window.screenY;
+    const cta = document.getElementById("cta");
+    const intro = document.getElementById("intro");
+    console.log(intro)
+    console.log(cta)
+    if (yPosition < 0) {
+      moveHeadingAnimation.restart();
+      intro?.classList.add("hidden")
+      cta?.classList.remove("hidden")
+      cta?.classList.add("flex")
+    } else {
+      moveHeadingAnimation.revert();
+      intro?.classList.remove("hidden")
+      cta?.classList.remove("flex")
+      cta?.classList.add("hidden")
+    }
   });
 </script>

@@ -1,12 +1,12 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import LandingPageLayout from "../../layouts/LandingPageLayout.astro";
 const token = Astro.cookies.get("token");
 if (!token) {
   return Astro.redirect("/login");
 }
 ---
 
-<Layout>
+<LandingPageLayout>
   {
     !token ? (
       <h1 class="text-black font-bold text-2xl tracking-wide text-center font uppercase">
@@ -18,4 +18,4 @@ if (!token) {
       </h1>
     )
   }
-</Layout>
+</LandingPageLayout>

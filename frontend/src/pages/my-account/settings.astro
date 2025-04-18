@@ -1,6 +1,6 @@
 ---
 import SettingsMenu from "../../components/SettingsMenu";
-import Layout from "../../layouts/Layout.astro";
+import LandingPageLayout from "../../layouts/LandingPageLayout.astro";
 
 const token = Astro.cookies.get("token");
 
@@ -9,7 +9,7 @@ if (!token) {
 }
 ---
 
-<Layout>
+<LandingPageLayout>
   <h1 class="text-2xl m-2">Settings</h1>
   <SettingsMenu token={token?.value ?? ""} client:load />
-</Layout>
+</LandingPageLayout>
