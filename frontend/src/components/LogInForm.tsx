@@ -4,6 +4,7 @@ import { actions } from 'astro:actions';
 import Cookies from 'js-cookie';
 import TextField from './TextField';
 import Button from './Button';
+import PasswordField from './PasswordField';
 
 export default function LogInForm() {
   const [formData, setFormData] = useState({
@@ -56,15 +57,13 @@ export default function LogInForm() {
           onChange={handleChange}
           animateLabels={true}
         />
-        <TextField
-          type="password"
+        <PasswordField
           value={formData.password}
           label="password"
           onChange={handleChange}
           animateLabels={true}
         />
-
-        <Button type="submit" label="Log in"/>
+        <Button type="submit" label="Log in" />
 
         <a
           href="/register"

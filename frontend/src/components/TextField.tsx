@@ -6,7 +6,8 @@ interface Props {
   value: string;
   label: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  animateLabels: boolean;
+  animateLabels?: boolean;
+  style?: { label: string; input: string };
 }
 
 export default function TextField({
@@ -15,6 +16,7 @@ export default function TextField({
   label,
   onChange,
   animateLabels,
+  style,
 }: Props) {
   useEffect(() => {
     const animation = animate(`#${label}-label`, {
@@ -36,7 +38,7 @@ export default function TextField({
   return (
     <>
       <label
-        className="uppercase text-2xl"
+        className={style?.label ?? 'uppercase text-2xl'}
         htmlFor={label}
         id={`${label}-label`}
       >
@@ -48,7 +50,10 @@ export default function TextField({
         onChange={e => onChange(e)}
         value={value}
         type={type}
-        className="w-1/2 h-10 max-w-sm text-black border-[1px] rounded-lg border-gray-700 px-2 text-2xl font-sans"
+        className={
+          style?.input ??
+          'w-1/2 h-10 max-w-sm text-black border-[1px] rounded-lg border-gray-700 px-2 text-2xl font-sans'
+        }
         name={label}
       />
     </>
