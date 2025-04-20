@@ -38,7 +38,8 @@ export default function TextField({
       <label
         className="uppercase text-2xl"
         htmlFor={label}
-        id={`${label}-label`}>
+        id={`${label}-label`}
+      >
         {label}
       </label>
       <input

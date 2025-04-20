@@ -3,6 +3,7 @@ import { validateUserCredentials } from '../lib/utils/helper';
 import { actions } from 'astro:actions';
 import Cookies from 'js-cookie';
 import TextField from './TextField';
+import Button from './Button';
 
 export default function LogInForm() {
   const [formData, setFormData] = useState({
@@ -41,10 +42,12 @@ export default function LogInForm() {
   return (
     <div
       className={`flex flex-col place-content-center h-full text-white w-1/2 m-auto`}
-      id="container">
+      id="container"
+    >
       <form
         className="flex flex-col gap-2 items-center drop-shadow-lg rounded-xl m-4"
-        onSubmit={handleSubmit}>
+        onSubmit={handleSubmit}
+      >
         {error && <p className="text-red-500">{error}</p>}
         <TextField
           type="email"
@@ -61,13 +64,12 @@ export default function LogInForm() {
           animateLabels={true}
         />
 
-        <button className="rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110">
-          Log in
-        </button>
+        <Button type="submit" label="Log in"/>
 
         <a
           href="/register"
-          className="text-blue-500 border-t-2 border-black border-dashed pt-2 hover:text-blue-900">
+          className="text-blue-500 border-t-2 border-black border-dashed pt-2 hover:text-blue-900"
+        >
           Don't have an account?
         </a>
       </form>

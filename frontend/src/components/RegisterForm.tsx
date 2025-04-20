@@ -3,6 +3,7 @@ import { validateUserCredentials } from '../lib/utils/helper';
 import Cookies from 'js-cookie';
 import { actions } from 'astro:actions';
 import { useTime } from '../hooks/useTime';
+import Button from './Button';
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -46,7 +47,8 @@ export default function RegisterForm() {
       </h1>
       <form
         className="flex flex-col gap-2 items-center drop-shadow-lg rounded-xl m-4"
-        onSubmit={event => handleSubmit(event)}>
+        onSubmit={event => handleSubmit(event)}
+      >
         {error && <p className="text-red-600">{error}</p>}
         <label className="uppercase" htmlFor="email">
           Email
@@ -92,13 +94,14 @@ export default function RegisterForm() {
           name="confirm-password"
         />
 
-        <button className="rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110">
+        <Button type="submit">
           Register
-        </button>
+        </Button>
 
         <a
           href="/login"
-          className="text-blue-500 border-t-2 border-black border-dashed pt-2 hover:text-blue-900">
+          className="text-blue-500 border-t-2 border-black border-dashed pt-2 hover:text-blue-900"
+        >
           Already have an account?
         </a>
       </form>

@@ -78,7 +78,8 @@ export default function Setting({
           className="bg-transparent border-[1px] mx-2"
           value={newSettingValue}
           id={id}
-          onChange={e => setNewSettingValue(e.target.value)}>
+          onChange={e => setNewSettingValue(e.target.value)}
+        >
           {options?.map((option, index) => (
             <option className="bg-black" key={index} value={option}>
               {option[0].toUpperCase() + option.slice(1)}

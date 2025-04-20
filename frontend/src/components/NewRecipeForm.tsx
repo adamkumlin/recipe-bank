@@ -4,6 +4,7 @@ import { actions } from 'astro:actions';
 import Cookies from 'js-cookie';
 import { useTime } from '../hooks/useTime';
 import InstructionsInput from './InstructionsInput';
+import Button from './Button';
 
 export default function NewRecipeForm() {
   const [formData, setFormData] = useState<Recipe>({
@@ -84,7 +85,8 @@ export default function NewRecipeForm() {
     <div className="w-1/2 h-full mx-auto flex flex-col justify-center items-center text-white">
       <form
         className="flex flex-col gap-2 items-center drop-shadow-lg rounded-xl m-4 w-full"
-        onSubmit={e => handleSubmit(e)}>
+        onSubmit={e => handleSubmit(e)}
+      >
         {error && <p className="text-red-600">{error}</p>}
         <input
           onChange={e =>
@@ -102,16 +104,8 @@ export default function NewRecipeForm() {
         </div>
 
         <div className="flex flex-row justify-between w-2/5">
-          <button
-            type="reset"
-            className="rounded-md text-white bg-red-700 m-2 p-2 mb-4 hover:scale-110">
-            Cancel
-          </button>
-          <button
-            type="submit"
-            className="rounded-md text-white bg-green-700 m-2 p-2 mb-4 hover:scale-110">
-            Add recipe
-          </button>
+          <Button type="reset">Cancel</Button>
+          <Button type="submit">Add recipe</Button>
         </div>
       </form>
     </div>

@@ -43,13 +43,15 @@ export default function NewRecipeFormPopup({
             <button
               type="button"
               onClick={() => setPopupMenu({ isActive: false, menuType: '' })}
-              className="rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110">
+              className="rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110"
+            >
               Cancel
             </button>
             <button
               onClick={() => assureHandlerExists(popupMenu.handler)}
               type="button"
-              className="rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110">
+              className="rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110"
+            >
               Done
             </button>
           </div>

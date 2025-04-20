@@ -1,3 +1,5 @@
+import Button from './Button';
+
 interface Props {
   query: string;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
@@ -23,12 +25,9 @@ export default function SearchBar({ query, setQuery, search }: Props) {
             : { borderColor: 'rgb(55 65 81 / 1)' }
         }
       />
-      <button
-        type="submit"
-        className="bg-blue-600 text-white rounded-md hover:bg-blue-400"
-        onClick={search}>
+      <Button type="submit" onClick={search}>
         Search
-      </button>
+      </Button>
     </form>
   );
 }

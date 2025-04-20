@@ -25,7 +25,8 @@ export default function InstructionsInput() {
         onChange={e => handleChange(e.target.value)}
         onKeyDown={e => handleKeyDown(e.key)}
         value={instruction}
-        className="text-black"></textarea>
+        className="text-black"
+      ></textarea>
     </div>
   );
 }

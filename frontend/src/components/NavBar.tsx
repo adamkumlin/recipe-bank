@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import Cookies from 'js-cookie';
+import Button from './Button';
 
 interface Props {
   isAlwaysMinimized: boolean;
@@ -32,11 +33,12 @@ export default function NavBar({ isAlwaysMinimized }: Props) {
           !isMinimized
             ? 'bg-gray-900 absolute *:text-xl *:text-white h-full w-1/5 px-6 hidden sm:block'
             : 'bg-gray-900 absolute *:text-xl *:text-white h-full w-fit px-6 hidden sm:block'
-        }>
+        }
+      >
         <div className="flex flex-row justify-end mt-2">
-          <button type="button" onClick={() => setIsMinimized(!isMinimized)}>
+          <Button type="button" onClick={() => setIsMinimized(!isMinimized)}>
             {!isMinimized ? <ArrowLeftFromLine /> : <ArrowRightFromLine />}
-          </button>
+          </Button>
         </div>
         <a className="text-center" href="/">
           {!isMinimized ? (
@@ -78,12 +80,6 @@ export default function NavBar({ isAlwaysMinimized }: Props) {
               {!isMinimized ? 'Settings' : ''}
             </a>
           </li>
-          <li className="hover:bg-blue-500">
-            <button onClick={handleLogOutClick} className="w-full">
-              <LogOut className={!isMinimized ? 'inline mr-2' : 'inline'} />
-              {!isMinimized ? 'Log out' : ''}
-            </button>
-          </li>
         </ul>
       </nav>
 
@@ -93,15 +89,13 @@ export default function NavBar({ isAlwaysMinimized }: Props) {
             Recipe <span className="text-blue-400">Bank</span>
           </h1>
         </a>
-        <button
-          type="button"
-          onClick={() => setIsActiveHamburger(!isActiveHamburger)}>
+        <Button type="button" onClick={() => setIsActiveHamburger(!isActiveHamburger)}>
           {!isActiveHamburger ? (
             <Menu className="min-w-[50px] min-h-[50px]" />
           ) : (
             <X className="min-w-[50px] min-h-[50px]" />
           )}
-        </button>
+        </Button>
       </div>
       {isActiveHamburger && (
         <nav className="bg-gray-900 absolute *:text-xl *:text-white w-full block sm:hidden">
@@ -131,10 +125,10 @@ export default function NavBar({ isAlwaysMinimized }: Props) {
               </a>
             </li>
             <li className="hover:bg-blue-500">
-              <button onClick={handleLogOutClick} className="w-full">
+              <Button type="button" onClick={handleLogOutClick}>
                 <LogOut className="inline mr-2" />
                 Log out
-              </button>
+              </Button>
             </li>
           </ul>
         </nav>

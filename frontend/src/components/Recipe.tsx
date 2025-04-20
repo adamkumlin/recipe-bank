@@ -39,7 +39,8 @@ export default function Recipe({
         className="group/recipe flex flex-1 flex-row justify-left *:w-1/5 *:bg-slate-800 *:border-[1px] cursor-pointer"
         onClick={() =>
           (window.location.href = `/my-account/recipes/${recipe._id}`)
-        }>
+        }
+      >
         <h2 className="group-hover/recipe:bg-gray-600">{recipe.title}</h2>
         <ul className="list-disc list-inside group-hover/recipe:bg-gray-600">
           {recipe.ingredients.map((i, index) => (
@@ -54,7 +55,8 @@ export default function Recipe({
         {recipe.link ? (
           <a
             className="underline text-blue-600 group-hover/recipe:bg-gray-600 hover:text-blue-800 visited:text-purple-600"
-            href={recipe.link}>
+            href={recipe.link}
+          >
             Link
           </a>
         ) : (
