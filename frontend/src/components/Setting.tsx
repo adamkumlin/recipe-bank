@@ -1,10 +1,10 @@
-import { actions } from "astro:actions";
-import React, { useEffect, useState, useId, useRef } from "react";
+import { actions } from 'astro:actions';
+import React, { useEffect, useState, useId, useRef } from 'react';
 
 interface Props {
   name: string;
   settingName: string;
-  inputType: "checkbox" | "select";
+  inputType: 'checkbox' | 'select';
   currentValue: string;
   setError: React.Dispatch<React.SetStateAction<string>>;
   options?: string[];
@@ -29,12 +29,12 @@ export default function Setting({
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const isChecked: boolean = e.target.checked;
     if (!token) {
-      setError("Error: Invalid token.");
+      setError('Error: Invalid token.');
       return;
     }
 
-    if (newSettingValue === "") {
-      setError("Error: New value cannot be empty.");
+    if (newSettingValue === '') {
+      setError('Error: New value cannot be empty.');
       return;
     }
     setNewSettingValue(isChecked.toString());
@@ -43,7 +43,7 @@ export default function Setting({
   async function updateSetting() {
     const user = await actions.verifyUserJwt(token);
     if (!user) {
-      setError("Error: Invalid user.");
+      setError('Error: Invalid user.');
       return;
     }
 
@@ -53,7 +53,7 @@ export default function Setting({
       userId: user.data.id,
     };
     await actions.editUserSetting(json);
-    setError("");
+    setError('');
   }
 
   useEffect(() => {
@@ -65,21 +65,20 @@ export default function Setting({
   return (
     <div className="flex flex-row">
       <label htmlFor={id}>{name}</label>
-      {inputType === "checkbox" ? (
+      {inputType === 'checkbox' ? (
         <input
           id={id}
           className="mx-2"
           type="checkbox"
-          onChange={(e) => handleChange(e)}
-          checked={newSettingValue === "true"}
+          onChange={e => handleChange(e)}
+          checked={newSettingValue === 'true'}
         />
       ) : (
         <select
           className="bg-transparent border-[1px] mx-2"
           value={newSettingValue}
           id={id}
-          onChange={(e) => setNewSettingValue(e.target.value)}
-        >
+          onChange={e => setNewSettingValue(e.target.value)}>
           {options?.map((option, index) => (
             <option className="bg-black" key={index} value={option}>
               {option[0].toUpperCase() + option.slice(1)}

@@ -1,11 +1,11 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import mongoose, { HydratedDocument, ObjectId } from "mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose, { HydratedDocument, ObjectId } from 'mongoose';
 
 export type RecipeDocument = HydratedDocument<Recipe>;
 
 @Schema()
 export class Recipe {
-  @Prop({required: false, type: mongoose.Schema.Types.ObjectId})
+  @Prop({ required: false, type: mongoose.Schema.Types.ObjectId })
   id: ObjectId;
 
   @Prop({ required: true, maxlength: 40 })
@@ -17,13 +17,13 @@ export class Recipe {
   @Prop({ required: true, maxlength: 400 })
   instructions: string[];
 
-  @Prop({required: false})
+  @Prop({ required: false })
   link: string;
-  
-  @Prop({required: true, type: mongoose.Schema.Types.ObjectId })
+
+  @Prop({ required: true, type: mongoose.Schema.Types.ObjectId })
   userId: ObjectId;
 
-  @Prop({required: true })
+  @Prop({ required: true })
   dateCreated: string;
 
   @Prop({ required: false })

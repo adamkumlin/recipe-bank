@@ -1,5 +1,5 @@
-import type { ObjectId } from "mongoose";
-import type { RecipeResponse } from "../lib/utils/types";
+import type { ObjectId } from 'mongoose';
+import type { RecipeResponse } from '../lib/utils/types';
 
 interface Props {
   recipe: RecipeResponse;
@@ -7,13 +7,21 @@ interface Props {
   selectedRecipeIds: ObjectId[];
 }
 
-export default function Recipe({ recipe, setSelectedRecipeIds, selectedRecipeIds }: Props) {
-  const createdDate = recipe.dateCreated.split(" ").shift();
-  const createdTime = recipe.dateCreated.split(" ").pop();
+export default function Recipe({
+  recipe,
+  setSelectedRecipeIds,
+  selectedRecipeIds,
+}: Props) {
+  const createdDate = recipe.dateCreated.split(' ').shift();
+  const createdTime = recipe.dateCreated.split(' ').pop();
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const isChecked: boolean = e.target.checked;
-    const idIsAlreadyPresent: boolean = selectedRecipeIds.find(id => id === recipe._id) ? true : false;
+    const idIsAlreadyPresent: boolean = selectedRecipeIds.find(
+      id => id === recipe._id
+    )
+      ? true
+      : false;
     const recipeIds = selectedRecipeIds;
 
     if (isChecked && !idIsAlreadyPresent) {
@@ -29,8 +37,9 @@ export default function Recipe({ recipe, setSelectedRecipeIds, selectedRecipeIds
     <div className="flex flex-row">
       <div
         className="group/recipe flex flex-1 flex-row justify-left *:w-1/5 *:bg-slate-800 *:border-[1px] cursor-pointer"
-        onClick={() => window.location.href = `/my-account/recipes/${recipe._id}`}
-      >
+        onClick={() =>
+          (window.location.href = `/my-account/recipes/${recipe._id}`)
+        }>
         <h2 className="group-hover/recipe:bg-gray-600">{recipe.title}</h2>
         <ul className="list-disc list-inside group-hover/recipe:bg-gray-600">
           {recipe.ingredients.map((i, index) => (
@@ -45,8 +54,7 @@ export default function Recipe({ recipe, setSelectedRecipeIds, selectedRecipeIds
         {recipe.link ? (
           <a
             className="underline text-blue-600 group-hover/recipe:bg-gray-600 hover:text-blue-800 visited:text-purple-600"
-            href={recipe.link}
-          >
+            href={recipe.link}>
             Link
           </a>
         ) : (
@@ -60,7 +68,11 @@ export default function Recipe({ recipe, setSelectedRecipeIds, selectedRecipeIds
         </div>
       </div>
       <div>
-        <input className="w-[20px] h-[20px] inline-block align-middle ml-[10px]" onChange={(e) => handleChange(e)} type="checkbox" />
+        <input
+          className="w-[20px] h-[20px] inline-block align-middle ml-[10px]"
+          onChange={e => handleChange(e)}
+          type="checkbox"
+        />
       </div>
     </div>
   );

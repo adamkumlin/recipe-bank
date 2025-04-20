@@ -7,7 +7,6 @@ import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { JWT_SECRET } from './constants';
 
-
 @Module({
   imports: [
     UserModule,

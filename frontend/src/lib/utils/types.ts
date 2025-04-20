@@ -1,4 +1,4 @@
-import { type ObjectId } from "mongoose";
+import { type ObjectId } from 'mongoose';
 
 export type RecipeResponse = {
   _id: ObjectId;
@@ -31,4 +31,3 @@ export type UserSettings = {
   displayLanguage: string;
   alwaysMinimizeNavbar: boolean;
 };
-

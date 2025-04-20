@@ -1,5 +1,5 @@
-import { animate } from "animejs";
-import { useEffect } from "react";
+import { animate } from 'animejs';
+import { useEffect } from 'react';
 
 interface Props {
   type: React.HTMLInputTypeAttribute;
@@ -30,7 +30,7 @@ export default function TextField({
       },
     });
     if (!animateLabels) {
-        animation.revert();
+      animation.revert();
     }
   }, []);
   return (
@@ -38,14 +38,13 @@ export default function TextField({
       <label
         className="uppercase text-2xl"
         htmlFor={label}
-        id={`${label}-label`}
-      >
+        id={`${label}-label`}>
         {label}
       </label>
       <input
         id={label}
         autoComplete="off"
-        onChange={(e) => onChange(e)}
+        onChange={e => onChange(e)}
         value={value}
         type={type}
         className="w-1/2 h-10 max-w-sm text-black border-[1px] rounded-lg border-gray-700 px-2 text-2xl font-sans"

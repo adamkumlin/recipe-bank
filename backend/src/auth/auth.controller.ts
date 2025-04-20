@@ -28,8 +28,8 @@ export class AuthController {
   }
 
   @Public()
-  @Get("verify-user/:token")
-  verifyUser(@Param("token") token: string) {
+  @Get('verify-user/:token')
+  verifyUser(@Param('token') token: string) {
     return this.authService.verifyUser(token);
   }
 }

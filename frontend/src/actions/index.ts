@@ -1,18 +1,18 @@
-import { defineAction } from "astro:actions";
-import { z } from "astro:schema";
-import bcrypt from "bcryptjs";
-import { type Recipe } from "../lib/utils/types";
+import { defineAction } from 'astro:actions';
+import { z } from 'astro:schema';
+import bcrypt from 'bcryptjs';
+import { type Recipe } from '../lib/utils/types';
 
 export const server = {
   logIn: defineAction({
     input: z.string(),
-    handler: async (input) => {
+    handler: async input => {
       const formData = JSON.parse(input);
 
-      const request = await fetch("http://localhost:3001/auth/login", {
-        method: "POST",
+      const request = await fetch('http://localhost:3001/auth/login', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           email: formData.email,
@@ -26,26 +26,26 @@ export const server = {
         return jsonResponse;
       }
 
-      return "";
+      return '';
     },
   }),
   register: defineAction({
     input: z.string(),
-    handler: async (input) => {
+    handler: async input => {
       const formData = JSON.parse(input);
 
       // Hash and salt the password
       const hash = await bcrypt.hash(formData.password, 8);
 
-      const request = await fetch("http://localhost:3001/user/create", {
-        method: "POST",
+      const request = await fetch('http://localhost:3001/user/create', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           email: formData.email,
           password: hash,
-          joinDate: formData.time
+          joinDate: formData.time,
         }),
       });
 
@@ -55,7 +55,7 @@ export const server = {
         return jsonResponse;
       }
 
-      return "";
+      return '';
     },
   }),
   addNewRecipe: defineAction({
@@ -63,13 +63,13 @@ export const server = {
       recipe: z.string(),
       userId: z.string(),
     }),
-    handler: async (input) => {
+    handler: async input => {
       const formData: Recipe = JSON.parse(input.recipe);
       const userId = JSON.parse(input.userId);
-      const request = await fetch("http://localhost:3001/recipe/create", {
-        method: "POST",
+      const request = await fetch('http://localhost:3001/recipe/create', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           userId: userId,
@@ -83,31 +83,31 @@ export const server = {
 
       if (!request.ok) {
         return {
-          error: "Error adding recipe.",
+          error: 'Error adding recipe.',
         };
       } else {
         return {
-          message: "Recipe added successfully.",
+          message: 'Recipe added successfully.',
         };
       }
     },
   }),
   verifyUserJwt: defineAction({
     input: z.string(),
-    handler: async (input) => {
+    handler: async input => {
       const request = await fetch(
-        "http://localhost:3001/auth/verify-user/" + input,
+        'http://localhost:3001/auth/verify-user/' + input,
         {
-          method: "GET",
+          method: 'GET',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
         }
       );
 
       if (!request.ok) {
         return {
-          error: "Error verifying user.",
+          error: 'Error verifying user.',
         };
       } else {
         const response = await request.json();
@@ -118,20 +118,20 @@ export const server = {
   }),
   getUserRecipes: defineAction({
     input: z.string(),
-    handler: async (input) => {
+    handler: async input => {
       const request = await fetch(
-        "http://localhost:3001/recipe/user/" + input,
+        'http://localhost:3001/recipe/user/' + input,
         {
-          method: "GET",
+          method: 'GET',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
         }
       );
 
       if (!request.ok) {
         return {
-          error: "Error fetching user recipes.",
+          error: 'Error fetching user recipes.',
         };
       } else {
         const response = await request.json();
@@ -142,17 +142,17 @@ export const server = {
   }),
   getRecipe: defineAction({
     input: z.string(),
-    handler: async (input) => {
-      const request = await fetch("http://localhost:3001/recipe/id/" + input, {
-        method: "GET",
+    handler: async input => {
+      const request = await fetch('http://localhost:3001/recipe/id/' + input, {
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
 
       if (!request.ok) {
         return {
-          error: "Error fetching user recipes.",
+          error: 'Error fetching user recipes.',
         };
       } else {
         const response = await request.json();
@@ -163,17 +163,17 @@ export const server = {
   }),
   deleteRecipe: defineAction({
     input: z.string(),
-    handler: async (input) => {
-      const request = await fetch("http://localhost:3001/recipe/id/" + input, {
-        method: "DELETE",
+    handler: async input => {
+      const request = await fetch('http://localhost:3001/recipe/id/' + input, {
+        method: 'DELETE',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
 
       if (!request.ok) {
         return {
-          error: "Error fetching user recipes.",
+          error: 'Error fetching user recipes.',
         };
       }
     },
@@ -184,13 +184,13 @@ export const server = {
       settingValue: z.string(),
       userId: z.string(),
     }),
-    handler: async (input) => {
+    handler: async input => {
       const request = await fetch(
-        "http://localhost:3001/user/" + input.userId,
+        'http://localhost:3001/user/' + input.userId,
         {
-          method: "PATCH",
+          method: 'PATCH',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             [input.settingName]: input.settingValue,
@@ -200,7 +200,7 @@ export const server = {
 
       if (!request.ok) {
         return {
-          error: "Error fetching user data.",
+          error: 'Error fetching user data.',
         };
       } else {
         const response = await request.json();
@@ -211,17 +211,20 @@ export const server = {
   }),
   getUserSettings: defineAction({
     input: z.string(),
-    handler: async (input) => {
-      const request = await fetch("http://localhost:3001/user/settings/" + input, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+    handler: async input => {
+      const request = await fetch(
+        'http://localhost:3001/user/settings/' + input,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       if (!request.ok) {
         return {
-          error: "Error fetching user data.",
+          error: 'Error fetching user data.',
         };
       } else {
         const response = await request.json();

@@ -10,7 +10,7 @@ export class RecipeService {
   constructor(@InjectModel(Recipe.name) private recipeModel: Model<Recipe>) {}
 
   async getAll(userId: ObjectId): Promise<Recipe[]> {
-    return await this.recipeModel.find({userId: userId}).exec();
+    return await this.recipeModel.find({ userId: userId }).exec();
   }
 
   async get(id: ObjectId): Promise<Recipe> {

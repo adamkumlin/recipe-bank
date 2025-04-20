@@ -1,13 +1,13 @@
-import { actions } from "astro:actions";
-import Setting from "./Setting";
-import { useEffect, useRef, useState } from "react";
-import { type UserSettings } from "../lib/utils/types";
+import { actions } from 'astro:actions';
+import Setting from './Setting';
+import { useEffect, useRef, useState } from 'react';
+import { type UserSettings } from '../lib/utils/types';
 
 interface Props {
   token: string;
 }
 export default function SettingsMenu({ token }: Props) {
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [userSettings, setUserSettings] = useState<UserSettings | null>(null);
 
   // const loginSectionRef = useRef(null);
@@ -18,27 +18,30 @@ export default function SettingsMenu({ token }: Props) {
     if (!ref.current) {
       return;
     }
-    ref.current.scroll()
-    ref.current.animate([
-      { backgroundColor: 'initial' },
-      { backgroundColor: "#00308F" },
-      { backgroundColor: 'initial' }
-    ], {
-      duration: 1000,
-      iterations: 1
-    });
+    ref.current.scroll();
+    ref.current.animate(
+      [
+        { backgroundColor: 'initial' },
+        { backgroundColor: '#00308F' },
+        { backgroundColor: 'initial' },
+      ],
+      {
+        duration: 1000,
+        iterations: 1,
+      }
+    );
   }
 
   useEffect(() => {
     async function getUserSettings() {
       if (!token) {
-        setError("Error: Invalid token.");
+        setError('Error: Invalid token.');
         return;
       }
 
       const user = await actions.verifyUserJwt(token);
       if (!user) {
-        setError("Error: Invalid user.");
+        setError('Error: Invalid user.');
         return;
       }
 
@@ -57,7 +60,9 @@ export default function SettingsMenu({ token }: Props) {
       <div className="flex flex-col w-1/2 mx-auto bg-gray-900 border-2 rounded-md">
         <div className="flex flex-row justify-center gap-2 text-purple-300 *:p-2">
           {/* <a onClick={() => handleClick(loginSectionRef)} href="#login">Login</a> */}
-          <a onClick={() => handleClick(displaySectionRef)} href="#display">Display</a>
+          <a onClick={() => handleClick(displaySectionRef)} href="#display">
+            Display
+          </a>
           {/* <a onClick={() => handleClick(accessibilitySectionRef)} href="#accessiblity">Accessibility</a> */}
         </div>
         {error && <span className="text-red-500">{error}</span>}
@@ -78,7 +83,7 @@ export default function SettingsMenu({ token }: Props) {
               inputType="select"
               settingName="displayLanguage"
               currentValue={userSettings.displayLanguage.toString()}
-              options={["english", "swedish"]}
+              options={['english', 'swedish']}
               setError={setError}
               token={token}
             />

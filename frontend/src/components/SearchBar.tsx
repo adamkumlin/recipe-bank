@@ -10,16 +10,23 @@ export default function SearchBar({ query, setQuery, search }: Props) {
       <input
         className="border-2 focus:outline-none"
         type="text"
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={e => setQuery(e.target.value)}
         value={query}
         placeholder="Tell me about..."
         style={
-          query !== ""
-            ? { borderColor: "lime", borderRadius: "5px", transition: "300ms ease-out" }
-            : { borderColor: "rgb(55 65 81 / 1)" }
+          query !== ''
+            ? {
+                borderColor: 'lime',
+                borderRadius: '5px',
+                transition: '300ms ease-out',
+              }
+            : { borderColor: 'rgb(55 65 81 / 1)' }
         }
       />
-      <button type="submit" className="bg-blue-600 text-white rounded-md hover:bg-blue-400" onClick={search}>
+      <button
+        type="submit"
+        className="bg-blue-600 text-white rounded-md hover:bg-blue-400"
+        onClick={search}>
         Search
       </button>
     </form>

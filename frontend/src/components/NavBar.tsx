@@ -8,9 +8,9 @@ import {
   SquarePlus,
   SquareUserRound,
   X,
-} from "lucide-react";
-import { useState } from "react";
-import Cookies from "js-cookie";
+} from 'lucide-react';
+import { useState } from 'react';
+import Cookies from 'js-cookie';
 
 interface Props {
   isAlwaysMinimized: boolean;
@@ -21,7 +21,7 @@ export default function NavBar({ isAlwaysMinimized }: Props) {
   const [isActiveHamburger, setIsActiveHamburger] = useState<boolean>(false);
 
   function handleLogOutClick() {
-    Cookies.remove("token");
+    Cookies.remove('token');
     window.location.reload();
   }
 
@@ -30,10 +30,9 @@ export default function NavBar({ isAlwaysMinimized }: Props) {
       <nav
         className={
           !isMinimized
-            ? "bg-gray-900 absolute *:text-xl *:text-white h-full w-1/5 px-6 hidden sm:block"
-            : "bg-gray-900 absolute *:text-xl *:text-white h-full w-fit px-6 hidden sm:block"
-        }
-      >
+            ? 'bg-gray-900 absolute *:text-xl *:text-white h-full w-1/5 px-6 hidden sm:block'
+            : 'bg-gray-900 absolute *:text-xl *:text-white h-full w-fit px-6 hidden sm:block'
+        }>
         <div className="flex flex-row justify-end mt-2">
           <button type="button" onClick={() => setIsMinimized(!isMinimized)}>
             {!isMinimized ? <ArrowLeftFromLine /> : <ArrowRightFromLine />}
@@ -53,36 +52,36 @@ export default function NavBar({ isAlwaysMinimized }: Props) {
         <ul className="flex flex-col items-center gap-5 *:bg-blue-950 *:w-full *:text-center *:rounded-lg mt-4 *:p-2 *:*:block">
           <li className="hover:bg-blue-500">
             <a href="/new-recipe">
-              <SquarePlus className={!isMinimized ? "inline mr-2" : "inline"} />
-              {!isMinimized ? "New recipe" : ""}
+              <SquarePlus className={!isMinimized ? 'inline mr-2' : 'inline'} />
+              {!isMinimized ? 'New recipe' : ''}
             </a>
           </li>
           <li className="hover:bg-blue-500">
             <a href="/my-account/recipes">
               <SquareLibrary
-                className={!isMinimized ? "inline mr-2" : "inline"}
+                className={!isMinimized ? 'inline mr-2' : 'inline'}
               />
-              {!isMinimized ? "My recipes" : ""}
+              {!isMinimized ? 'My recipes' : ''}
             </a>
           </li>
           <li className="hover:bg-blue-500">
             <a href="/my-account">
               <SquareUserRound
-                className={!isMinimized ? "inline mr-2" : "inline"}
+                className={!isMinimized ? 'inline mr-2' : 'inline'}
               />
-              {!isMinimized ? "My account" : ""}
+              {!isMinimized ? 'My account' : ''}
             </a>
           </li>
           <li className="hover:bg-blue-500">
             <a href="/my-account/settings">
-              <Settings className={!isMinimized ? "inline mr-2" : "inline"} />
-              {!isMinimized ? "Settings" : ""}
+              <Settings className={!isMinimized ? 'inline mr-2' : 'inline'} />
+              {!isMinimized ? 'Settings' : ''}
             </a>
           </li>
           <li className="hover:bg-blue-500">
             <button onClick={handleLogOutClick} className="w-full">
-              <LogOut className={!isMinimized ? "inline mr-2" : "inline"} />
-              {!isMinimized ? "Log out" : ""}
+              <LogOut className={!isMinimized ? 'inline mr-2' : 'inline'} />
+              {!isMinimized ? 'Log out' : ''}
             </button>
           </li>
         </ul>
@@ -96,8 +95,7 @@ export default function NavBar({ isAlwaysMinimized }: Props) {
         </a>
         <button
           type="button"
-          onClick={() => setIsActiveHamburger(!isActiveHamburger)}
-        >
+          onClick={() => setIsActiveHamburger(!isActiveHamburger)}>
           {!isActiveHamburger ? (
             <Menu className="min-w-[50px] min-h-[50px]" />
           ) : (

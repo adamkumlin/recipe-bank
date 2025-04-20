@@ -1,5 +1,5 @@
-import { useState } from "react";
-import type { PopupMenu } from "../lib/utils/types";
+import { useState } from 'react';
+import type { PopupMenu } from '../lib/utils/types';
 
 interface Props {
   popupMenu: PopupMenu;
@@ -11,13 +11,13 @@ export default function NewRecipeFormPopup({
   setPopupMenu,
   popupError,
 }: Props) {
-  const [newValue, setNewValue] = useState("");
+  const [newValue, setNewValue] = useState('');
 
   function assureHandlerExists(
     handler: ((newValue: string) => void) | undefined
   ) {
     if (!handler) {
-      console.log("no");
+      console.log('no');
     } else {
       handler(newValue);
     }
@@ -32,7 +32,7 @@ export default function NewRecipeFormPopup({
           {popupError && <p className="text-red-600">{popupError}</p>}
           <input
             id={popupMenu.menuType}
-            onChange={(e) => setNewValue(e.target.value)}
+            onChange={e => setNewValue(e.target.value)}
             value={newValue}
             type="text"
             className="h-8 max-w-sm border-[1px] rounded-lg border-gray-700 text-black"
@@ -42,16 +42,14 @@ export default function NewRecipeFormPopup({
           <div>
             <button
               type="button"
-              onClick={() => setPopupMenu({ isActive: false, menuType: "" })}
-              className="rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110"
-            >
+              onClick={() => setPopupMenu({ isActive: false, menuType: '' })}
+              className="rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110">
               Cancel
             </button>
             <button
               onClick={() => assureHandlerExists(popupMenu.handler)}
               type="button"
-              className="rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110"
-            >
+              className="rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110">
               Done
             </button>
           </div>

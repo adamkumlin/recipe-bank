@@ -10,21 +10,25 @@ export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const isEmailAlreadyTaken: boolean = await this.getByEmail(createUserDto.email) ? true : false;
+    const isEmailAlreadyTaken: boolean = (await this.getByEmail(
+      createUserDto.email,
+    ))
+      ? true
+      : false;
     if (isEmailAlreadyTaken) {
-      throw new ConflictException("Email is already in use.");
+      throw new ConflictException('Email is already in use.');
     }
     const createdUser = new this.userModel(createUserDto);
     return createdUser.save();
   }
 
   async getByEmail(email: string): Promise<User> {
-    const existingUser = await this.userModel.findOne({email: email}).exec();
+    const existingUser = await this.userModel.findOne({ email: email }).exec();
     return existingUser;
   }
 
   async getById(id: string): Promise<User> {
-    const existingUser = await this.userModel.findOne({_id: id}).exec();
+    const existingUser = await this.userModel.findOne({ _id: id }).exec();
     return existingUser;
   }
 

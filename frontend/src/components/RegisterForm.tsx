@@ -1,15 +1,15 @@
-import { type FormEvent, useState } from "react";
-import { validateUserCredentials } from "../lib/utils/helper";
-import Cookies from "js-cookie";
-import { actions } from "astro:actions";
-import { useTime } from "../hooks/useTime";
+import { type FormEvent, useState } from 'react';
+import { validateUserCredentials } from '../lib/utils/helper';
+import Cookies from 'js-cookie';
+import { actions } from 'astro:actions';
+import { useTime } from '../hooks/useTime';
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-    dateCreated: "",
+    email: '',
+    password: '',
+    confirmPassword: '',
+    dateCreated: '',
   });
   const [error, setError] = useState<string>();
 
@@ -17,7 +17,7 @@ export default function RegisterForm() {
     e.preventDefault();
 
     const validation = validateUserCredentials(formData, true);
-    if (validation !== "") {
+    if (validation !== '') {
       setError(validation);
       return;
     }
@@ -31,10 +31,10 @@ export default function RegisterForm() {
     const { data } = await actions.register(json);
 
     if (!data) {
-      setError("wrogn!");
+      setError('wrogn!');
     } else {
       const { data } = await actions.logIn(json);
-      Cookies.set("token", data.access_token, { expires: 7 });
+      Cookies.set('token', data.access_token, { expires: 7 });
       window.location.reload();
     }
   }
@@ -46,16 +46,15 @@ export default function RegisterForm() {
       </h1>
       <form
         className="flex flex-col gap-2 items-center drop-shadow-lg rounded-xl m-4"
-        onSubmit={(event) => handleSubmit(event)}
-      >
+        onSubmit={event => handleSubmit(event)}>
         {error && <p className="text-red-600">{error}</p>}
         <label className="uppercase" htmlFor="email">
           Email
         </label>
         <input
           id="email"
-          onChange={(e) =>
-            setFormData((current) => ({ ...current, email: e.target.value }))
+          onChange={e =>
+            setFormData(current => ({ ...current, email: e.target.value }))
           }
           value={formData.email}
           type="email"
@@ -67,8 +66,8 @@ export default function RegisterForm() {
         </label>
         <input
           id="password"
-          onChange={(e) =>
-            setFormData((current) => ({ ...current, password: e.target.value }))
+          onChange={e =>
+            setFormData(current => ({ ...current, password: e.target.value }))
           }
           value={formData.password}
           type="password"
@@ -81,8 +80,8 @@ export default function RegisterForm() {
         </label>
         <input
           id="confirm-password"
-          onChange={(e) =>
-            setFormData((current) => ({
+          onChange={e =>
+            setFormData(current => ({
               ...current,
               confirmPassword: e.target.value,
             }))
@@ -99,8 +98,7 @@ export default function RegisterForm() {
 
         <a
           href="/login"
-          className="text-blue-500 border-t-2 border-black border-dashed pt-2 hover:text-blue-900"
-        >
+          className="text-blue-500 border-t-2 border-black border-dashed pt-2 hover:text-blue-900">
           Already have an account?
         </a>
       </form>
