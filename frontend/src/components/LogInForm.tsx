@@ -2,6 +2,7 @@ import { type ChangeEvent, type FormEvent, useEffect, useState } from "react";
 import { validateUserCredentials } from "../lib/utils/helper";
 import { actions } from "astro:actions";
 import Cookies from "js-cookie";
+import TextField from "./TextField";
 import { animate } from "animejs";
 
 export default function LogInForm() {
@@ -10,7 +11,6 @@ export default function LogInForm() {
     password: "",
   });
   const [error, setError] = useState("");
-  const [stopAnimations, setStopAnimations] = useState(false);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -35,112 +35,23 @@ export default function LogInForm() {
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setStopAnimations(true);
     const type = e.target.id;
     setFormData((current) => ({ ...current, [type]: e.target.value }));
   }
 
-  useEffect(() => {
-    const email = animate("#email", {
-      rotate: {
-        from: "-1deg",
-        to: "1deg",
-        duration: 4000,
-      },
-      scale: {
-        from: 1,
-        to: 1.025,
-        duration: 3000,
-      },
-      x: {
-        from: "-10px",
-        to: "10px",
-        duration: 5000,
-      },
-      y: {
-        from: "-2px",
-        to: "2px",
-        duration: 5000,
-      },
-      opacity: {
-        from: 1,
-        to: 0.9,
-        duration: 5000,
-      },
-      loop: true,
-      alternate: true,
-    });
-    const password = animate("#password", {
-      rotate: {
-        from: "1deg",
-        to: "-1deg",
-        duration: 4000,
-      },
-      scale: {
-        from: 1.025,
-        to: 1,
-        duration: 3000,
-      },
-      x: {
-        from: "10px",
-        to: "-10px",
-        duration: 5000,
-      },
-      y: {
-        from: "2px",
-        to: "-2px",
-        duration: 5000,
-      },
-      opacity: {
-        from: 1,
-        to: 0.9,
-        duration: 5000,
-      },
-      loop: true,
-      alternate: true,
-    });
-
-    if (stopAnimations) {
-        password.revert();
-        email.revert();
-      }
-  }, [stopAnimations]);
-
   return (
     <div
       className={`flex flex-col place-content-center h-full text-white w-1/2 m-auto`}
+      id="container"
+      
     >
-      <h1 className=" font-bold text-2xl tracking-wide text-center font uppercase">
-        Log in
-      </h1>
       <form
         className="flex flex-col gap-2 items-center drop-shadow-lg rounded-xl m-4"
         onSubmit={handleSubmit}
       >
         {error && <p className="text-red-500">{error}</p>}
-        <label className="uppercase" htmlFor="email">
-          Email
-        </label>
-        <input
-          id="email"
-          autoComplete="off"
-          onChange={(e) => handleChange(e)}
-          value={formData.email}
-          type="email"
-          className="w-1/2 h-8 max-w-sm text-black border-[1px] rounded-lg border-gray-700"
-          name="email"
-        />
-        <label className="uppercase" htmlFor="password">
-          Password
-        </label>
-        <input
-          id="password"
-          onChange={(e) => handleChange(e)}
-          value={formData.password}
-          type="password"
-          className="w-1/2 h-8 max-w-sm text-black border-[1px] rounded-lg border-gray-700"
-          name="password"
-        />
+        <TextField type="email" value={formData.email} label="email" onChange={handleChange} animateLabels={true}/>
+        <TextField type="password" value={formData.password} label="password" onChange={handleChange} animateLabels={true}/>
 
         <button className="rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110">
           Log in

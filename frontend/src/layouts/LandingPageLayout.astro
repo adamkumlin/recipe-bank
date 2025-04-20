@@ -29,9 +29,7 @@ try {
     class={`font-['Lilita_One'] bg-[rgb(4,5,15)] text-center text-white m-0 w-full h-full *:overflow-y-hidden z-0`}
   >
     {
-      token ? (
         <NavBar isAlwaysMinimized={isAlwaysMinimized} client:load />
-      ) : null
     }
     <main
       class={token
