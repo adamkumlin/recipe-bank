@@ -67,7 +67,7 @@ export default function LogInForm() {
 
         <a
           href="/register"
-          className="text-blue-500 border-t-2 border-black border-dashed pt-2 hover:text-blue-900"
+          className="text-blue-500 border-t-2 border-white border-dashed pt-2 hover:text-blue-200"
         >
           Don't have an account?
         </a>
