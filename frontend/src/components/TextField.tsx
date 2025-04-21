@@ -36,7 +36,7 @@ export default function TextField({
     }
   }, []);
   return (
-    <div className='flex flex-col'>
+    <div className="flex flex-col">
       <label
         className={style?.label ?? 'uppercase text-2xl'}
         htmlFor={label}

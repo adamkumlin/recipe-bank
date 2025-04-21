@@ -1,8 +1,9 @@
 ---
 import LogInForm from "../../components/LogInForm";
+import PageHeading from "../../components/PageHeading";
 import LandingPageLayout from "../../layouts/LandingPageLayout.astro";
 ---
 <LandingPageLayout>
-
+    <PageHeading label="Welcome back!" />
     <LogInForm client:load/>
 </LandingPageLayout>

@@ -94,9 +94,7 @@ export default function RegisterForm() {
           name="confirm-password"
         />
 
-        <Button type="submit">
-          Register
-        </Button>
+        <Button type="submit">Register</Button>
 
         <a
           href="/login"

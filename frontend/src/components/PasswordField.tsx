@@ -1,7 +1,7 @@
-import { useRef, useState } from 'react';
-import TextField from './TextField';
+import { useEffect, useState } from 'react';
 import Button from './Button';
 import { Eye, EyeClosed } from 'lucide-react';
+import { animate } from 'animejs';
 
 interface Props {
   value: string;
@@ -18,6 +18,24 @@ export default function PasswordField({
 }: Props) {
   const [showPassword, setShowPassword] = useState(false);
 
+  useEffect(() => {
+    const animation = animate(`#${label}-label`, {
+      y: {
+        from: 50,
+        to: 0,
+        duration: 1000,
+      },
+      scale: {
+        from: 0.75,
+        to: 1,
+        duration: 2000,
+      },
+    });
+    if (!animateLabels) {
+      animation.revert();
+    }
+  }, []);
+
   return (
     <div className="relative">
       <label
@@ -32,7 +50,7 @@ export default function PasswordField({
         autoComplete="off"
         onChange={e => onChange(e)}
         value={value}
-        type={showPassword ? "text" : "password"}
+        type={showPassword ? 'text' : 'password'}
         className={
           'w-full h-10 max-w-sm text-black border-[1px] rounded-lg border-gray-700 text-2xl font-sans'
         }
@@ -42,13 +60,13 @@ export default function PasswordField({
         style="rounded-md text-black absolute w-fit h-fit right-[5px]"
         type="button"
         onClick={() => setShowPassword(!showPassword)}
-        >
+      >
         {!showPassword ? (
-          <Eye className='w-[30px] h-10'/>
+          <Eye className="w-[30px] h-10" />
         ) : (
-          <EyeClosed className='w-[25px] h-10'/>
+          <EyeClosed className="w-[25px] h-10" />
         )}
       </Button>
-        </div>
+    </div>
   );
 }

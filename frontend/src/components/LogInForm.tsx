@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 import TextField from './TextField';
 import Button from './Button';
 import PasswordField from './PasswordField';
+import { animate, createTimeline } from 'animejs';
 
 export default function LogInForm() {
   const [formData, setFormData] = useState({
@@ -42,8 +43,9 @@ export default function LogInForm() {
 
   return (
     <div
-      className={"flex flex-col place-content-center h-full text-white w-1/2 m-auto"}
-      id="container"
+      className={
+        'flex flex-col place-content-center h-full text-white w-1/2 m-auto'
+      }
     >
       <form
         className="flex flex-col gap-2 items-center justify-center drop-shadow-lg rounded-xl m-auto bg-[#1B2436] h-1/2 w-4/5"
@@ -63,7 +65,11 @@ export default function LogInForm() {
           onChange={handleChange}
           animateLabels={true}
         />
-        <Button type="submit" label="Log in" style='rounded-lg text-white bg-blue-600 m-2 w-1/4 py-2 mb-4 hover:scale-110 text-2xl'/>
+        <Button
+          type="submit"
+          label="Log in"
+          style="rounded-lg text-white bg-blue-600 m-2 w-1/4 py-2 mb-4 hover:scale-110 text-2xl"
+        />
 
         <a
           href="/register"
