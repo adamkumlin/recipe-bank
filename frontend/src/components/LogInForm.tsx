@@ -42,11 +42,11 @@ export default function LogInForm() {
 
   return (
     <div
-      className={`flex flex-col place-content-center h-full text-white w-1/2 m-auto`}
+      className={"flex flex-col place-content-center h-full text-white w-1/2 m-auto"}
       id="container"
     >
       <form
-        className="flex flex-col gap-2 items-center drop-shadow-lg rounded-xl m-4"
+        className="flex flex-col gap-2 items-center justify-center drop-shadow-lg rounded-xl m-auto bg-[#1B2436] h-1/2 w-4/5"
         onSubmit={handleSubmit}
       >
         {error && <p className="text-red-500">{error}</p>}
@@ -63,7 +63,7 @@ export default function LogInForm() {
           onChange={handleChange}
           animateLabels={true}
         />
-        <Button type="submit" label="Log in" />
+        <Button type="submit" label="Log in" style='rounded-lg text-white bg-blue-600 m-2 w-1/4 py-2 mb-4 hover:scale-110 text-2xl'/>
 
         <a
           href="/register"

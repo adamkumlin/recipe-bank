@@ -31,8 +31,8 @@ export default function NavBar({ isAlwaysMinimized }: Props) {
       <nav
         className={
           !isMinimized
-            ? 'bg-gray-900 absolute *:text-xl *:text-white h-full w-1/5 px-6 hidden sm:block'
-            : 'bg-gray-900 absolute *:text-xl *:text-white h-full w-fit px-6 hidden sm:block'
+            ? 'bg-[#121E30] absolute *:text-xl *:text-white h-full w-1/5 px-6 hidden sm:block'
+            : 'bg-[#121E30] absolute *:text-xl *:text-white h-full w-fit px-6 hidden sm:block'
         }
       >
         <div className="flex flex-row justify-end mt-2">
