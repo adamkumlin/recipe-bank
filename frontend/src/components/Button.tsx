@@ -20,7 +20,7 @@ export default function Button({
         style ??
         'rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110'
       }
-      onClick={onClick ? () => onClick() : undefined}
+      onClick={onClick ?? undefined}
       type={type}
     >
       {label}

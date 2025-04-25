@@ -5,18 +5,21 @@ import easeOfUseImage from "../assets/ease-of-use.jpg";
 import recipeBookImage from "../assets/recipe-book.jpg"
 ---
 
-<video
-  class="-z-30 absolute w-full h-full blur-md opacity-30 object-cover"
-  autoplay
-  muted
-  loop
->
-  <source src={cookingVideo} />
-</video>
 <StartPageLayout>
+  <video
+    id="video"
+    class="-z-30 absolute w-full h-full blur-md opacity-30 object-cover"
+    autoplay
+    muted
+    loop
+    >
+    <source src={cookingVideo} />
+  </video>
   <div class="flex flex-col items-center justify-center gap-10 h-full">
+    <button id="stop-video-button" class="absolute top-0 left-0">Stop video</button>
+    <div class="w-10 h-1/4 bg-[#121E30] absolute right-0 -top-12 -rotate-45"></div>
     <h1 class="text-9xl">
-      Recipe <span class="text-blue-400">Bank</span>
+      Recipe <span class="text-blue-400 rotate-90">Bank</span>
     </h1>
     <div class="text-4xl" id="intro">
       <p><span class="text-blue-500">See</span> it.</p>
@@ -41,24 +44,23 @@ import recipeBookImage from "../assets/recipe-book.jpg"
     <a
       class="bg-lime-700 w-fit p-4 text-2xl rounded border-[1px] border-white mt-8"
       href="/login">Get started</a
-    >
+      >
   </div>
 </StartPageLayout>
 
 <script>
   import { animate } from "animejs";
-
   const button = document.querySelector("a") as HTMLAnchorElement;
   const smokeParticleStyle =
-    "width: 5px; height: 5px; borderRadius: 100%; position: absolute; bottom: 20%; width: 5px; height: 5px;";
+  "width: 5px; height: 5px; borderRadius: 100%; position: absolute; bottom: 20%; width: 5px; height: 5px;";
   const smokeContainerStyle =
-    "height: 50%; width: 50%; position: absolute; pointer-events: none";
-
+  "height: 50%; width: 50%; position: absolute; pointer-events: none";
+  
   function createSmokeParticle() {
     let percentage = Math.ceil(Math.round(Math.random() * 9));
     const doAddition: boolean = Math.random() < 0.5;
     const color = Math.random() < 0.5 ? "#bab9b8" : "#828282";
-
+    
     if (doAddition) {
       percentage = 50 + percentage;
     } else {
@@ -95,6 +97,7 @@ import recipeBookImage from "../assets/recipe-book.jpg"
 
   document.addEventListener("DOMContentLoaded", () => {
     buttonShakeAnimation.pause();
+
   });
 
   button.addEventListener("mouseenter", () => {
@@ -123,4 +126,12 @@ import recipeBookImage from "../assets/recipe-book.jpg"
       }, 200);
     }, 50);
   });
+
+  const stopVideoButton = document.querySelector("#stop-video-button") as Element;
+
+  stopVideoButton.addEventListener("click", () => {
+    const video = document.querySelector("#video") as HTMLVideoElement;
+    video.remove();
+    stopVideoButton.remove();
+  })
 </script>

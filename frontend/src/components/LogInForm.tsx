@@ -48,7 +48,7 @@ export default function LogInForm() {
       }
     >
       <form
-        className="flex flex-col gap-2 items-center justify-center drop-shadow-lg rounded-xl m-auto bg-[#1B2436] h-1/2 w-4/5"
+        className="flex flex-col gap-2 items-center justify-center drop-shadow-lg rounded-xl m-auto sm:bg-[#1B2436] h-1/2 w-4/5"
         onSubmit={handleSubmit}
       >
         {error && <p className="text-red-500">{error}</p>}
@@ -68,7 +68,7 @@ export default function LogInForm() {
         <Button
           type="submit"
           label="Log in"
-          style="rounded-lg text-white bg-blue-600 m-2 w-1/4 py-2 mb-4 hover:scale-110 text-2xl"
+          style="rounded-lg text-white bg-blue-600 m-2 sm:w-1/4 py-2 mb-4 hover:scale-110 text-2xl w-full"
         />
 
         <a
