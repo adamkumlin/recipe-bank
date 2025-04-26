@@ -57,7 +57,7 @@ export default function SettingsMenu({ token }: Props) {
     return <h2>Loading...</h2>;
   } else {
     return (
-      <div className="flex flex-col w-1/2 mx-auto bg-gray-900 border-2 rounded-md">
+      <div className="flex flex-col w-1/2 mx-auto bg-backdrop rounded-md">
         <div className="flex flex-row justify-center gap-2 text-purple-300 *:p-2">
           {/* <a onClick={() => handleClick(loginSectionRef)} href="#login">Login</a> */}
           <a onClick={() => handleClick(displaySectionRef)} href="#display">

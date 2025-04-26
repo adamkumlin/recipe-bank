@@ -1,4 +1,4 @@
-import { emailRegex, passwordRegex } from './constants';
+import { emailRegex } from './constants';
 
 export function validateUserCredentials(
   formData: {
@@ -27,9 +27,9 @@ export function validateUserCredentials(
     return 'Email is not valid.';
   }
 
-  const isValidPassword = passwordRegex.test(formData.password);
+  const isValidPassword = formData.password.length > 10;
   if (!isValidPassword) {
-    return 'Password is not valid.';
+    return 'Password is too short (10 characters minimum).';
   }
 
   return '';

@@ -1,4 +1,4 @@
-import { type FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { validateUserCredentials } from '../lib/utils/helper';
 import Cookies from 'js-cookie';
 import { actions } from 'astro:actions';
@@ -14,7 +14,7 @@ export default function RegisterForm() {
   });
   const [error, setError] = useState<string>();
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const validation = validateUserCredentials(formData, true);

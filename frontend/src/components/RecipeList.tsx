@@ -13,7 +13,7 @@ export default function RecipeList({ recipes }: Props) {
 
   if (recipes && recipes.length > 0) {
     return (
-      <div className="flex flex-col justify-center w-1/2 m-auto text-center text-white">
+      <div className="flex flex-col justify-center w-1/2 m-auto text-center text-main">
         <RecipeSettings recipeIds={selectedRecipeIds} />
         <div className="flex flex-row justify-center *:border-[1px] *:bg-blue-950 *:w-1/5 mr-[30px]">
           <h2 className="rounded-tl-xl">Title</h2>

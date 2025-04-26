@@ -1,11 +1,10 @@
-import { type ChangeEvent, type FormEvent, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { validateUserCredentials } from '../lib/utils/helper';
 import { actions } from 'astro:actions';
 import Cookies from 'js-cookie';
 import TextField from './TextField';
 import Button from './Button';
 import PasswordField from './PasswordField';
-import { animate, createTimeline } from 'animejs';
 
 export default function LogInForm() {
   const [formData, setFormData] = useState({
@@ -14,7 +13,7 @@ export default function LogInForm() {
   });
   const [error, setError] = useState('');
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const validation = validateUserCredentials(formData, false);
@@ -36,7 +35,7 @@ export default function LogInForm() {
     }
   }
 
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const type = e.target.id;
     setFormData(current => ({ ...current, [type]: e.target.value }));
   }
@@ -44,11 +43,11 @@ export default function LogInForm() {
   return (
     <div
       className={
-        'flex flex-col place-content-center h-full text-white w-1/2 m-auto'
+        'flex flex-col place-content-center h-full text-main w-1/2 m-auto'
       }
     >
       <form
-        className="flex flex-col gap-2 items-center justify-center drop-shadow-lg rounded-xl m-auto sm:bg-[#1B2436] h-1/2 w-4/5"
+        className="flex flex-col gap-2 items-center justify-center drop-shadow-lg rounded-xl m-auto sm:bg-backdrop h-1/2 w-4/5"
         onSubmit={handleSubmit}
       >
         {error && <p className="text-red-500">{error}</p>}
@@ -68,7 +67,7 @@ export default function LogInForm() {
         <Button
           type="submit"
           label="Log in"
-          style="rounded-lg text-white bg-blue-600 m-2 sm:w-1/4 py-2 mb-4 hover:scale-110 text-2xl w-full"
+          style="rounded-lg text-main bg-blue-600 m-2 sm:w-1/4 py-2 mb-4 hover:scale-110 text-2xl w-full"
         />
 
         <a

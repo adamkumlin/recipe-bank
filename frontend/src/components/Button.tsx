@@ -18,7 +18,7 @@ export default function Button({
       id={label}
       className={
         style ??
-        'rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110'
+        'rounded-md text-main bg-slate-700 m-2 p-2 mb-4 hover:scale-110'
       }
       onClick={onClick ?? undefined}
       type={type}

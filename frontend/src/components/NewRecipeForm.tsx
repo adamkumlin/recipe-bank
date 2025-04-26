@@ -1,4 +1,4 @@
-import { type FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { type PopupMenu, type Recipe } from '../lib/utils/types';
 import { actions } from 'astro:actions';
 import Cookies from 'js-cookie';
@@ -45,7 +45,7 @@ export default function NewRecipeForm() {
     setPopupError('');
   }
 
-  async function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const token = Cookies.get('token');
 
@@ -82,7 +82,7 @@ export default function NewRecipeForm() {
   }
 
   return (
-    <div className="w-1/2 h-full mx-auto flex flex-col justify-center items-center text-white">
+    <div className="w-1/2 h-full mx-auto flex flex-col justify-center items-center text-main">
       <form
         className="flex flex-col gap-2 items-center drop-shadow-lg rounded-xl m-4 w-full"
         onSubmit={e => handleSubmit(e)}

@@ -25,7 +25,7 @@ export default function NewRecipeFormPopup({
   return (
     <>
       {popupMenu.isActive && (
-        <div className="absolute top-1 flex flex-col items-center text-white bg-blue-950 z-10 p-14 rounded-3xl border-[1px] border-white">
+        <div className="absolute top-1 flex flex-col items-center text-main bg-blue-950 z-10 p-14 rounded-3xl border-[1px] border-white">
           <label className="uppercase" htmlFor={popupMenu.menuType}>
             New {popupMenu.menuType}
           </label>
@@ -43,14 +43,14 @@ export default function NewRecipeFormPopup({
             <button
               type="button"
               onClick={() => setPopupMenu({ isActive: false, menuType: '' })}
-              className="rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110"
+              className="rounded-md text-main bg-slate-700 m-2 p-2 mb-4 hover:scale-110"
             >
               Cancel
             </button>
             <button
               onClick={() => assureHandlerExists(popupMenu.handler)}
               type="button"
-              className="rounded-md text-white bg-slate-700 m-2 p-2 mb-4 hover:scale-110"
+              className="rounded-md text-main bg-slate-700 m-2 p-2 mb-4 hover:scale-110"
             >
               Done
             </button>

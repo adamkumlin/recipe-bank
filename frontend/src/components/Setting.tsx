@@ -1,5 +1,5 @@
 import { actions } from 'astro:actions';
-import React, { useEffect, useState, useId, useRef } from 'react';
+import React, { useEffect, useState, useId } from 'react';
 
 interface Props {
   name: string;
