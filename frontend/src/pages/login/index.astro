@@ -2,6 +2,11 @@
 import LogInForm from "../../components/LogInForm";
 import PageHeading from "../../components/PageHeading";
 import LandingPageLayout from "../../layouts/LandingPageLayout.astro";
+
+const token = Astro.cookies.get("token");
+if (token) {
+    return Astro.redirect("/my-account/recipes")
+}
 ---
 <LandingPageLayout>
     <PageHeading label="Welcome back!" />
