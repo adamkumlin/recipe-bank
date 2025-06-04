@@ -32,7 +32,7 @@ export default function RegisterForm() {
     const { data } = await actions.register(json);
 
     if (!data) {
-      setError('wrogn!');
+      setError('fel!');
     } else {
       const { data } = await actions.logIn(json);
       Cookies.set('token', data.access_token, { expires: 7 });

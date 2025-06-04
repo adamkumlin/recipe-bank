@@ -28,7 +28,7 @@ export default function LogInForm() {
 
     // If an error occurred, display it
     if (!data) {
-      setError('wrogn!');
+      setError('fel!');
     } else {
       Cookies.set('token', data.access_token, { expires: 7 });
       window.location.reload();
