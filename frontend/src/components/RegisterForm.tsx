@@ -4,6 +4,8 @@ import Cookies from 'js-cookie';
 import { actions } from 'astro:actions';
 import { useTime } from '../hooks/useTime';
 import Button from './Button';
+import TextField from './TextField';
+import PasswordField from './PasswordField';
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -40,60 +42,41 @@ export default function RegisterForm() {
     }
   }
 
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const type = e.target.id;
+    setFormData(current => ({ ...current, [type]: e.target.value }));
+  }
+
   return (
-    <div className={`w-1/2 m-auto flex flex-col place-content-center h-full`}>
-      <h1 className="font-bold text-2xl tracking-wide text-center font uppercase">
-        Register
-      </h1>
+    <div
+      className={`flex flex-col place-content-center h-full text-main w-1/2 m-auto`}
+    >
       <form
-        className="flex flex-col gap-2 items-center drop-shadow-lg rounded-xl m-4"
+        className="flex flex-col gap-2 items-center justify-center drop-shadow-lg rounded-xl m-auto sm:bg-backdrop h-1/2 w-4/5"
         onSubmit={event => handleSubmit(event)}
       >
         {error && <p className="text-red-600">{error}</p>}
-        <label className="uppercase" htmlFor="email">
-          Email
-        </label>
-        <input
-          id="email"
-          onChange={e =>
-            setFormData(current => ({ ...current, email: e.target.value }))
-          }
-          value={formData.email}
+        <TextField
           type="email"
-          className="w-1/2 h-8 max-w-sm border-[1px] rounded-lg text-black border-gray-700"
-          name="email"
+          value={formData.email}
+          label="Email"
+          onChange={handleChange}
+          id="email"
         />
-        <label className="uppercase" htmlFor="password">
-          Password
-        </label>
-        <input
-          id="password"
-          onChange={e =>
-            setFormData(current => ({ ...current, password: e.target.value }))
-          }
+
+        <PasswordField
           value={formData.password}
-          type="password"
-          className="w-1/2 h-8 max-w-sm border-[1px] rounded-lg text-black border-gray-700"
-          name="password"
+          label="Password"
+          onChange={handleChange}
+          id="password"
         />
 
-        <label className="uppercase" htmlFor="confirm-password">
-          Confirm password
-        </label>
-        <input
-          id="confirm-password"
-          onChange={e =>
-            setFormData(current => ({
-              ...current,
-              confirmPassword: e.target.value,
-            }))
-          }
+        <PasswordField
           value={formData.confirmPassword}
-          type="password"
-          className="w-1/2 h-8 max-w-sm border-[1px] rounded-lg text-black border-gray-700"
-          name="confirm-password"
+          label="Confirm password"
+          onChange={handleChange}
+          id="confirmPassword"
         />
-
         <Button type="submit">Register</Button>
 
         <a

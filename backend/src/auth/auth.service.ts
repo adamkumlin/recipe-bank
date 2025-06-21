@@ -6,7 +6,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
 import { User } from 'src/user/schema/user.schema';
-const bcrypt = require('bcryptjs');
+import bcrypt from 'bcryptjs';
 
 @Injectable()
 export class AuthService {
@@ -24,7 +24,7 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException('Incorrect email or password.');
     }
-    // @ts-ignore: _id does exist
+    // @ts-expect-error: _id does exist
     const payload = { id: user._id.toString(), email: email };
     return {
       access_token: await this.jwtService.signAsync(payload),

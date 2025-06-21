@@ -1,6 +1,6 @@
 import { type ObjectId } from 'mongoose';
 
-export type RecipeResponse = {
+export interface RecipeResponse {
   _id: ObjectId;
   title: string;
   ingredients: string[];
@@ -10,7 +10,7 @@ export type RecipeResponse = {
   dateUpdated?: string;
 };
 
-export type Recipe = {
+export interface Recipe {
   title: string;
   ingredients: string[];
   instructions: string[];
@@ -19,13 +19,13 @@ export type Recipe = {
   dateUpdated?: string;
 };
 
-export type PopupMenu = {
+export interface PopupMenu {
   isActive: boolean;
   menuType: string;
   handler?: (newValue: string) => void;
 };
 
-export type UserSettings = {
+export interface UserSettings {
   alwaysRememberPassword: boolean;
   useDarkTheme: boolean;
   displayLanguage: string;

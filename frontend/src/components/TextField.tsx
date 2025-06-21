@@ -1,13 +1,10 @@
-import { animate } from 'animejs';
-import { useEffect } from 'react';
-
 interface Props {
   type: React.HTMLInputTypeAttribute;
   value: string;
   label: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  animateLabels?: boolean;
   style?: { label: string; input: string };
+  id: string;
 }
 
 export default function TextField({
@@ -15,37 +12,20 @@ export default function TextField({
   value,
   label,
   onChange,
-  animateLabels,
   style,
+  id
 }: Props) {
-  useEffect(() => {
-    const animation = animate(`#${label}-label`, {
-      y: {
-        from: 50,
-        to: 0,
-        duration: 1000,
-      },
-      scale: {
-        from: 0.75,
-        to: 1,
-        duration: 2000,
-      },
-    });
-    if (!animateLabels) {
-      animation.revert();
-    }
-  }, []);
   return (
     <div className="flex flex-col">
       <label
         className={style?.label ?? 'uppercase text-2xl'}
-        htmlFor={label}
-        id={`${label}-label`}
+        htmlFor={id}
+        id={`${id}-label`}
       >
         {label}
       </label>
       <input
-        id={label}
+        id={id}
         autoComplete="off"
         onChange={e => onChange(e)}
         value={value}
@@ -54,7 +34,7 @@ export default function TextField({
           style?.input ??
           'w-full h-10 max-w-sm text-black border-[1px] rounded-lg border-gray-700 text-2xl font-sans'
         }
-        name={label}
+        name={id}
       />
     </div>
   );

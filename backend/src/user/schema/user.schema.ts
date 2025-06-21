@@ -17,6 +17,7 @@ export class User {
   @Prop({ required: false })
   profileImage: string;
 
+  @Prop({ required: true })
   joinDate: string;
 
   @Prop({ default: true })

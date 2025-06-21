@@ -56,13 +56,11 @@ export default function LogInForm() {
           value={formData.email}
           label="email"
           onChange={handleChange}
-          animateLabels={true}
         />
         <PasswordField
           value={formData.password}
           label="password"
           onChange={handleChange}
-          animateLabels={true}
         />
         <Button
           type="submit"

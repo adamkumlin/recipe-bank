@@ -1,11 +1,17 @@
 ---
+import PageHeading from '../../components/PageHeading';
 import RegisterForm from '../../components/RegisterForm';
 import LandingPageLayout from '../../layouts/LandingPageLayout.astro';
+import Cookies from "astro";
 
 const token = Astro.cookies.get('token');
+
 if (token) {
   return Astro.redirect('/my-account/recipes');
 }
 ---
 
-<LandingPageLayout> <RegisterForm client:load /></LandingPageLayout>
+<LandingPageLayout>
+  <PageHeading label="Welcome!" />
+  <RegisterForm client:load />
+</LandingPageLayout>
